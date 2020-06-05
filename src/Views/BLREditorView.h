@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BLREditorView : UIView
+@interface BLREditorView : UIView <UIScrollViewDelegate>
 
 @property(nonatomic, nullable) UIImage *image;
 

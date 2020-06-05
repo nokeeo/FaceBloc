@@ -60,7 +60,7 @@
     return;
   }
   
-  BLRImageMetadata *metadata = [BLRImageMetadata metadataWithFaceObservations:observations];
+  BLRImageMetadata *metadata = [BLRImageMetadata metadataWithFaceObservations:observations obfuscationPaths:nil];
   
   __weak __typeof__(self) weakSelf = self;
   [_imagePipeline processImage:image withMetaData:metadata completion:^(UIImage * _Nonnull processedImage) {
