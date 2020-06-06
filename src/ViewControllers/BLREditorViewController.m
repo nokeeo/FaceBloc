@@ -58,6 +58,7 @@
   ]];
   
   self.view.backgroundColor = UIColor.blackColor;
+  [self setIsDrawingEnabled:[_bottomNavigationView isDrawingEnabled]];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -90,6 +91,10 @@
 - (void)editorBottomNavigationView:(BLREditorBottomNavigationView *)editorBottomNavigationView didChangeFaceObfuscation:(BOOL)shouldFaceObfuscate {
   // Triggers a re-rendering of the image.
   [self processImage:_originalImage metadata:_imageMetadata];
+}
+
+- (void)editorBottomNavigationView:(BLREditorBottomNavigationView *)editorBottomNavigationView didEnableDrawing:(BOOL)enabled {
+  [self setIsDrawingEnabled:enabled];
 }
 
 #pragma mark - BLRImageViewDelegate
@@ -128,6 +133,10 @@
 
 - (BLRImagePipelineOptions *)createPipelineOptions {
   return [BLRImagePipelineOptions optionsWithShouldObscureFaces:_bottomNavigationView.shouldObscureFaces];
+}
+
+- (void)setIsDrawingEnabled:(BOOL)isDrawingEnabled {
+  _imageViewController.imageView.touchTrackingEnabled = isDrawingEnabled;
 }
 
 @end

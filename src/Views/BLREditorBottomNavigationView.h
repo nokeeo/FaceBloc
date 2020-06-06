@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, readonly) BOOL shouldObscureFaces;
 
+@property(nonatomic, getter=isDrawingEnabled, readonly) BOOL drawingEnabled;
+
 @property(nonatomic, nullable, weak) id<BLREditorBottomNavigationViewDelegate> delegate;
 
 @end
@@ -23,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol BLREditorBottomNavigationViewDelegate <NSObject>
 
 - (void)editorBottomNavigationView:(BLREditorBottomNavigationView *)editorBottomNavigationView didChangeFaceObfuscation:(BOOL)shouldFaceObfuscate;
+
+- (void)editorBottomNavigationView:(BLREditorBottomNavigationView *)editorBottomNavigationView didEnableDrawing:(BOOL)enabled;
 
 @end
 
