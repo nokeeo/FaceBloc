@@ -17,4 +17,11 @@
   self.view = _imageView;
 }
 
+#pragma mark - Getters
+
+- (BLRImageView *)imageView {
+  [self loadViewIfNeeded];
+  return _imageView;
+}
+
 @end

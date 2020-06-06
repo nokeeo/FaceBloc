@@ -35,6 +35,7 @@
   [super viewDidLoad];
   
   _imageViewController = [[BLRImageViewController alloc] init];
+  _imageViewController.imageView.delegate = self;
   UIView *imageView = _imageViewController.view;
   imageView.translatesAutoresizingMaskIntoConstraints = NO;
   [self addChildViewController:_imageViewController];
@@ -89,6 +90,19 @@
 - (void)editorBottomNavigationView:(BLREditorBottomNavigationView *)editorBottomNavigationView didChangeFaceObfuscation:(BOOL)shouldFaceObfuscate {
   // Triggers a re-rendering of the image.
   [self processImage:_originalImage metadata:_imageMetadata];
+}
+
+#pragma mark - BLRImageViewDelegate
+
+- (void)imageView:(BLRImageView *)imageView didUpdatePath:(CGPathRef)path {
+  UIBezierPath *bezierPath = [UIBezierPath bezierPathWithCGPath:path];
+  _imageMetadata = [BLRImageMetadata metadataWithFaceObservations:_imageMetadata.faceObservations obfuscationPaths:@[bezierPath]];
+  
+  [self processImage:_originalImage metadata:_imageMetadata];
+}
+
+- (void)imageView:(BLRImageView *)imageView didFinishPath:(CGPathRef)path {
+  // TODO: End path and append path.
 }
 
 #pragma mark - Private Methods

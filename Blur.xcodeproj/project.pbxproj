@@ -26,6 +26,7 @@
 		BEAF7B3A248B7AED00902E58 /* BLRImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B39248B7AED00902E58 /* BLRImageViewController.m */; };
 		BEAF7B3D248B7DBE00902E58 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B3C248B7DBE00902E58 /* UIView+AutoLayout.m */; };
 		BEAF7B46248B894800902E58 /* BLREditorBottomNavigationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B45248B894800902E58 /* BLREditorBottomNavigationButton.m */; };
+		BEAF7B49248BBDDD00902E58 /* BLRPath.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B48248BBDDD00902E58 /* BLRPath.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,8 @@
 		BEAF7B3C248B7DBE00902E58 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
 		BEAF7B44248B894800902E58 /* BLREditorBottomNavigationButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLREditorBottomNavigationButton.h; sourceTree = "<group>"; };
 		BEAF7B45248B894800902E58 /* BLREditorBottomNavigationButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLREditorBottomNavigationButton.m; sourceTree = "<group>"; };
+		BEAF7B47248BBDDD00902E58 /* BLRPath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLRPath.h; sourceTree = "<group>"; };
+		BEAF7B48248BBDDD00902E58 /* BLRPath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLRPath.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +152,8 @@
 		BE3EA5802489C7640053F89C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				BEAF7B47248BBDDD00902E58 /* BLRPath.h */,
+				BEAF7B48248BBDDD00902E58 /* BLRPath.m */,
 			);
 			name = Utils;
 			path = src/Utils;
@@ -324,6 +329,7 @@
 				BEAF7B3D248B7DBE00902E58 /* UIView+AutoLayout.m in Sources */,
 				BEAF7B34248A2E5800902E58 /* BLREditorViewController.m in Sources */,
 				BE3EA59A2489C7640053F89C /* LocalizationIDs.m in Sources */,
+				BEAF7B49248BBDDD00902E58 /* BLRPath.m in Sources */,
 				BEAF7B3A248B7AED00902E58 /* BLRImageViewController.m in Sources */,
 				BEAF7B37248B0A8700902E58 /* BLREditorBottomNavigationView.m in Sources */,
 				BEAC4F5B2489DEE300BF4264 /* BLRImagePipeline.m in Sources */,
