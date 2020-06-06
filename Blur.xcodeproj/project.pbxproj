@@ -17,11 +17,15 @@
 		BE3EA5982489C7640053F89C /* BLRRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA5892489C7640053F89C /* BLRRootView.m */; };
 		BE3EA5992489C7640053F89C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE3EA58D2489C7640053F89C /* Localizable.strings */; };
 		BE3EA59A2489C7640053F89C /* LocalizationIDs.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA58F2489C7640053F89C /* LocalizationIDs.m */; };
-		BEAC4F572489D90800BF4264 /* BLREditorView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC4F562489D90800BF4264 /* BLREditorView.m */; };
+		BEAC4F572489D90800BF4264 /* BLRImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC4F562489D90800BF4264 /* BLRImageView.m */; };
 		BEAC4F5B2489DEE300BF4264 /* BLRImagePipeline.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC4F5A2489DEE300BF4264 /* BLRImagePipeline.m */; };
 		BEAC4F5E2489DF6B00BF4264 /* BLRImageMetadata.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC4F5D2489DF6B00BF4264 /* BLRImageMetadata.m */; };
 		BEAC4F612489E0FD00BF4264 /* BLRFeatureDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC4F602489E0FD00BF4264 /* BLRFeatureDetector.m */; };
 		BEAF7B34248A2E5800902E58 /* BLREditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B32248A2E5800902E58 /* BLREditorViewController.m */; };
+		BEAF7B37248B0A8700902E58 /* BLREditorBottomNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B36248B0A8700902E58 /* BLREditorBottomNavigationView.m */; };
+		BEAF7B3A248B7AED00902E58 /* BLRImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B39248B7AED00902E58 /* BLRImageViewController.m */; };
+		BEAF7B3D248B7DBE00902E58 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B3C248B7DBE00902E58 /* UIView+AutoLayout.m */; };
+		BEAF7B46248B894800902E58 /* BLREditorBottomNavigationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B45248B894800902E58 /* BLREditorBottomNavigationButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,8 +58,8 @@
 		BE3EA58E2489C7640053F89C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BE3EA58F2489C7640053F89C /* LocalizationIDs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalizationIDs.m; sourceTree = "<group>"; };
 		BE3EA5902489C7640053F89C /* LocalizationIDs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalizationIDs.h; sourceTree = "<group>"; };
-		BEAC4F552489D90800BF4264 /* BLREditorView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLREditorView.h; sourceTree = "<group>"; };
-		BEAC4F562489D90800BF4264 /* BLREditorView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLREditorView.m; sourceTree = "<group>"; };
+		BEAC4F552489D90800BF4264 /* BLRImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLRImageView.h; sourceTree = "<group>"; };
+		BEAC4F562489D90800BF4264 /* BLRImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLRImageView.m; sourceTree = "<group>"; };
 		BEAC4F592489DEE300BF4264 /* BLRImagePipeline.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BLRImagePipeline.h; path = src/Models/BLRImagePipeline.h; sourceTree = SOURCE_ROOT; };
 		BEAC4F5A2489DEE300BF4264 /* BLRImagePipeline.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BLRImagePipeline.m; path = src/Models/BLRImagePipeline.m; sourceTree = SOURCE_ROOT; };
 		BEAC4F5C2489DF6B00BF4264 /* BLRImageMetadata.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BLRImageMetadata.h; path = src/Models/BLRImageMetadata.h; sourceTree = SOURCE_ROOT; };
@@ -64,6 +68,14 @@
 		BEAC4F602489E0FD00BF4264 /* BLRFeatureDetector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BLRFeatureDetector.m; path = src/Models/BLRFeatureDetector.m; sourceTree = SOURCE_ROOT; };
 		BEAF7B32248A2E5800902E58 /* BLREditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLREditorViewController.m; sourceTree = "<group>"; };
 		BEAF7B33248A2E5800902E58 /* BLREditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLREditorViewController.h; sourceTree = "<group>"; };
+		BEAF7B35248B0A8700902E58 /* BLREditorBottomNavigationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLREditorBottomNavigationView.h; sourceTree = "<group>"; };
+		BEAF7B36248B0A8700902E58 /* BLREditorBottomNavigationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLREditorBottomNavigationView.m; sourceTree = "<group>"; };
+		BEAF7B38248B7AED00902E58 /* BLRImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLRImageViewController.h; sourceTree = "<group>"; };
+		BEAF7B39248B7AED00902E58 /* BLRImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLRImageViewController.m; sourceTree = "<group>"; };
+		BEAF7B3B248B7DBE00902E58 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
+		BEAF7B3C248B7DBE00902E58 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
+		BEAF7B44248B894800902E58 /* BLREditorBottomNavigationButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLREditorBottomNavigationButton.h; sourceTree = "<group>"; };
+		BEAF7B45248B894800902E58 /* BLREditorBottomNavigationButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLREditorBottomNavigationButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,8 +157,14 @@
 		BE3EA5882489C7640053F89C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BEAC4F552489D90800BF4264 /* BLREditorView.h */,
-				BEAC4F562489D90800BF4264 /* BLREditorView.m */,
+				BEAF7B44248B894800902E58 /* BLREditorBottomNavigationButton.h */,
+				BEAF7B45248B894800902E58 /* BLREditorBottomNavigationButton.m */,
+				BEAF7B3B248B7DBE00902E58 /* UIView+AutoLayout.h */,
+				BEAF7B3C248B7DBE00902E58 /* UIView+AutoLayout.m */,
+				BEAF7B35248B0A8700902E58 /* BLREditorBottomNavigationView.h */,
+				BEAF7B36248B0A8700902E58 /* BLREditorBottomNavigationView.m */,
+				BEAC4F552489D90800BF4264 /* BLRImageView.h */,
+				BEAC4F562489D90800BF4264 /* BLRImageView.m */,
 				BE3EA58A2489C7640053F89C /* BLRRootView.h */,
 				BE3EA5892489C7640053F89C /* BLRRootView.m */,
 			);
@@ -191,6 +209,8 @@
 			children = (
 				BEAF7B33248A2E5800902E58 /* BLREditorViewController.h */,
 				BEAF7B32248A2E5800902E58 /* BLREditorViewController.m */,
+				BEAF7B38248B7AED00902E58 /* BLRImageViewController.h */,
+				BEAF7B39248B7AED00902E58 /* BLRImageViewController.m */,
 			);
 			name = ViewControllers;
 			path = src/ViewControllers;
@@ -300,11 +320,15 @@
 				BEAC4F612489E0FD00BF4264 /* BLRFeatureDetector.m in Sources */,
 				BE3EA5922489C7640053F89C /* main.m in Sources */,
 				BE3EA5962489C7640053F89C /* SceneDelegate.m in Sources */,
-				BEAC4F572489D90800BF4264 /* BLREditorView.m in Sources */,
+				BEAC4F572489D90800BF4264 /* BLRImageView.m in Sources */,
+				BEAF7B3D248B7DBE00902E58 /* UIView+AutoLayout.m in Sources */,
 				BEAF7B34248A2E5800902E58 /* BLREditorViewController.m in Sources */,
 				BE3EA59A2489C7640053F89C /* LocalizationIDs.m in Sources */,
+				BEAF7B3A248B7AED00902E58 /* BLRImageViewController.m in Sources */,
+				BEAF7B37248B0A8700902E58 /* BLREditorBottomNavigationView.m in Sources */,
 				BEAC4F5B2489DEE300BF4264 /* BLRImagePipeline.m in Sources */,
 				BEAC4F5E2489DF6B00BF4264 /* BLRImageMetadata.m in Sources */,
+				BEAF7B46248B894800902E58 /* BLREditorBottomNavigationButton.m in Sources */,
 				BE3EA5982489C7640053F89C /* BLRRootView.m in Sources */,
 				BE3EA5942489C7640053F89C /* BLRRootViewController.m in Sources */,
 			);

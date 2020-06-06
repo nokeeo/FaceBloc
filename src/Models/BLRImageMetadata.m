@@ -10,17 +10,30 @@
 
 @implementation BLRImageMetadata
 
-+ (instancetype)metadataWithFaceObservations:(NSArray<VNDetectedObjectObservation *> *)faceObservations {
-  return [[self alloc] initWithFaceObservations:faceObservations];
++ (instancetype)metadataWithFaceObservations:(NSArray<VNDetectedObjectObservation *> *)faceObservations obfuscationPaths:(nullable NSArray<UIBezierPath *> *)obfuscationPaths {
+  return [[self alloc] initWithFaceObservations:faceObservations obfuscationPaths:obfuscationPaths];
 }
 
-- (instancetype)initWithFaceObservations:(NSArray<VNDetectedObjectObservation *> *)faceObservations {
+- (instancetype)initWithFaceObservations:(NSArray<VNDetectedObjectObservation *> *)faceObservations obfuscationPaths:(nullable NSArray<UIBezierPath *> *)obfuscationPaths {
   self = [super init];
   if (self) {
     _faceObservations = faceObservations;
+    _obfuscationPaths = obfuscationPaths;
   }
   
   return self;
 }
 
+# pragma mark NSMutableCopying
+
+- (id)mutableCopyWithZone:(NSZone *)zone {
+  return [BLRMutableImageMetadata metadataWithFaceObservations:[_faceObservations copy] obfuscationPaths:[_obfuscationPaths copy]];
+}
+
 @end
+
+#pragma mark -
+
+@implementation BLRMutableImageMetadata
+@end
+

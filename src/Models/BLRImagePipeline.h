@@ -17,9 +17,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^BLRImagePipelineCompletion)(UIImage *processedImage);
 
+@interface BLRImagePipelineOptions : NSObject
+
+@property (nonatomic) BOOL shouldObscureFaces;
+
++ (instancetype)optionsWithShouldObscureFaces:(BOOL)shouldObscureFaces;
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end
+
 @interface BLRImagePipeline : NSObject
 
-- (void)processImage:(UIImage *)image withMetaData:(BLRImageMetadata *)metadata completion:(BLRImagePipelineCompletion)completion;
+- (void)processImage:(UIImage *)image withMetaData:(BLRImageMetadata *)metadata options:(BLRImagePipelineOptions *)options completion:(BLRImagePipelineCompletion)completion;
 
 @end
 

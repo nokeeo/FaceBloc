@@ -1,12 +1,12 @@
 //
-//  BLREditorView.m
+//  BLRImageView.m
 //  Blur
 //
 //  Created by Eric Lee on 6/4/20.
 //  Copyright © 2020 Nokeeo. All rights reserved.
 //
 
-#import "BLREditorView.h"
+#import "BLRImageView.h"
 
 static UIScrollView *CreateImageScrollView() {
   UIScrollView *view = [[UIScrollView alloc] init];
@@ -39,7 +39,7 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
   ];
 }
 
-@implementation BLREditorView {
+@implementation BLRImageView {
   UIScrollView *_imageScrollView;
   UIImageView *_imageView;
   

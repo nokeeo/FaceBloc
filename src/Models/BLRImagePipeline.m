@@ -31,9 +31,35 @@ static void CallCompletionBlock(BLRImagePipelineCompletion completion, UIImage *
   });
 }
 
+#pragma mark -
+
+@implementation BLRImagePipelineOptions
+
+- (instancetype)initWithShouldObscureFaces:(BOOL)shouldObscureFaces {
+  self = [super init];
+  if (self) {
+    _shouldObscureFaces = shouldObscureFaces;
+  }
+  
+  return self;
+}
+
++ (instancetype)optionsWithShouldObscureFaces:(BOOL)shouldObscureFaces {
+  return [[self alloc] initWithShouldObscureFaces:shouldObscureFaces];
+}
+
+@end
+
+#pragma mark -
+
 @implementation BLRImagePipeline
 
-- (void)processImage:(UIImage *)image withMetaData:(BLRImageMetadata *)metadata completion:(BLRImagePipelineCompletion)completion {
+- (void)processImage:(UIImage *)image withMetaData:(BLRImageMetadata *)metadata options:(BLRImagePipelineOptions *)options completion:(BLRImagePipelineCompletion)completion {
+  if (!options.shouldObscureFaces) {
+    completion(image);
+    return;
+  }
+  
   dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
     CGSize imageSize = image.size;
     UIGraphicsImageRenderer *imageRenderer = [[UIGraphicsImageRenderer alloc] initWithSize:image.size];

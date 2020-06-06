@@ -1,5 +1,5 @@
 //
-//  BLREditorView.h
+//  BLRImageView.h
 //  Blur
 //
 //  Created by Eric Lee on 6/4/20.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BLREditorView : UIView <UIScrollViewDelegate>
+@interface BLRImageView : UIView <UIScrollViewDelegate>
 
 @property(nonatomic, nullable) UIImage *image;
 

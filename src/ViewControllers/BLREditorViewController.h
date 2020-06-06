@@ -1,10 +1,10 @@
 #import <UIKit/UIKit.h>
 
+#import "BLREditorBottomNavigationView.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
-@class BLREditorView;
-
-@interface BLREditorViewController : UIViewController
+@interface BLREditorViewController : UIViewController <BLREditorBottomNavigationViewDelegate>
 
 @property(nonatomic, nullable) UIImage *image;
 
