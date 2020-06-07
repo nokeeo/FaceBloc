@@ -19,6 +19,7 @@
   
   UIImage *_originalImage;
   BLRImageMetadata *_imageMetadata;
+  NSArray<UIBezierPath *> *_imagePaths;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -26,6 +27,7 @@
   if (self) {
     _featureDetector = [[BLRFeatureDetector alloc] init];
     _imagePipeline = [[BLRImagePipeline alloc] init];
+    _imagePaths = @[];
   }
   
   return self;
@@ -100,14 +102,25 @@
 #pragma mark - BLRImageViewDelegate
 
 - (void)imageView:(BLRImageView *)imageView didUpdatePath:(CGPathRef)path {
-  UIBezierPath *bezierPath = [UIBezierPath bezierPathWithCGPath:path];
-  _imageMetadata = [BLRImageMetadata metadataWithFaceObservations:_imageMetadata.faceObservations obfuscationPaths:@[bezierPath]];
+  UIBezierPath *currentPath = [UIBezierPath bezierPathWithCGPath:path];
+  
+  NSMutableArray *paths = [_imagePaths mutableCopy];
+  [paths addObject:currentPath];
+  _imageMetadata = [BLRImageMetadata metadataWithFaceObservations:_imageMetadata.faceObservations obfuscationPaths:paths];
   
   [self processImage:_originalImage metadata:_imageMetadata];
 }
 
 - (void)imageView:(BLRImageView *)imageView didFinishPath:(CGPathRef)path {
-  // TODO: End path and append path.
+  UIBezierPath *currentPath = [UIBezierPath bezierPathWithCGPath:path];
+  
+  NSMutableArray *paths = [_imagePaths mutableCopy];
+  [paths addObject:currentPath];
+  
+  _imageMetadata = [BLRImageMetadata metadataWithFaceObservations:_imageMetadata.faceObservations obfuscationPaths:paths];
+  _imagePaths = paths;
+  
+  [self processImage:_originalImage metadata:_imageMetadata];
 }
 
 #pragma mark - Private Methods
