@@ -14,3 +14,5 @@ NSString *const BLRCancelButtonStringID = @"cancel_button";
 
 NSString *const BLRPhotoPermissionsDeniedError = @"photo_permissions_denied";
 
+extern NSString *const BLRErrorDialogConfirmationTitle = @"error_dialog_confirmation_title";
+

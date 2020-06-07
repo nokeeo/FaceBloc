@@ -16,4 +16,6 @@ extern NSString *const BLRCancelButtonStringID;
 
 extern NSString *const BLRPhotoPermissionsDeniedError;
 
+extern NSString *const BLRErrorDialogConfirmationTitle;
+
 NS_ASSUME_NONNULL_END

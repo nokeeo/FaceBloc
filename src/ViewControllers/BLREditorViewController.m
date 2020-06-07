@@ -10,6 +10,7 @@
 #import "BLRImageView.h"
 #import "BLRImageViewController.h"
 #import "BLRPhotoLibraryService.h"
+#import "UIViewController+NSError.h"
 #import "UIView+AutoLayout.h"
 
 @implementation BLREditorViewController {
@@ -171,17 +172,19 @@
     UIImage *image = self.image;
     __weak __typeof__(self) weakSelf = self;
     [self->_photoService savePhotoToLibrary:image queue:dispatch_get_main_queue() completion:^(NSError * _Nullable error) {
-      [activityViewController dismissViewControllerAnimated:YES completion:nil];
-      [weakSelf notifyDelegateFinishedEditingImage:image];
-      
-      // TODO:Handle error.
-      NSLog(@"%@", error);
+      [weakSelf handlePhotoSaveResponse:image error:error activityViewController:activityViewController];
     }];
   }];
 }
 
-- (void)notifyDelegateFinishedEditingImage:(UIImage *)image {
-  [_delegate editorViewController:self didFinishEditingWithFinalImage:image];
+- (void)handlePhotoSaveResponse:(UIImage *)image error:(nullable NSError *)error activityViewController:(UIViewController *)activityViewController {
+  [activityViewController dismissViewControllerAnimated:YES completion:^{
+    if (error) {
+      [self blr_presentError:error];
+    } else {
+      [self->_delegate editorViewController:self didFinishEditingWithFinalImage:image];
+    }
+  }];
 }
 
 @end

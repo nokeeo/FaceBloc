@@ -11,3 +11,5 @@
 "cancel_button" = "Cancel";
 
 "photo_permissions_denied" = "Permissions denied. Access required to save a photo.";
+
+"error_dialog_confirmation_title" = "Ok";
