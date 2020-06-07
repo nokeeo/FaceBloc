@@ -14,4 +14,6 @@ extern NSString *const BLRImportButtonStringID;
 extern NSString *const BLRSaveButtonStringID;
 extern NSString *const BLRCancelButtonStringID;
 
+extern NSString *const BLRPhotoPermissionsDeniedError;
+
 NS_ASSUME_NONNULL_END

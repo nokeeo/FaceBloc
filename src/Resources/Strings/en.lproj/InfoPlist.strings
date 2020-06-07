@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  Blur
+
+  Created by Eric Lee on 6/6/20.
+  Copyright © 2020 Nokeeo. All rights reserved.
+*/
+
+NSPhotoLibraryUsageDescription = "This app requires write only access to the photos library to save photos.";

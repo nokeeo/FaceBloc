@@ -9,3 +9,5 @@
 "import_button" = "Import Image";
 "save_button" = "Save";
 "cancel_button" = "Cancel";
+
+"photo_permissions_denied" = "Permissions denied. Access required to save a photo.";

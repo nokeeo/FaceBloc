@@ -10,11 +10,23 @@
 
 #import "BLRRootView.h"
 #import "BLREditorViewController.h"
+#import "BLRPhotoLibraryService.h"
 #import "UIViewController+Presenting.h"
 
 @implementation BLRRootViewController {
   UIImagePickerController *_Nullable _mediaPickerController;
   BLREditorViewController *_Nullable _editorViewController;
+  
+  BLRPhotoLibraryService *_photoLibraryService;
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+  if (self) {
+    _photoLibraryService = [[BLRPhotoLibraryService alloc] init];
+  }
+  
+  return self;
 }
 
 - (void)loadView {
@@ -35,8 +47,17 @@
 }
 
 - (void)editorViewController:(BLREditorViewController *)editorViewController didFinishEditingWithFinalImage:(UIImage *)finalImage {
-  [_editorViewController blr_dismissViewController:self];
-  // TODO: Actually save the image.
+  __weak __typeof__(self) weakSelf = self;
+  [_photoLibraryService savePhotoToLibrary:finalImage queue:dispatch_get_main_queue() completion:^(NSError * _Nullable error) {
+    __typeof__(self) strongSelf = weakSelf;
+    if (!strongSelf) {
+      return;
+    }
+    
+    [strongSelf->_editorViewController blr_dismissViewController:self];
+    // TODO: Handle error.
+    NSLog(@"%@", error);
+  }];
 }
 
 #pragma mark - BLRRootViewDelegate
