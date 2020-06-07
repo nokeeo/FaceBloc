@@ -112,6 +112,7 @@ static CGAffineTransform GetInitialTransform() {
   [UIView animateWithDuration:duration animations:^{
     activityView.alpha = 1;
     activityView.transform = CGAffineTransformIdentity;
+    [transitionContext completeTransition:YES];
   }];
 }
 
@@ -125,6 +126,7 @@ static CGAffineTransform GetInitialTransform() {
     activityView.transform = GetInitialTransform();
   } completion:^(BOOL finished) {
     [activityView removeFromSuperview];
+    [transitionContext completeTransition:YES];
   }];
 }
 
@@ -181,6 +183,10 @@ static CGAffineTransform GetInitialTransform() {
 
 - (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
   return [[BLRActivityViewControllerTransitionAnimator alloc] initWithPresenting:YES];
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+  return [[BLRActivityViewControllerTransitionAnimator alloc] initWithPresenting:NO];
 }
 
 @end

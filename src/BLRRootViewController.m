@@ -47,17 +47,7 @@
 }
 
 - (void)editorViewController:(BLREditorViewController *)editorViewController didFinishEditingWithFinalImage:(UIImage *)finalImage {
-  __weak __typeof__(self) weakSelf = self;
-  [_photoLibraryService savePhotoToLibrary:finalImage queue:dispatch_get_main_queue() completion:^(NSError * _Nullable error) {
-    __typeof__(self) strongSelf = weakSelf;
-    if (!strongSelf) {
-      return;
-    }
-    
-    [strongSelf->_editorViewController blr_dismissViewController:self];
-    // TODO: Handle error.
-    NSLog(@"%@", error);
-  }];
+  [_editorViewController blr_dismissViewController:self];
 }
 
 #pragma mark - BLRRootViewDelegate

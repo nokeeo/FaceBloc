@@ -2,12 +2,14 @@
 
 #import <Vision/Vision.h>
 
+#import "BLRActivityViewController.h"
 #import "BLREditorBottomNavigationView.h"
 #import "BLRFeatureDetector.h"
 #import "BLRImageMetadata.h"
 #import "BLRImagePipeline.h"
 #import "BLRImageView.h"
 #import "BLRImageViewController.h"
+#import "BLRPhotoLibraryService.h"
 #import "UIView+AutoLayout.h"
 
 @implementation BLREditorViewController {
@@ -20,6 +22,8 @@
   UIImage *_originalImage;
   BLRImageMetadata *_imageMetadata;
   NSArray<UIBezierPath *> *_imagePaths;
+  
+  BLRPhotoLibraryService *_photoService;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -28,6 +32,7 @@
     _featureDetector = [[BLRFeatureDetector alloc] init];
     _imagePipeline = [[BLRImagePipeline alloc] init];
     _imagePaths = @[];
+    _photoService = [[BLRPhotoLibraryService alloc] init];
   }
   
   return self;
@@ -104,7 +109,7 @@
 }
 
 - (void)editorBottomNavigationViewDidTapSaveButton:(BLREditorBottomNavigationView *)bottomNavigationView {
-  [_delegate editorViewController:self didFinishEditingWithFinalImage:_imageViewController.imageView.image];
+  [self saveCurrentImageToPhotosLibrary];
 }
 
 #pragma mark - BLRImageViewDelegate
@@ -158,6 +163,25 @@
 
 - (void)setIsDrawingEnabled:(BOOL)isDrawingEnabled {
   _imageViewController.imageView.touchTrackingEnabled = isDrawingEnabled;
+}
+
+- (void)saveCurrentImageToPhotosLibrary {
+  BLRActivityViewController *activityViewController = [[BLRActivityViewController alloc] init];
+  [self presentViewController:activityViewController animated:YES completion:^{
+    UIImage *image = self.image;
+    __weak __typeof__(self) weakSelf = self;
+    [self->_photoService savePhotoToLibrary:image queue:dispatch_get_main_queue() completion:^(NSError * _Nullable error) {
+      [activityViewController dismissViewControllerAnimated:YES completion:nil];
+      [weakSelf notifyDelegateFinishedEditingImage:image];
+      
+      // TODO:Handle error.
+      NSLog(@"%@", error);
+    }];
+  }];
+}
+
+- (void)notifyDelegateFinishedEditingImage:(UIImage *)image {
+  [_delegate editorViewController:self didFinishEditingWithFinalImage:image];
 }
 
 @end
