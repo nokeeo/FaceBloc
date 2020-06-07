@@ -64,7 +64,9 @@ static UIButton *CreateTextButton(NSString *title) {
     [cancelButton addTarget:self action:@selector(didTapCancelButton) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton *saveButton = CreateTextButton(NSLocalizedString(BLRSaveButtonStringID, nil));
+    UIFont *currentSaveButtonFont = saveButton.titleLabel.font;
     saveButton.translatesAutoresizingMaskIntoConstraints = NO;
+    saveButton.titleLabel.font = [UIFont boldSystemFontOfSize:currentSaveButtonFont.pointSize];
     [saveButton addTarget:self action:@selector(didTapSaveButton) forControlEvents:UIControlEventTouchUpInside];
     
     [self addSubview:cancelButton];
@@ -90,7 +92,7 @@ static UIButton *CreateTextButton(NSString *title) {
     
     BLREdgeConstraints *saveButtonConstraints = [saveButton blr_constraintsAttachedToLayoutGuideEdges:safeAreaLayoutGuide];
     [self addConstraints:@[
-      [saveButton.trailingAnchor constraintEqualToAnchor:safeAreaLayoutGuide.trailingAnchor constant:-1],
+      [saveButton.trailingAnchor constraintEqualToAnchor:safeAreaLayoutGuide.trailingAnchor constant:-kHorizonalEdgePadding],
       saveButtonConstraints.top,
       saveButtonConstraints.bottom,
     ]];
