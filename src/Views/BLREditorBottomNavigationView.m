@@ -12,6 +12,8 @@
 #import "UIView+AutoLayout.h"
 #import "LocalizationIDs.h"
 
+static const CGFloat kHorizonalEdgePadding = 8;
+
 static UIStackView *CreateItemStackView() {
   UIStackView *view = [[UIStackView alloc] init];
   view.axis = UILayoutConstraintAxisHorizontal;
@@ -81,16 +83,16 @@ static UIButton *CreateTextButton(NSString *title) {
     
     BLREdgeConstraints *cancelButtonConstraints = [cancelButton blr_constraintsAttachedToLayoutGuideEdges:safeAreaLayoutGuide];
     [self addConstraints:@[
-      cancelButtonConstraints.leading,
+      [cancelButton.leadingAnchor constraintEqualToAnchor:safeAreaLayoutGuide.leadingAnchor constant:kHorizonalEdgePadding],
       cancelButtonConstraints.top,
       cancelButtonConstraints.bottom,
     ]];
     
     BLREdgeConstraints *saveButtonConstraints = [saveButton blr_constraintsAttachedToLayoutGuideEdges:safeAreaLayoutGuide];
     [self addConstraints:@[
+      [saveButton.trailingAnchor constraintEqualToAnchor:safeAreaLayoutGuide.trailingAnchor constant:-1],
       saveButtonConstraints.top,
       saveButtonConstraints.bottom,
-      saveButtonConstraints.trailing,
     ]];
   }
   
