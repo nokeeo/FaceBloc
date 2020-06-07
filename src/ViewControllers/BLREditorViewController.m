@@ -25,6 +25,8 @@
   NSArray<UIBezierPath *> *_imagePaths;
   
   BLRPhotoLibraryService *_photoService;
+  
+  NSURL *_imageURL;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -39,11 +41,20 @@
   return self;
 }
 
+- (instancetype)initWithImageURL:(NSURL *)imageURL {
+  self = [self initWithNibName:nil bundle:nil];
+  if (self) {
+    _imageURL = imageURL;
+  }
+  
+  return self;
+}
+
 - (void)viewDidLoad {
   [super viewDidLoad];
   
-  _imageViewController = [[BLRImageViewController alloc] init];
-  _imageViewController.imageView.delegate = self;
+  _imageViewController = [[BLRImageViewController alloc] initWithImageURL:_imageURL];
+  _imageViewController.delegate = self;
   UIView *imageView = _imageViewController.view;
   imageView.translatesAutoresizingMaskIntoConstraints = NO;
   [self addChildViewController:_imageViewController];
@@ -76,24 +87,6 @@
   _imageViewController.additionalSafeAreaInsets = UIEdgeInsetsMake(0, 0, bottomNavigationHeight, 0);
 }
 
-#pragma mark - Getters
-
-- (UIImage *)image {
-  return _imageViewController.imageView.image;
-}
-
-#pragma mark - Setters
-
-- (void)setImage:(UIImage *)image {
-  [self loadViewIfNeeded];
-  __weak __typeof__(self) weakSelf = self;
-  _originalImage = image;
-  [_featureDetector detectFeaturesForImage:image dispatchQueue:dispatch_get_main_queue() completion:^(NSArray<VNDetectedObjectObservation *> * _Nullable observations, NSError * _Nullable error) {
-    [weakSelf handleFacialFeatureDetectionForImage:image observations:observations error:error];
-  }];
-  _imageViewController.imageView.image = image;
-}
-
 #pragma mark - BLREditorBottomNavigationViewDelegate
 
 - (void)editorBottomNavigationView:(BLREditorBottomNavigationView *)editorBottomNavigationView didChangeFaceObfuscation:(BOOL)shouldFaceObfuscate {
@@ -111,6 +104,15 @@
 
 - (void)editorBottomNavigationViewDidTapSaveButton:(BLREditorBottomNavigationView *)bottomNavigationView {
   [self saveCurrentImageToPhotosLibrary];
+}
+
+#pragma mark - BLRImageViewControllerDelegate
+
+- (void)imageViewController:(BLRImageViewController *)viewController didLoadImage:(UIImage *)image {
+  __weak __typeof__(self) weakSelf = self;
+  [_featureDetector detectFeaturesForImage:image dispatchQueue:dispatch_get_main_queue() completion:^(NSArray<VNDetectedObjectObservation *> * _Nullable observations, NSError * _Nullable error) {
+    [weakSelf handleFacialFeatureDetectionForImage:image observations:observations error:error];
+  }];
 }
 
 #pragma mark - BLRImageViewDelegate
@@ -169,7 +171,7 @@
 - (void)saveCurrentImageToPhotosLibrary {
   BLRActivityViewController *activityViewController = [[BLRActivityViewController alloc] init];
   [self presentViewController:activityViewController animated:YES completion:^{
-    UIImage *image = self.image;
+    UIImage *image = self->_imageViewController.imageView.image;
     __weak __typeof__(self) weakSelf = self;
     [self->_photoService savePhotoToLibrary:image queue:dispatch_get_main_queue() completion:^(NSError * _Nullable error) {
       [weakSelf handlePhotoSaveResponse:image error:error activityViewController:activityViewController];

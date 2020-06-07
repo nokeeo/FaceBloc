@@ -18,16 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, getter=isTouchTrackingEnabled) BOOL touchTrackingEnabled;
 
-@property(nonatomic, nullable, weak) id<BLRImageViewDelegate> delegate;
-
-@end
-
-@protocol BLRImageViewDelegate <NSObject>
-
-- (void)imageView:(BLRImageView *)imageView didUpdatePath:(CGPathRef)path;
-
-- (void)imageView:(BLRImageView *)imageView didFinishPath:(CGPathRef)path;
-
 @end
 
 NS_ASSUME_NONNULL_END

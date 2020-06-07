@@ -2,17 +2,17 @@
 
 #import "BLREditorBottomNavigationView.h"
 
-#import "BLRImageView.h"
+#import "BLRImageViewController.h"
 
 @protocol BLREditorViewControllerDelegate;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BLREditorViewController : UIViewController <BLREditorBottomNavigationViewDelegate, BLRImageViewDelegate>
-
-@property(nonatomic, nullable) UIImage *image;
+@interface BLREditorViewController : UIViewController <BLREditorBottomNavigationViewDelegate, BLRImageViewControllerDelegate>
 
 @property(nonatomic, nullable, weak) id<BLREditorViewControllerDelegate> delegate;
+
+- (instancetype)initWithImageURL:(nullable NSURL *)imageURL;
 
 @end
 

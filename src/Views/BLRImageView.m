@@ -153,7 +153,6 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
   UITouch *touch = touches.allObjects.firstObject;
   [_touchPath addPoint:[touch preciseLocationInView:_imageView]];
   CGPathRef pathRef = _touchPath.CGPath;
-  [_delegate imageView:self didUpdatePath:pathRef];
   CGPathRelease(pathRef);
 }
 
@@ -162,7 +161,6 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
   [_touchPath addPoint:[touch locationInView:_imageView]];
   CGPathRef pathRef = _touchPath.CGPath;
   [_touchPath clear];
-  [_delegate imageView:self didFinishPath:pathRef];
   CGPathRelease(pathRef);
 }
 
