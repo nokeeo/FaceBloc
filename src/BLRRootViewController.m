@@ -10,10 +10,10 @@
 
 #import "BLRRootView.h"
 #import "BLREditorViewController.h"
+#import "UIViewController+Presenting.h"
 
 @implementation BLRRootViewController {
   UIImagePickerController *_Nullable _mediaPickerController;
-  
   BLREditorViewController *_Nullable _editorViewController;
 }
 
@@ -26,6 +26,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+}
+
+#pragma mark - BLREditoViewControllerDelegate
+
+- (void)editorViewControllerDidCancelEditing:(BLREditorViewController *)editorViewController {
+  [_editorViewController blr_dismissViewController:self];
+}
+
+- (void)editorViewController:(BLREditorViewController *)editorViewController didFinishEditingWithFinalImage:(UIImage *)finalImage {
+  [_editorViewController blr_dismissViewController:self];
+  // TODO: Actually save the image.
 }
 
 #pragma mark - BLRRootViewDelegate
@@ -74,6 +85,7 @@
   
   _editorViewController = [[BLREditorViewController alloc] init];
   _editorViewController.image = image;
+  _editorViewController.delegate = self;
   [self showViewController:_editorViewController sender:self];
 }
 

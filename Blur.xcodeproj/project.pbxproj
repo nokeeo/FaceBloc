@@ -27,6 +27,8 @@
 		BEAF7B3D248B7DBE00902E58 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B3C248B7DBE00902E58 /* UIView+AutoLayout.m */; };
 		BEAF7B46248B894800902E58 /* BLREditorBottomNavigationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B45248B894800902E58 /* BLREditorBottomNavigationButton.m */; };
 		BEAF7B49248BBDDD00902E58 /* BLRPath.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B48248BBDDD00902E58 /* BLRPath.m */; };
+		BEAF7B4C248C766100902E58 /* UIViewController+Presenting.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B4B248C766100902E58 /* UIViewController+Presenting.m */; };
+		BEAF7B4F248C774600902E58 /* UINavigationController+Presenting.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B4E248C774600902E58 /* UINavigationController+Presenting.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +81,10 @@
 		BEAF7B45248B894800902E58 /* BLREditorBottomNavigationButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLREditorBottomNavigationButton.m; sourceTree = "<group>"; };
 		BEAF7B47248BBDDD00902E58 /* BLRPath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLRPath.h; sourceTree = "<group>"; };
 		BEAF7B48248BBDDD00902E58 /* BLRPath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLRPath.m; sourceTree = "<group>"; };
+		BEAF7B4A248C766100902E58 /* UIViewController+Presenting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Presenting.h"; sourceTree = "<group>"; };
+		BEAF7B4B248C766100902E58 /* UIViewController+Presenting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Presenting.m"; sourceTree = "<group>"; };
+		BEAF7B4D248C774600902E58 /* UINavigationController+Presenting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Presenting.h"; sourceTree = "<group>"; };
+		BEAF7B4E248C774600902E58 /* UINavigationController+Presenting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Presenting.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -212,6 +218,10 @@
 		BEAF7B31248A2E5800902E58 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				BEAF7B4D248C774600902E58 /* UINavigationController+Presenting.h */,
+				BEAF7B4E248C774600902E58 /* UINavigationController+Presenting.m */,
+				BEAF7B4A248C766100902E58 /* UIViewController+Presenting.h */,
+				BEAF7B4B248C766100902E58 /* UIViewController+Presenting.m */,
 				BEAF7B33248A2E5800902E58 /* BLREditorViewController.h */,
 				BEAF7B32248A2E5800902E58 /* BLREditorViewController.m */,
 				BEAF7B38248B7AED00902E58 /* BLRImageViewController.h */,
@@ -324,12 +334,14 @@
 				BE3EA5972489C7640053F89C /* AppDelegate.m in Sources */,
 				BEAC4F612489E0FD00BF4264 /* BLRFeatureDetector.m in Sources */,
 				BE3EA5922489C7640053F89C /* main.m in Sources */,
+				BEAF7B4C248C766100902E58 /* UIViewController+Presenting.m in Sources */,
 				BE3EA5962489C7640053F89C /* SceneDelegate.m in Sources */,
 				BEAC4F572489D90800BF4264 /* BLRImageView.m in Sources */,
 				BEAF7B3D248B7DBE00902E58 /* UIView+AutoLayout.m in Sources */,
 				BEAF7B34248A2E5800902E58 /* BLREditorViewController.m in Sources */,
 				BE3EA59A2489C7640053F89C /* LocalizationIDs.m in Sources */,
 				BEAF7B49248BBDDD00902E58 /* BLRPath.m in Sources */,
+				BEAF7B4F248C774600902E58 /* UINavigationController+Presenting.m in Sources */,
 				BEAF7B3A248B7AED00902E58 /* BLRImageViewController.m in Sources */,
 				BEAF7B37248B0A8700902E58 /* BLREditorBottomNavigationView.m in Sources */,
 				BEAC4F5B2489DEE300BF4264 /* BLRImagePipeline.m in Sources */,

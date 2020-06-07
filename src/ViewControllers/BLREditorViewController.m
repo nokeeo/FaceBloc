@@ -99,6 +99,14 @@
   [self setIsDrawingEnabled:enabled];
 }
 
+- (void)editorBottomNavigationViewDidCancelEditing:(BLREditorBottomNavigationView *)bottomNavigationView {
+  [_delegate editorViewControllerDidCancelEditing:self];
+}
+
+- (void)editorBottomNavigationViewDidTapSaveButton:(BLREditorBottomNavigationView *)bottomNavigationView {
+  [_delegate editorViewController:self didFinishEditingWithFinalImage:_imageViewController.imageView.image];
+}
+
 #pragma mark - BLRImageViewDelegate
 
 - (void)imageView:(BLRImageView *)imageView didUpdatePath:(CGPathRef)path {

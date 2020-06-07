@@ -28,6 +28,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)editorBottomNavigationView:(BLREditorBottomNavigationView *)editorBottomNavigationView didEnableDrawing:(BOOL)enabled;
 
+- (void)editorBottomNavigationViewDidCancelEditing:(BLREditorBottomNavigationView *)bottomNavigationView;
+
+- (void)editorBottomNavigationViewDidTapSaveButton:(BLREditorBottomNavigationView *)bottomNavigationView;
+
 @end
 
 NS_ASSUME_NONNULL_END

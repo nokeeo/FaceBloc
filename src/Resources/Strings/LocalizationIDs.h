@@ -11,5 +11,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 extern NSString *const BLRImportButtonStringID;
+extern NSString *const BLRSaveButtonStringID;
+extern NSString *const BLRCancelButtonStringID;
 
 NS_ASSUME_NONNULL_END

@@ -10,6 +10,7 @@
 
 #import "BLREditorBottomNavigationButton.h"
 #import "UIView+AutoLayout.h"
+#import "LocalizationIDs.h"
 
 static UIStackView *CreateItemStackView() {
   UIStackView *view = [[UIStackView alloc] init];
@@ -17,6 +18,14 @@ static UIStackView *CreateItemStackView() {
   view.spacing = 12;
   
   return view;
+}
+
+static UIButton *CreateTextButton(NSString *title) {
+  UIButton *button = [[UIButton alloc] init];
+  [button setTitle:title forState:UIControlStateNormal];
+  [button setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
+  
+  return button;
 }
 
 @implementation BLREditorBottomNavigationView {
@@ -30,6 +39,7 @@ static UIStackView *CreateItemStackView() {
   self = [super initWithFrame:frame];
   if (self) {
     _itemStackView = CreateItemStackView();
+    _itemStackView.translatesAutoresizingMaskIntoConstraints = NO;
     
     _faceObfuscationButton = [[BLREditorBottomNavigationButton alloc] init];
     _faceObfuscationButton.on = YES;
@@ -47,18 +57,40 @@ static UIStackView *CreateItemStackView() {
     [_drawButton addTarget:self action:@selector(didTapDrawButton) forControlEvents:UIControlEventTouchUpInside];
     [_itemStackView addArrangedSubview:_drawButton];
     
+    UIButton *cancelButton = CreateTextButton(NSLocalizedString(BLRCancelButtonStringID, nil));
+    cancelButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [cancelButton addTarget:self action:@selector(didTapCancelButton) forControlEvents:UIControlEventTouchUpInside];
     
+    UIButton *saveButton = CreateTextButton(NSLocalizedString(BLRSaveButtonStringID, nil));
+    saveButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [saveButton addTarget:self action:@selector(didTapSaveButton) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self addSubview:cancelButton];
     [self addSubview:_itemStackView];
+    [self addSubview:saveButton];
     
     UILayoutGuide *safeAreaLayoutGuide = self.safeAreaLayoutGuide;
-    _itemStackView.translatesAutoresizingMaskIntoConstraints = NO;
-    BLREdgeConstraints *itemConstraints = [_itemStackView blr_constraintsAttachedToLayoutGuideEdges:self.safeAreaLayoutGuide];
+    BLREdgeConstraints *itemStackViewConstraints = [_itemStackView blr_constraintsAttachedToLayoutGuideEdges:safeAreaLayoutGuide];
     [self addConstraints:@[
-      itemConstraints.top,
-      itemConstraints.bottom,
-      [_itemStackView.leftAnchor constraintGreaterThanOrEqualToAnchor:safeAreaLayoutGuide.leftAnchor],
-      [_itemStackView.rightAnchor constraintLessThanOrEqualToAnchor:safeAreaLayoutGuide.rightAnchor],
+      itemStackViewConstraints.top,
+      itemStackViewConstraints.bottom,
+      [_itemStackView.leadingAnchor constraintGreaterThanOrEqualToAnchor:cancelButton.trailingAnchor],
+      [_itemStackView.trailingAnchor constraintLessThanOrEqualToAnchor:safeAreaLayoutGuide.trailingAnchor],
       [_itemStackView.centerXAnchor constraintEqualToAnchor:safeAreaLayoutGuide.centerXAnchor],
+    ]];
+    
+    BLREdgeConstraints *cancelButtonConstraints = [cancelButton blr_constraintsAttachedToLayoutGuideEdges:safeAreaLayoutGuide];
+    [self addConstraints:@[
+      cancelButtonConstraints.leading,
+      cancelButtonConstraints.top,
+      cancelButtonConstraints.bottom,
+    ]];
+    
+    BLREdgeConstraints *saveButtonConstraints = [saveButton blr_constraintsAttachedToLayoutGuideEdges:safeAreaLayoutGuide];
+    [self addConstraints:@[
+      saveButtonConstraints.top,
+      saveButtonConstraints.bottom,
+      saveButtonConstraints.trailing,
     ]];
   }
   
@@ -87,6 +119,14 @@ static UIStackView *CreateItemStackView() {
   BOOL drawingEnabled = ![_drawButton isOn];
   [_drawButton setOn:drawingEnabled animated:YES];
   [_delegate editorBottomNavigationView:self didEnableDrawing:drawingEnabled];
+}
+
+- (void)didTapCancelButton {
+  [_delegate editorBottomNavigationViewDidCancelEditing:self];
+}
+
+- (void)didTapSaveButton {
+  [_delegate editorBottomNavigationViewDidTapSaveButton:self];
 }
 
 @end

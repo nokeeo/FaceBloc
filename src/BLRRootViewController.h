@@ -9,7 +9,8 @@
 #import <UIKit/UIKit.h>
 
 #import "BLRRootView.h"
+#import "BLREditorViewController.h"
 
-@interface BLRRootViewController : UIViewController <BLRRootViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface BLRRootViewController : UIViewController <BLREditorViewControllerDelegate, BLRRootViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @end
 

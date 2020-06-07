@@ -9,3 +9,6 @@
 #import "LocalizationIDs.h"
 
 NSString *const BLRImportButtonStringID = @"import_button";
+NSString *const BLRSaveButtonStringID = @"save_button";
+NSString *const BLRCancelButtonStringID = @"cancel_button";
+
