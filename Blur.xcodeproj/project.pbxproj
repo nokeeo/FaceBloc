@@ -31,6 +31,7 @@
 		BEAF7B4F248C774600902E58 /* UINavigationController+Presenting.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B4E248C774600902E58 /* UINavigationController+Presenting.m */; };
 		BEAF7B52248CADB700902E58 /* BLRPhotoLibraryService.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B51248CADB700902E58 /* BLRPhotoLibraryService.m */; };
 		BEAF7B55248CB02500902E58 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEAF7B57248CB02500902E58 /* InfoPlist.strings */; };
+		BEAF7B5A248CCB1900902E58 /* BLRActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B59248CCB1800902E58 /* BLRActivityViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,8 @@
 		BEAF7B50248CADB700902E58 /* BLRPhotoLibraryService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLRPhotoLibraryService.h; sourceTree = "<group>"; };
 		BEAF7B51248CADB700902E58 /* BLRPhotoLibraryService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLRPhotoLibraryService.m; sourceTree = "<group>"; };
 		BEAF7B56248CB02500902E58 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BEAF7B58248CCB1800902E58 /* BLRActivityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLRActivityViewController.h; sourceTree = "<group>"; };
+		BEAF7B59248CCB1800902E58 /* BLRActivityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLRActivityViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +231,8 @@
 			children = (
 				BEAF7B4D248C774600902E58 /* UINavigationController+Presenting.h */,
 				BEAF7B4E248C774600902E58 /* UINavigationController+Presenting.m */,
+				BEAF7B58248CCB1800902E58 /* BLRActivityViewController.h */,
+				BEAF7B59248CCB1800902E58 /* BLRActivityViewController.m */,
 				BEAF7B4A248C766100902E58 /* UIViewController+Presenting.h */,
 				BEAF7B4B248C766100902E58 /* UIViewController+Presenting.m */,
 				BEAF7B33248A2E5800902E58 /* BLREditorViewController.h */,
@@ -358,6 +363,7 @@
 				BEAC4F5E2489DF6B00BF4264 /* BLRImageMetadata.m in Sources */,
 				BEAF7B46248B894800902E58 /* BLREditorBottomNavigationButton.m in Sources */,
 				BE3EA5982489C7640053F89C /* BLRRootView.m in Sources */,
+				BEAF7B5A248CCB1900902E58 /* BLRActivityViewController.m in Sources */,
 				BE3EA5942489C7640053F89C /* BLRRootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

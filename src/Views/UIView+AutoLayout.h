@@ -32,11 +32,25 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
+@interface BLRCenterConstraints : NSObject <BLRViewConstraining>
+
+@property(nonatomic, readonly) NSLayoutConstraint *x;
+
+@property(nonatomic, readonly) NSLayoutConstraint *y;
+
++ (instancetype)centerConstraintWithX:(NSLayoutConstraint *)x y:(NSLayoutConstraint *)y;
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end
+
 @interface UIView (AutoLayout)
 
 - (BLREdgeConstraints *)blr_constraintsAttachedToSuperviewEdges;
 
 - (BLREdgeConstraints *)blr_constraintsAttachedToLayoutGuideEdges:(UILayoutGuide *)layoutGuide;
+
+- (BLRCenterConstraints *)blr_constraintsCenteredInSuperview;
 
 - (void)blr_addConstraints:(id<BLRViewConstraining>)constraints;
 

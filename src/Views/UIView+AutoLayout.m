@@ -45,6 +45,33 @@
 
 #pragma mark -
 
+@implementation BLRCenterConstraints
+
+- (instancetype)initWithX:(NSLayoutConstraint *)x y:(NSLayoutConstraint *)y {
+  self = [super init];
+  if (self) {
+    _x = x;
+    _y = y;
+  }
+  
+  return self;
+}
+
++ (instancetype)centerConstraintWithX:(NSLayoutConstraint *)x y:(NSLayoutConstraint *)y {
+  return [[self alloc] initWithX:x y:y];
+}
+
+- (NSArray<NSLayoutConstraint *> *)constraints {
+  return @[
+    _x,
+    _y,
+  ];
+}
+
+@end
+
+#pragma mark -
+
 @implementation UIView (AutoLayout)
 
 - (BLREdgeConstraints *)blr_constraintsAttachedToSuperviewEdges {
@@ -64,6 +91,14 @@
   NSLayoutConstraint *bottom = [self.bottomAnchor constraintEqualToAnchor:layoutGuide.bottomAnchor];
   
   return [BLREdgeConstraints edgeConstraintsWithLeading:leading trailing:trailing top:top bottom:bottom];
+}
+
+- (BLRCenterConstraints *)blr_constraintsCenteredInSuperview {
+  UIView *superview = self.superview;
+  NSLayoutConstraint *x = [self.centerXAnchor constraintEqualToAnchor:superview.centerXAnchor];
+  NSLayoutConstraint *y = [self.centerYAnchor constraintEqualToAnchor:superview.centerYAnchor];
+  
+  return [BLRCenterConstraints centerConstraintWithX:x y:y];
 }
 
 - (void)blr_addConstraints:(id<BLRViewConstraining>)constraints {
