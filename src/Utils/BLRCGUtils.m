@@ -8,14 +8,44 @@
 
 #import "BLRCGUtils.h"
 
-@implementation BLRCGUtils
+#import <CoreGraphics/CoreGraphics.h>
+#import <Vision/Vision.h>
+#import <UIKit/UIKit.h>
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
+#import "BLRImageGeometryData.h"
+
+static void DrawFaceObfuscationRects(CGContextRef context, NSArray<VNDetectedObjectObservation *> *observations) {
+  CGContextSaveGState(context);
+  
+  CGContextScaleCTM(context, 1, -1);
+  CGContextTranslateCTM(context, 0, -1);
+  CGContextSetFillColorWithColor(context, UIColor.redColor.CGColor);
+  for (VNDetectedObjectObservation *observation in observations) {
+    CGContextFillRect(context, observation.boundingBox);
+  }
+  
+  CGContextRestoreGState(context);
 }
-*/
 
-@end
+static void DrawObfuscationPaths(CGContextRef context, NSArray<UIBezierPath *> *paths) {
+  CGContextSaveGState(context);
+  
+  CGContextSetFillColorWithColor(context, UIColor.redColor.CGColor);
+  for (UIBezierPath *path in paths) {
+    CGContextAddPath(context, path.CGPath);
+    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextSetLineWidth(context, 0.01);
+    CGContextStrokePath(context);
+  }
+  
+  CGContextRestoreGState(context);
+}
+
+void BLRDrawImageGeometryInContext(CGContextRef context, BLRImageGeometryData *geometry) {
+  DrawFaceObfuscationRects(context, geometry.faceObservations);
+  DrawObfuscationPaths(context, geometry.obfuscationPaths);
+}
+
+CGPoint BLRNormalizePoint(CGPoint point, CGSize bounds) {
+  return CGPointMake(point.x / bounds.width, point.y / bounds.height);
+}

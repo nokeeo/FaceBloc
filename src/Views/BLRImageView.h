@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, nullable) UIImage *image;
 
-@property(nonatomic, getter=isTouchTrackingEnabled) BOOL touchTrackingEnabled;
+@property(nonatomic, readonly) UIView *contentView;
 
 @end
 

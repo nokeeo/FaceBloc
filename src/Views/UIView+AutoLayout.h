@@ -50,6 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BLREdgeConstraints *)blr_constraintsAttachedToLayoutGuideEdges:(UILayoutGuide *)layoutGuide;
 
+- (BLREdgeConstraints *)blr_constraintsAttachedToView:(UIView *)view;
+
 - (BLRCenterConstraints *)blr_constraintsCenteredInSuperview;
 
 - (void)blr_addConstraints:(id<BLRViewConstraining>)constraints;

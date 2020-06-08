@@ -10,7 +10,7 @@
 
 #import <CoreImage/CoreImage.h>
 
-@class BLRImageMetadata;
+@class BLRImageGeometryData;
 @class UIImage;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -29,7 +29,7 @@ typedef void (^BLRImagePipelineCompletion)(UIImage *processedImage);
 
 @interface BLRImagePipeline : NSObject
 
-- (void)processImage:(UIImage *)image withMetaData:(BLRImageMetadata *)metadata options:(BLRImagePipelineOptions *)options completion:(BLRImagePipelineCompletion)completion;
+- (void)processImage:(UIImage *)image withMetaData:(BLRImageGeometryData *)metadata options:(BLRImagePipelineOptions *)options completion:(BLRImagePipelineCompletion)completion;
 
 @end
 

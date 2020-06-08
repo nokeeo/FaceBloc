@@ -3,12 +3,15 @@
 #import <Vision/Vision.h>
 
 #import "BLRActivityViewController.h"
+#import "BLRCGUtils.h"
 #import "BLREditorBottomNavigationView.h"
 #import "BLRFeatureDetector.h"
-#import "BLRImageMetadata.h"
+#import "BLRGeometryOverylayView.h"
+#import "BLRImageGeometryData.h"
 #import "BLRImagePipeline.h"
 #import "BLRImageView.h"
 #import "BLRImageViewController.h"
+#import "BLRPath.h"
 #import "BLRPhotoLibraryService.h"
 #import "UIViewController+NSError.h"
 #import "UIView+AutoLayout.h"
@@ -21,10 +24,15 @@
   BLRImagePipeline *_imagePipeline;
   
   UIImage *_originalImage;
-  BLRImageMetadata *_imageMetadata;
+  BLRImageGeometryData *_imageMetadata;
   NSArray<UIBezierPath *> *_imagePaths;
   
   BLRPhotoLibraryService *_photoService;
+  
+  BLRGeometryOverylayView *_geometryOverlayView;
+  
+  NSArray<UIBezierPath *> *_previousTouchPaths;
+  BLRPath *_touchPath;
   
   NSURL *_imageURL;
 }
@@ -36,6 +44,8 @@
     _imagePipeline = [[BLRImagePipeline alloc] init];
     _imagePaths = @[];
     _photoService = [[BLRPhotoLibraryService alloc] init];
+    _previousTouchPaths= [NSArray array];
+    _touchPath = [[BLRPath alloc] init];
   }
   
   return self;
@@ -61,6 +71,11 @@
   [self.view addSubview:_imageViewController.view];
   [_imageViewController didMoveToParentViewController:self];
   
+  _geometryOverlayView = [[BLRGeometryOverylayView alloc] init];
+  _geometryOverlayView.translatesAutoresizingMaskIntoConstraints = NO;
+  [_imageViewController.imageView.contentView addSubview:_geometryOverlayView];
+  [_imageViewController.imageView blr_addConstraints:[_geometryOverlayView blr_constraintsAttachedToSuperviewEdges]];
+  
   _bottomNavigationView = [[BLREditorBottomNavigationView alloc] init];
   _bottomNavigationView.translatesAutoresizingMaskIntoConstraints = NO;
   _bottomNavigationView.delegate = self;
@@ -69,11 +84,11 @@
   UIView *view = self.view;
   [view blr_addConstraints:[imageView blr_constraintsAttachedToSuperviewEdges]];
   
-  BLREdgeConstraints *edgeConstraints = [_bottomNavigationView blr_constraintsAttachedToSuperviewEdges];
+  BLREdgeConstraints *bottomNavigationEdgeConstraints = [_bottomNavigationView blr_constraintsAttachedToSuperviewEdges];
   [view addConstraints:@[
-    edgeConstraints.leading,
-    edgeConstraints.bottom,
-    edgeConstraints.trailing,
+    bottomNavigationEdgeConstraints.leading,
+    bottomNavigationEdgeConstraints.bottom,
+    bottomNavigationEdgeConstraints.trailing,
   ]];
   
   self.view.backgroundColor = UIColor.blackColor;
@@ -122,7 +137,7 @@
   
   NSMutableArray *paths = [_imagePaths mutableCopy];
   [paths addObject:currentPath];
-  _imageMetadata = [BLRImageMetadata metadataWithFaceObservations:_imageMetadata.faceObservations obfuscationPaths:paths];
+  _imageMetadata = [BLRImageGeometryData geometryWithFaceObservations:_imageMetadata.faceObservations obfuscationPaths:paths];
   
   [self processImage:_originalImage metadata:_imageMetadata];
 }
@@ -133,10 +148,73 @@
   NSMutableArray *paths = [_imagePaths mutableCopy];
   [paths addObject:currentPath];
   
-  _imageMetadata = [BLRImageMetadata metadataWithFaceObservations:_imageMetadata.faceObservations obfuscationPaths:paths];
+  _imageMetadata = [BLRImageGeometryData geometryWithFaceObservations:_imageMetadata.faceObservations obfuscationPaths:paths];
   _imagePaths = paths;
   
   [self processImage:_originalImage metadata:_imageMetadata];
+}
+
+#pragma mark - UIResponder
+
+- (BOOL)canHandleTouches {
+  return _bottomNavigationView.drawingEnabled;
+}
+
+- (void)handleTouchesUpdate:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+  UITouch *touch = touches.allObjects.firstObject;
+  CGPoint touchPoint = [touch locationInView:_geometryOverlayView];
+  
+  CGPoint normalizedPoint = BLRNormalizePoint(touchPoint, _geometryOverlayView.bounds.size);
+  [_touchPath addPoint:normalizedPoint];
+  
+  BLRImageGeometryData *currentGeometry = _geometryOverlayView.geometry;
+  CGPathRef newPathRef = _touchPath.CGPath;
+  UIBezierPath *bezierPath = [UIBezierPath bezierPathWithCGPath:newPathRef];
+  CGPathRelease(newPathRef);
+  
+  NSMutableArray<UIBezierPath *> *obfuscationPaths = [_previousTouchPaths mutableCopy];
+  [obfuscationPaths addObject:bezierPath];
+  BLRImageGeometryData *newGeometry = [BLRImageGeometryData geometryWithFaceObservations:currentGeometry.faceObservations obfuscationPaths:obfuscationPaths];
+  
+  _geometryOverlayView.geometry = newGeometry;
+}
+
+- (void)handleTouchesEnd:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+  [self handleTouchesUpdate:touches withEvent:event];
+  _previousTouchPaths = _geometryOverlayView.geometry.obfuscationPaths;
+  [_touchPath clear];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+  if (![self canHandleTouches]) {
+    [super touchesBegan:touches withEvent:event];
+    return;
+  }
+  [self handleTouchesUpdate:touches withEvent:event];
+}
+
+- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+  if (![self canHandleTouches]) {
+    [super touchesMoved:touches withEvent:event];
+    return;
+  }
+  [self handleTouchesUpdate:touches withEvent:event];
+}
+
+- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+  if (![self canHandleTouches]) {
+    [super touchesEnded:touches withEvent:event];
+    return;
+  }
+  [self handleTouchesEnd:touches withEvent:event];
+}
+
+- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+  if (![self canHandleTouches]) {
+    [super touchesCancelled:touches withEvent:event];
+    return;
+  }
+  [self handleTouchesEnd:touches withEvent:event];
 }
 
 #pragma mark - Private Methods
@@ -147,17 +225,17 @@
     return;
   }
   
-  _imageMetadata = [BLRImageMetadata metadataWithFaceObservations:observations obfuscationPaths:nil];
-  [self processImage:image metadata:_imageMetadata];
+  _imageMetadata = [BLRImageGeometryData geometryWithFaceObservations:observations obfuscationPaths:nil];
+  _geometryOverlayView.geometry = _imageMetadata;
 }
 
-- (void)processImage:(UIImage *)image metadata:(BLRImageMetadata *)metadata {
-  BLRImagePipelineOptions *options = [self createPipelineOptions];
-  __weak __typeof__(self) weakSelf = self;
-  [_imagePipeline processImage:image withMetaData:metadata options:options completion:^(UIImage * _Nonnull processedImage) {
-    __typeof__(self) strongSelf = weakSelf;
-    strongSelf->_imageViewController.imageView.image = processedImage;
-  }];
+- (void)processImage:(UIImage *)image metadata:(BLRImageGeometryData *)metadata {
+//  BLRImagePipelineOptions *options = [self createPipelineOptions];
+//  __weak __typeof__(self) weakSelf = self;
+//  [_imagePipeline processImage:image withMetaData:metadata options:options completion:^(UIImage * _Nonnull processedImage) {
+//    __typeof__(self) strongSelf = weakSelf;
+//    strongSelf->_imageViewController.imageView.image = processedImage;
+//  }];
 }
 
 - (BLRImagePipelineOptions *)createPipelineOptions {
@@ -165,7 +243,8 @@
 }
 
 - (void)setIsDrawingEnabled:(BOOL)isDrawingEnabled {
-  _imageViewController.imageView.touchTrackingEnabled = isDrawingEnabled;
+  // Disable interaction on the image view controller to propegate the touch events up to this object.
+  _imageViewController.view.userInteractionEnabled = !isDrawingEnabled;
 }
 
 - (void)saveCurrentImageToPhotosLibrary {

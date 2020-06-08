@@ -6,12 +6,15 @@
 //  Copyright © 2020 Nokeeo. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <CoreGraphics/CoreGraphics.h>
+#import <Foundation/Foundation.h>
+
+@class BLRImageGeometryData;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BLRCGUtils : UIView
+extern void BLRDrawImageGeometryInContext(CGContextRef context, BLRImageGeometryData *geometry);
 
-@end
+extern CGPoint BLRNormalizePoint(CGPoint point, CGSize bounds);
 
 NS_ASSUME_NONNULL_END
