@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class BLRImage;
 @class BLRImageView;
 @protocol BLRImageViewControllerDelegate;
 
@@ -19,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, nullable, weak) id<BLRImageViewControllerDelegate> delegate;
 
-- (instancetype)initWithImageURL:(nullable NSURL *)imageURL;
+- (instancetype)initWithImage:(BLRImage *)image;
 
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
 

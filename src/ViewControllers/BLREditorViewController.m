@@ -7,6 +7,7 @@
 #import "BLREditorBottomNavigationView.h"
 #import "BLRFeatureDetector.h"
 #import "BLRGeometryOverylayView.h"
+#import "BLRImage.h"
 #import "BLRImageGeometryData.h"
 #import "BLRImageView.h"
 #import "BLRImageViewController.h"
@@ -61,7 +62,8 @@
 - (void)viewDidLoad {
   [super viewDidLoad];
   
-  _imageViewController = [[BLRImageViewController alloc] initWithImageURL:_imageURL];
+  BLRImage *image = [[BLRImage alloc] initWithURL:_imageURL];
+  _imageViewController = [[BLRImageViewController alloc] initWithImage:image];
   _imageViewController.delegate = self;
   UIView *imageView = _imageViewController.view;
   imageView.translatesAutoresizingMaskIntoConstraints = NO;
