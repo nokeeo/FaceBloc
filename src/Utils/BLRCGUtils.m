@@ -13,6 +13,7 @@
 #import <UIKit/UIKit.h>
 
 #import "BLRImageGeometryData.h"
+#import "BLRRenderingOptions.h"
 
 static void DrawFaceObfuscationRects(CGContextRef context, NSArray<VNDetectedObjectObservation *> *observations) {
   CGContextSaveGState(context);
@@ -41,8 +42,11 @@ static void DrawObfuscationPaths(CGContextRef context, NSArray<UIBezierPath *> *
   CGContextRestoreGState(context);
 }
 
-void BLRDrawImageGeometryInContext(CGContextRef context, BLRImageGeometryData *geometry) {
-  DrawFaceObfuscationRects(context, geometry.faceObservations);
+void BLRDrawImageGeometryInContext(CGContextRef context, BLRImageGeometryData *geometry, BLRRenderingOptions *options) {
+  if (options.shouldObscureFaces) {
+    DrawFaceObfuscationRects(context, geometry.faceObservations);
+  }
+  
   DrawObfuscationPaths(context, geometry.obfuscationPaths);
 }
 
