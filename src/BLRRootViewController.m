@@ -89,12 +89,6 @@
 }
 
 - (void)showEditorViewControllerWithImageURL:(NSURL *)imageURL {
-//  if (_editorViewController.parentViewController) {
-//    _editorViewController.image = image;
-//    return;
-//  }
-  
-  
   _editorViewController = [[BLREditorViewController alloc] initWithImageURL:imageURL];
   _editorViewController.delegate = self;
   [self showViewController:_editorViewController sender:self];
