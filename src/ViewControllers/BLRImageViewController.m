@@ -8,16 +8,15 @@
 
 #import "BLRImageViewController.h"
 
+#import "BLRImage.h"
 #import "BLRImageView.h"
 
-@implementation BLRImageViewController {
-  NSURL *_imageURL;
-}
+@implementation BLRImageViewController
 
-- (instancetype)initWithImageURL:(NSURL *)imageURL {
+- (instancetype)initWithImage:(BLRImage *)image {
   self = [super initWithNibName:nil bundle:nil];
   if (self) {
-    _imageURL = imageURL;
+    _image = image;
   }
   
   return self;
@@ -44,33 +43,26 @@
 #pragma mark - Private Methods
 
 - (void)loadImageIfNeeded {
-  if (self.imageView.image || !_imageURL) {
+  if (self.imageView.image || !_image) {
     return;
   }
   
   CGSize safeAreaInsetSize = UIEdgeInsetsInsetRect(self.view.bounds, self.view.safeAreaInsets).size;
   CGFloat scale = UIScreen.mainScreen.scale;
   CGFloat imageMaxPixelSize = MAX(safeAreaInsetSize.width, safeAreaInsetSize.height) * scale;
-  NSDictionary<NSString *, id> *imageSourceOptions = @{
-    (__bridge NSString *)kCGImageSourceShouldCache : @(NO),
+  NSDictionary<BLRImageLoadOptionKey, id> *options = @{
+    BLRImageLoadOptionTemplateMaxDimension : @(imageMaxPixelSize),
   };
-  CGImageSourceRef imageSource = CGImageSourceCreateWithURL((__bridge CFURLRef)self->_imageURL, (__bridge CFDictionaryRef)imageSourceOptions);
-  CFDictionaryRef thumbnailOptions = (__bridge CFDictionaryRef) @{
-    (__bridge NSString *)kCGImageSourceCreateThumbnailFromImageAlways : @(YES),
-    (__bridge NSString *)kCGImageSourceShouldCacheImmediately : @(YES),
-    (__bridge NSString *)kCGImageSourceThumbnailMaxPixelSize : @(imageMaxPixelSize),
-  };
-  dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
-    CGImageRef imageRef = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, thumbnailOptions);
-    UIImage *image = [UIImage imageWithCGImage:imageRef];
-    CGImageRelease(imageRef);
-    CFRelease(imageSource);
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-      self.imageView.image = image;
-      [self->_delegate imageViewController:self didLoadImage:image];
-    });
-  });
+  
+  __weak __typeof__(self) weakSelf = self;
+  [_image imageOfType:BLRImageTypeTemplate options:options onQueue:dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0) completion:^(UIImage * _Nonnull image) {
+    [weakSelf handleImageLoad:image];
+  }];
+}
+
+- (void)handleImageLoad:(UIImage *)image {
+  _imageView.image = image;
+  [_delegate imageViewController:self didLoadImage:image];
 }
 
 @end

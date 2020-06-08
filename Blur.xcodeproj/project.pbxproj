@@ -35,6 +35,8 @@
 		BEAF7B63248DBE2400902E58 /* BLRGeometryOverylayView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B62248DBE2400902E58 /* BLRGeometryOverylayView.m */; };
 		BEAF7B66248DBF3000902E58 /* BLRCGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B65248DBF3000902E58 /* BLRCGUtils.m */; };
 		BEAF7B69248E031F00902E58 /* BLRRenderingOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B68248E031F00902E58 /* BLRRenderingOptions.m */; };
+		BEAF7B6C248E09BD00902E58 /* BLRImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B6B248E09BD00902E58 /* BLRImage.m */; };
+		BEAF7B6F248E237200902E58 /* BLRImageGraphicsRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B6E248E237200902E58 /* BLRImageGraphicsRenderer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +104,10 @@
 		BEAF7B65248DBF3000902E58 /* BLRCGUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLRCGUtils.m; sourceTree = "<group>"; };
 		BEAF7B67248E031F00902E58 /* BLRRenderingOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BLRRenderingOptions.h; path = src/Models/BLRRenderingOptions.h; sourceTree = SOURCE_ROOT; };
 		BEAF7B68248E031F00902E58 /* BLRRenderingOptions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BLRRenderingOptions.m; path = src/Models/BLRRenderingOptions.m; sourceTree = SOURCE_ROOT; };
+		BEAF7B6A248E09BD00902E58 /* BLRImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BLRImage.h; path = src/Models/BLRImage.h; sourceTree = SOURCE_ROOT; };
+		BEAF7B6B248E09BD00902E58 /* BLRImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BLRImage.m; path = src/Models/BLRImage.m; sourceTree = SOURCE_ROOT; };
+		BEAF7B6D248E237200902E58 /* BLRImageGraphicsRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLRImageGraphicsRenderer.h; sourceTree = "<group>"; };
+		BEAF7B6E248E237200902E58 /* BLRImageGraphicsRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLRImageGraphicsRenderer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -175,6 +181,8 @@
 		BE3EA5802489C7640053F89C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				BEAF7B6D248E237200902E58 /* BLRImageGraphicsRenderer.h */,
+				BEAF7B6E248E237200902E58 /* BLRImageGraphicsRenderer.m */,
 				BEAF7B64248DBF3000902E58 /* BLRCGUtils.h */,
 				BEAF7B65248DBF3000902E58 /* BLRCGUtils.m */,
 				BEAF7B50248CADB700902E58 /* BLRPhotoLibraryService.h */,
@@ -229,6 +237,8 @@
 		BEAC4F582489DE2C00BF4264 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BEAF7B6A248E09BD00902E58 /* BLRImage.h */,
+				BEAF7B6B248E09BD00902E58 /* BLRImage.m */,
 				BEAF7B67248E031F00902E58 /* BLRRenderingOptions.h */,
 				BEAF7B68248E031F00902E58 /* BLRRenderingOptions.m */,
 				BEAC4F5C2489DF6B00BF4264 /* BLRImageGeometryData.h */,
@@ -360,6 +370,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEAF7B6C248E09BD00902E58 /* BLRImage.m in Sources */,
 				BE3EA5972489C7640053F89C /* AppDelegate.m in Sources */,
 				BEAC4F612489E0FD00BF4264 /* BLRFeatureDetector.m in Sources */,
 				BE3EA5922489C7640053F89C /* main.m in Sources */,
@@ -383,6 +394,7 @@
 				BE3EA5982489C7640053F89C /* BLRRootView.m in Sources */,
 				BEAF7B5A248CCB1900902E58 /* BLRActivityViewController.m in Sources */,
 				BE3EA5942489C7640053F89C /* BLRRootViewController.m in Sources */,
+				BEAF7B6F248E237200902E58 /* BLRImageGraphicsRenderer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
