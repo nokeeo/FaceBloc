@@ -93,6 +93,15 @@
   return [BLREdgeConstraints edgeConstraintsWithLeading:leading trailing:trailing top:top bottom:bottom];
 }
 
+- (BLREdgeConstraints *)blr_constraintsAttachedToView:(UIView *)view {
+  NSLayoutConstraint *leading = [self.leadingAnchor constraintEqualToAnchor:view.leadingAnchor];
+  NSLayoutConstraint *trailing = [self.trailingAnchor constraintEqualToAnchor:view.trailingAnchor];
+  NSLayoutConstraint *top = [self.topAnchor constraintEqualToAnchor:view.topAnchor];
+  NSLayoutConstraint *bottom = [self.bottomAnchor constraintEqualToAnchor:view.bottomAnchor];
+  
+  return [BLREdgeConstraints edgeConstraintsWithLeading:leading trailing:trailing top:top bottom:bottom];
+}
+
 - (BLRCenterConstraints *)blr_constraintsCenteredInSuperview {
   UIView *superview = self.superview;
   NSLayoutConstraint *x = [self.centerXAnchor constraintEqualToAnchor:superview.centerXAnchor];

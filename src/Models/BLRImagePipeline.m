@@ -1,6 +1,6 @@
 #import "BLRImagePipeline.h"
 
-#import "BLRImageMetadata.h"
+#import "BLRImageGeometryData.h"
 
 #import <CoreGraphics/CoreGraphics.h>
 #import <CoreImage/CoreImage.h>
@@ -14,7 +14,7 @@ static CGRect ConvertNormalizedFrameToImageSpace(CGSize imageSize, CGRect normal
                     CGRectGetHeight(normalizedFrame) * imageSize.height);
 }
 
-static void ObfuscateFacialFeatures(CGContextRef context, CGSize imageSize, BLRImageMetadata *metadata) {
+static void ObfuscateFacialFeatures(CGContextRef context, CGSize imageSize, BLRImageGeometryData *metadata) {
   CGContextSaveGState(context);
   
   CGContextScaleCTM(context, 1, -1);
@@ -71,7 +71,7 @@ static void CallCompletionBlock(BLRImagePipelineCompletion completion, UIImage *
 
 @implementation BLRImagePipeline
 
-- (void)processImage:(UIImage *)image withMetaData:(BLRImageMetadata *)metadata options:(BLRImagePipelineOptions *)options completion:(BLRImagePipelineCompletion)completion {
+- (void)processImage:(UIImage *)image withMetaData:(BLRImageGeometryData *)metadata options:(BLRImagePipelineOptions *)options completion:(BLRImagePipelineCompletion)completion {
   dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
     CGSize imageSize = image.size;
     UIGraphicsImageRendererFormat *rendererFormat = [[UIGraphicsImageRendererFormat alloc] init];

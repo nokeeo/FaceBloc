@@ -44,10 +44,12 @@
 
 - (void)editorViewControllerDidCancelEditing:(BLREditorViewController *)editorViewController {
   [_editorViewController blr_dismissViewController:self];
+  _editorViewController = nil;
 }
 
 - (void)editorViewController:(BLREditorViewController *)editorViewController didFinishEditingWithFinalImage:(UIImage *)finalImage {
   [_editorViewController blr_dismissViewController:self];
+  _editorViewController = nil;
 }
 
 #pragma mark - BLRRootViewDelegate
@@ -60,12 +62,10 @@
 #pragma mark - UIImagePickerControllerDelegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey,id> *)info {
-  UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
-  BLREditorViewController *editorViewController = [[BLREditorViewController alloc] init];
-  editorViewController.image = originalImage;
   
+  NSURL *imageURL = info[UIImagePickerControllerImageURL];
   [picker dismissViewControllerAnimated:YES completion:nil];
-  [self showEditorViewControllerWithImage:originalImage];
+  [self showEditorViewControllerWithImageURL:imageURL];
 }
 
 #pragma mark - Private Methods
@@ -88,14 +88,14 @@
   [self presentViewController:_mediaPickerController animated:YES completion:nil];
 }
 
-- (void)showEditorViewControllerWithImage:(UIImage *)image {
-  if (_editorViewController.parentViewController) {
-    _editorViewController.image = image;
-    return;
-  }
+- (void)showEditorViewControllerWithImageURL:(NSURL *)imageURL {
+//  if (_editorViewController.parentViewController) {
+//    _editorViewController.image = image;
+//    return;
+//  }
   
-  _editorViewController = [[BLREditorViewController alloc] init];
-  _editorViewController.image = image;
+  
+  _editorViewController = [[BLREditorViewController alloc] initWithImageURL:imageURL];
   _editorViewController.delegate = self;
   [self showViewController:_editorViewController sender:self];
 }

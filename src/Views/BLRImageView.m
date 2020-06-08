@@ -8,8 +8,6 @@
 
 #import "BLRImageView.h"
 
-#import "BLRPath.h"
-
 static UIScrollView *CreateImageScrollView() {
   UIScrollView *view = [[UIScrollView alloc] init];
   view.bouncesZoom = YES;
@@ -49,8 +47,6 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
   NSLayoutConstraint *_imageViewLeadingConstrint;
   NSLayoutConstraint *_imageViewBottomConstraint;
   NSLayoutConstraint *_imageViewTrailingConstraint;
-  
-  BLRPath *_touchPath;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -76,8 +72,6 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
       _imageViewBottomConstraint,
     ]];
     _imageScrollView.delegate = self;
-    
-    _touchPath = [[BLRPath alloc] init];
   }
   
   return self;
@@ -103,23 +97,14 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
   return _imageView.image;
 }
 
-- (BOOL)isTouchTrackingEnabled {
-  return !_imageScrollView.userInteractionEnabled;
+- (UIView *)contentView {
+  return _imageView;
 }
 
 #pragma mark - Setters
 
 - (void)setImage:(UIImage *)image {
   _imageView.image = image;
-}
-
-- (void)setTouchTrackingEnabled:(BOOL)touchTrackingEnabled {
-  _imageScrollView.userInteractionEnabled = !touchTrackingEnabled;
-  
-  if (!touchTrackingEnabled) {
-    // TODO: Broadcast end of touch.
-    [_touchPath clear];
-  }
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -141,65 +126,6 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
   CGFloat imageViewXOffset = floorf(MAX(0, CGRectGetWidth(scrollViewSafeArea) - size.width) / 2.f);
   _imageViewLeadingConstrint.constant = imageViewXOffset;
   _imageViewTrailingConstraint.constant = imageViewYOffset;
-}
-
-#pragma mark - Touch Events
-
-- (BOOL)canHandleTouches:(NSSet<UITouch *> *)touches {
-  return ![self isTouchTrackingEnabled] && touches.count > 0;
-}
-
-- (void)handleTouchesUpdate:(NSSet<UITouch *> *)touches {
-  UITouch *touch = touches.allObjects.firstObject;
-  [_touchPath addPoint:[touch preciseLocationInView:_imageView]];
-  CGPathRef pathRef = _touchPath.CGPath;
-  [_delegate imageView:self didUpdatePath:pathRef];
-  CGPathRelease(pathRef);
-}
-
-- (void)handleTouchesEnd:(NSSet<UITouch *> *)touches {
-  UITouch *touch = touches.allObjects.firstObject;
-  [_touchPath addPoint:[touch locationInView:_imageView]];
-  CGPathRef pathRef = _touchPath.CGPath;
-  [_touchPath clear];
-  [_delegate imageView:self didFinishPath:pathRef];
-  CGPathRelease(pathRef);
-}
-
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-  if ([self canHandleTouches:touches]) {
-    [super touchesBegan:touches withEvent:event];
-    return;
-  }
-  
-  [self handleTouchesUpdate:touches];
-}
-
-- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-  if ([self canHandleTouches:touches]) {
-    [super touchesMoved:touches withEvent:event];
-    return;
-  }
-  
-  [self handleTouchesUpdate:touches];
-}
-
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-  if ([self canHandleTouches:touches]) {
-    [super touchesEnded:touches withEvent:event];
-    return;
-  }
-  
-  [self handleTouchesEnd:touches];
-}
-
-- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
- if ([self canHandleTouches:touches]) {
-    [super touchesCancelled:touches withEvent:event];
-    return;
-  }
-  
-  [self handleTouchesEnd:touches];
 }
 
 @end

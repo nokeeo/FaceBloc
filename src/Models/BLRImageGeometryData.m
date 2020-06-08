@@ -6,11 +6,11 @@
 //  Copyright © 2020 Nokeeo. All rights reserved.
 //
 
-#import "BLRImageMetadata.h"
+#import "BLRImageGeometryData.h"
 
-@implementation BLRImageMetadata
+@implementation BLRImageGeometryData
 
-+ (instancetype)metadataWithFaceObservations:(NSArray<VNDetectedObjectObservation *> *)faceObservations obfuscationPaths:(nullable NSArray<UIBezierPath *> *)obfuscationPaths {
++ (instancetype)geometryWithFaceObservations:(NSArray<VNDetectedObjectObservation *> *)faceObservations obfuscationPaths:(nullable NSArray<UIBezierPath *> *)obfuscationPaths {
   return [[self alloc] initWithFaceObservations:faceObservations obfuscationPaths:obfuscationPaths];
 }
 
@@ -24,16 +24,5 @@
   return self;
 }
 
-# pragma mark NSMutableCopying
-
-- (id)mutableCopyWithZone:(NSZone *)zone {
-  return [BLRMutableImageMetadata metadataWithFaceObservations:[_faceObservations copy] obfuscationPaths:[_obfuscationPaths copy]];
-}
-
-@end
-
-#pragma mark -
-
-@implementation BLRMutableImageMetadata
 @end
 

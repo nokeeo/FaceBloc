@@ -8,13 +8,26 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
 @class BLRImageView;
+@protocol BLRImageViewControllerDelegate;
+
+NS_ASSUME_NONNULL_BEGIN
 
 @interface BLRImageViewController : UIViewController
 
 @property(nonatomic) BLRImageView *imageView;
+
+@property(nonatomic, nullable, weak) id<BLRImageViewControllerDelegate> delegate;
+
+- (instancetype)initWithImageURL:(nullable NSURL *)imageURL;
+
+- (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
+
+@end
+
+@protocol BLRImageViewControllerDelegate <NSObject>
+
+- (void)imageViewController:(BLRImageViewController *)viewController didLoadImage:(UIImage *)image;
 
 @end
 
