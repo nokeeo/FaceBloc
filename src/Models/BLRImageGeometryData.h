@@ -5,7 +5,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class UIBezierPath;
 @class VNDetectedObjectObservation;
 
-@interface BLRImageMetadata : NSObject <NSMutableCopying>
+@interface BLRImageGeometryData : NSObject <NSMutableCopying>
 
 @property(nonatomic, readonly, nullable) NSArray<VNDetectedObjectObservation *> *faceObservations;
 
@@ -14,12 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)metadataWithFaceObservations:(nullable NSArray<VNDetectedObjectObservation *> *)faceObservations obfuscationPaths:(nullable NSArray<UIBezierPath *> *)obfuscationPaths;
 
 - (instancetype)init NS_UNAVAILABLE;
-
-@end
-
-@interface BLRMutableImageMetadata : BLRImageMetadata
-
-@property(nonatomic, readwrite, nullable) NSArray<VNDetectedObjectObservation *> *faceObservations;
 
 @end
 

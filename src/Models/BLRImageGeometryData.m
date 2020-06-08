@@ -6,9 +6,9 @@
 //  Copyright © 2020 Nokeeo. All rights reserved.
 //
 
-#import "BLRImageMetadata.h"
+#import "BLRImageGeometryData.h"
 
-@implementation BLRImageMetadata
+@implementation BLRImageGeometryData
 
 + (instancetype)metadataWithFaceObservations:(NSArray<VNDetectedObjectObservation *> *)faceObservations obfuscationPaths:(nullable NSArray<UIBezierPath *> *)obfuscationPaths {
   return [[self alloc] initWithFaceObservations:faceObservations obfuscationPaths:obfuscationPaths];
