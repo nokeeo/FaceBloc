@@ -44,7 +44,7 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
   UIImageView *_imageView;
   
   NSLayoutConstraint *_imageViewTopConstraint;
-  NSLayoutConstraint *_imageViewLeadingConstrint;
+  NSLayoutConstraint *_imageViewLeadingConstraint;
   NSLayoutConstraint *_imageViewBottomConstraint;
   NSLayoutConstraint *_imageViewTrailingConstraint;
 }
@@ -61,13 +61,13 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
     _imageView = CreateImageView();
     _imageView.translatesAutoresizingMaskIntoConstraints = NO;
     _imageViewTopConstraint = [_imageView.topAnchor constraintEqualToAnchor:_imageScrollView.topAnchor];
-    _imageViewLeadingConstrint = [_imageView.leadingAnchor constraintEqualToAnchor:_imageScrollView.leadingAnchor];
+    _imageViewLeadingConstraint = [_imageView.leadingAnchor constraintEqualToAnchor:_imageScrollView.leadingAnchor];
     _imageViewTrailingConstraint = [_imageView.trailingAnchor constraintEqualToAnchor:_imageScrollView.trailingAnchor];
     _imageViewBottomConstraint = [_imageView.bottomAnchor constraintEqualToAnchor:_imageScrollView.bottomAnchor];
     [_imageScrollView addSubview:_imageView];
     [self addConstraints:@[
       _imageViewTopConstraint,
-      _imageViewLeadingConstrint,
+      _imageViewLeadingConstraint,
       _imageViewTrailingConstraint,
       _imageViewBottomConstraint,
     ]];
@@ -80,15 +80,7 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
 - (void)layoutSubviews {
   [super layoutSubviews];
   
-  CGSize imageSize = _imageView.image.size;
-  CGRect scrollViewSafeArea = UIEdgeInsetsInsetRect(_imageScrollView.bounds, _imageScrollView.safeAreaInsets);
-  CGFloat verticalZoomScale = CGRectGetHeight(scrollViewSafeArea) / imageSize.height;
-  CGFloat horizontalZoomScale = CGRectGetWidth(scrollViewSafeArea) / imageSize.width;
-  CGFloat minZoomScale = MIN(verticalZoomScale, horizontalZoomScale);
-  
-  _imageScrollView.minimumZoomScale = minZoomScale;
-  _imageScrollView.zoomScale = minZoomScale;
-  // TODO: Fix initial positioning. The initial positioning of the image should be centered.
+  [self updateZoomLevel];
 }
 
 #pragma mark - Getters
@@ -105,6 +97,10 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
 
 - (void)setImage:(UIImage *)image {
   _imageView.image = image;
+  
+  // Force layout pass if needed to size the image view before updating the zoom level.
+  [self layoutIfNeeded];
+  [self updateZoomLevel];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -121,11 +117,29 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
   CGRect scrollViewSafeArea = UIEdgeInsetsInsetRect(_imageScrollView.bounds, _imageScrollView.safeAreaInsets);
   CGFloat imageViewYOffset = floorf(MAX(0, CGRectGetHeight(scrollViewSafeArea) - size.height) / 2.f);
   _imageViewTopConstraint.constant = imageViewYOffset;
-  _imageViewBottomConstraint.constant = imageViewYOffset;
+  _imageViewBottomConstraint.constant = -imageViewYOffset;
   
   CGFloat imageViewXOffset = floorf(MAX(0, CGRectGetWidth(scrollViewSafeArea) - size.width) / 2.f);
-  _imageViewLeadingConstrint.constant = imageViewXOffset;
-  _imageViewTrailingConstraint.constant = imageViewYOffset;
+  _imageViewLeadingConstraint.constant = imageViewXOffset;
+  _imageViewTrailingConstraint.constant = -imageViewXOffset;
+  
+  [self layoutIfNeeded];
+}
+
+- (void)updateZoomLevel {
+  CGSize imageSize = _imageView.bounds.size;//_imageView.image.size;
+  if (CGSizeEqualToSize(imageSize, CGSizeZero)) {
+    return;
+  }
+  
+  CGRect scrollViewSafeArea = UIEdgeInsetsInsetRect(_imageScrollView.bounds, _imageScrollView.safeAreaInsets);
+  CGFloat verticalZoomScale = CGRectGetHeight(scrollViewSafeArea) / imageSize.height;
+  CGFloat horizontalZoomScale = CGRectGetWidth(scrollViewSafeArea) / imageSize.width;
+  CGFloat minZoomScale = MIN(verticalZoomScale, horizontalZoomScale);
+  
+  _imageScrollView.minimumZoomScale = minZoomScale;
+  
+  _imageScrollView.zoomScale = minZoomScale;
 }
 
 @end
