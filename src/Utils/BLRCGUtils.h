@@ -10,10 +10,11 @@
 #import <Foundation/Foundation.h>
 
 @class BLRImageGeometryData;
+@class BLRRenderingOptions;
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern void BLRDrawImageGeometryInContext(CGContextRef context, BLRImageGeometryData *geometry);
+extern void BLRDrawImageGeometryInContext(CGContextRef context, BLRImageGeometryData *geometry, BLRRenderingOptions *options);
 
 extern CGPoint BLRNormalizePoint(CGPoint point, CGSize bounds);
 

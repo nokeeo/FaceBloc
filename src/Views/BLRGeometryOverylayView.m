@@ -9,12 +9,16 @@
 #import "BLRGeometryOverylayView.h"
 
 #import "BLRCGUtils.h"
+#import "BLRImageGeometryData.h"
+#import "BLRRenderingOptions.h"
 
 @implementation BLRGeometryOverylayView
 
 - (instancetype)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
   if (self) {
+    _geometry = [BLRImageGeometryData geometryWithFaceObservations:nil obfuscationPaths:nil];
+    _renderingOptions = [BLRRenderingOptions optionsWithShouldObscureFaces:YES];
     self.opaque = NO;
   }
   
@@ -22,7 +26,7 @@
 }
 
 - (void)drawRect:(CGRect)rect {
-  if (!_geometry) {
+  if (!_geometry && !_renderingOptions) {
     return;
   }
   
@@ -32,14 +36,21 @@
   CGContextClearRect(context, rect);
   CGContextClipToRect(context, rect);
   
+  // The geometry in the plain old data object is normalized. Scale the coordinate system to
+  // the size of the view.
   CGContextScaleCTM(context, viewSize.width, viewSize.height);
-  BLRDrawImageGeometryInContext(context, _geometry);
+  BLRDrawImageGeometryInContext(context, _geometry, _renderingOptions);
 }
 
 #pragma mark - Setters
 
 - (void)setGeometry:(BLRImageGeometryData *)geometry {
   _geometry = geometry;
+  [self setNeedsDisplay];
+}
+
+- (void)setRenderingOptions:(BLRRenderingOptions *)renderingOptions {
+  _renderingOptions = renderingOptions;
   [self setNeedsDisplay];
 }
 

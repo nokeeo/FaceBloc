@@ -8,11 +8,11 @@
 #import "BLRFeatureDetector.h"
 #import "BLRGeometryOverylayView.h"
 #import "BLRImageGeometryData.h"
-#import "BLRImagePipeline.h"
 #import "BLRImageView.h"
 #import "BLRImageViewController.h"
 #import "BLRPath.h"
 #import "BLRPhotoLibraryService.h"
+#import "BLRRenderingOptions.h"
 #import "UIViewController+NSError.h"
 #import "UIView+AutoLayout.h"
 
@@ -21,7 +21,6 @@
   BLREditorBottomNavigationView *_bottomNavigationView;
   
   BLRFeatureDetector *_featureDetector;
-  BLRImagePipeline *_imagePipeline;
   
   UIImage *_originalImage;
   BLRImageGeometryData *_imageMetadata;
@@ -41,7 +40,6 @@
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
     _featureDetector = [[BLRFeatureDetector alloc] init];
-    _imagePipeline = [[BLRImagePipeline alloc] init];
     _imagePaths = @[];
     _photoService = [[BLRPhotoLibraryService alloc] init];
     _previousTouchPaths= [NSArray array];
@@ -105,8 +103,7 @@
 #pragma mark - BLREditorBottomNavigationViewDelegate
 
 - (void)editorBottomNavigationView:(BLREditorBottomNavigationView *)editorBottomNavigationView didChangeFaceObfuscation:(BOOL)shouldFaceObfuscate {
-  // Triggers a re-rendering of the image.
-  [self processImage:_originalImage metadata:_imageMetadata];
+  _geometryOverlayView.renderingOptions = [self createRenderingOptions];
 }
 
 - (void)editorBottomNavigationView:(BLREditorBottomNavigationView *)editorBottomNavigationView didEnableDrawing:(BOOL)enabled {
@@ -129,31 +126,6 @@
     [weakSelf handleFacialFeatureDetectionForImage:image observations:observations error:error];
   }];
 }
-
-#pragma mark - BLRImageViewDelegate
-
-- (void)imageView:(BLRImageView *)imageView didUpdatePath:(CGPathRef)path {
-  UIBezierPath *currentPath = [UIBezierPath bezierPathWithCGPath:path];
-  
-  NSMutableArray *paths = [_imagePaths mutableCopy];
-  [paths addObject:currentPath];
-  _imageMetadata = [BLRImageGeometryData geometryWithFaceObservations:_imageMetadata.faceObservations obfuscationPaths:paths];
-  
-  [self processImage:_originalImage metadata:_imageMetadata];
-}
-
-- (void)imageView:(BLRImageView *)imageView didFinishPath:(CGPathRef)path {
-  UIBezierPath *currentPath = [UIBezierPath bezierPathWithCGPath:path];
-  
-  NSMutableArray *paths = [_imagePaths mutableCopy];
-  [paths addObject:currentPath];
-  
-  _imageMetadata = [BLRImageGeometryData geometryWithFaceObservations:_imageMetadata.faceObservations obfuscationPaths:paths];
-  _imagePaths = paths;
-  
-  [self processImage:_originalImage metadata:_imageMetadata];
-}
-
 #pragma mark - UIResponder
 
 - (BOOL)canHandleTouches {
@@ -229,17 +201,8 @@
   _geometryOverlayView.geometry = _imageMetadata;
 }
 
-- (void)processImage:(UIImage *)image metadata:(BLRImageGeometryData *)metadata {
-//  BLRImagePipelineOptions *options = [self createPipelineOptions];
-//  __weak __typeof__(self) weakSelf = self;
-//  [_imagePipeline processImage:image withMetaData:metadata options:options completion:^(UIImage * _Nonnull processedImage) {
-//    __typeof__(self) strongSelf = weakSelf;
-//    strongSelf->_imageViewController.imageView.image = processedImage;
-//  }];
-}
-
-- (BLRImagePipelineOptions *)createPipelineOptions {
-  return [BLRImagePipelineOptions optionsWithShouldObscureFaces:_bottomNavigationView.shouldObscureFaces];
+- (BLRRenderingOptions *)createRenderingOptions {
+  return [BLRRenderingOptions optionsWithShouldObscureFaces:_bottomNavigationView.shouldObscureFaces];
 }
 
 - (void)setIsDrawingEnabled:(BOOL)isDrawingEnabled {

@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 
 @class BLRImageGeometryData;
+@class BLRRenderingOptions;
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BLRGeometryOverylayView : UIView
 
-@property(nonatomic, nullable) BLRImageGeometryData *geometry;
+@property(nonatomic) BLRImageGeometryData *geometry;
+
+@property(nonatomic) BLRRenderingOptions *renderingOptions;
 
 @end
 
