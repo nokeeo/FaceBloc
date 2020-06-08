@@ -11,9 +11,7 @@
 #import "BLRImage.h"
 #import "BLRImageView.h"
 
-@implementation BLRImageViewController {
-  BLRImage *_image;
-}
+@implementation BLRImageViewController
 
 - (instancetype)initWithImage:(BLRImage *)image {
   self = [super initWithNibName:nil bundle:nil];
@@ -52,9 +50,12 @@
   CGSize safeAreaInsetSize = UIEdgeInsetsInsetRect(self.view.bounds, self.view.safeAreaInsets).size;
   CGFloat scale = UIScreen.mainScreen.scale;
   CGFloat imageMaxPixelSize = MAX(safeAreaInsetSize.width, safeAreaInsetSize.height) * scale;
+  NSDictionary<BLRImageLoadOptionKey, id> *options = @{
+    BLRImageLoadOptionTemplateMaxDimension : @(imageMaxPixelSize),
+  };
   
   __weak __typeof__(self) weakSelf = self;
-  [_image templateImageWithDimension:imageMaxPixelSize completion:^(UIImage * _Nonnull image) {
+  [_image imageOfType:BLRImageTypeTemplate options:options onQueue:dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0) completion:^(UIImage * _Nonnull image) {
     [weakSelf handleImageLoad:image];
   }];
 }

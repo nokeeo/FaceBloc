@@ -12,7 +12,18 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^BLRImageLoadComletion)(UIImage *image);
+typedef void (^BLRImageLoadCompletion)(UIImage *image);
+
+typedef NS_ENUM(NSUInteger, BLRImageType) {
+  BLRImageTypeSource,
+  BLRImageTypeTemplate
+};
+
+typedef NSString *const BLRImageLoadOptionKey NS_TYPED_ENUM;
+
+extern BLRImageLoadOptionKey BLRImageLoadOptionTemplateMaxDimension;
+
+extern
 
 @interface BLRImage : NSObject
 
@@ -22,7 +33,11 @@ typedef void (^BLRImageLoadComletion)(UIImage *image);
 
 - (instancetype)init NS_UNAVAILABLE;
 
-- (void)templateImageWithDimension:(size_t)dimension completion:(BLRImageLoadComletion)completion;
+- (void)sourceImage:(BLRImageLoadCompletion)completion;
+
+- (void)imageOfType:(BLRImageType)type options:(nullable NSDictionary<BLRImageLoadOptionKey, id> *)options onQueue:(dispatch_queue_t)onQueue completion:(BLRImageLoadCompletion)completion;
+
+- (UIImage *)imageOfType:(BLRImageType)type options:(nullable NSDictionary<BLRImageLoadOptionKey, id> *)options;
 
 @end
 

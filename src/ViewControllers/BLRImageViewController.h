@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BLRImageViewController : UIViewController
 
+@property(nonatomic) BLRImage *image;
+
 @property(nonatomic) BLRImageView *imageView;
 
 @property(nonatomic, nullable, weak) id<BLRImageViewControllerDelegate> delegate;

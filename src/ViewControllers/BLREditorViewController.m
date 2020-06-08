@@ -9,6 +9,7 @@
 #import "BLRGeometryOverylayView.h"
 #import "BLRImage.h"
 #import "BLRImageGeometryData.h"
+#import "BLRImageGraphicsRenderer.h"
 #import "BLRImageView.h"
 #import "BLRImageViewController.h"
 #import "BLRPath.h"
@@ -215,15 +216,24 @@
 - (void)saveCurrentImageToPhotosLibrary {
   BLRActivityViewController *activityViewController = [[BLRActivityViewController alloc] init];
   [self presentViewController:activityViewController animated:YES completion:^{
-    UIImage *image = self->_imageViewController.imageView.image;
+    BLRImage *image = self->_imageViewController.image;
+    BLRPhotoLibraryService *photoService = self->_photoService;
+    BLRImageGeometryData *geometry = self->_geometryOverlayView.geometry;
+    BLRRenderingOptions *options = [self createRenderingOptions];
     __weak __typeof__(self) weakSelf = self;
-    [self->_photoService savePhotoToLibrary:image queue:dispatch_get_main_queue() completion:^(NSError * _Nullable error) {
-      [weakSelf handlePhotoSaveResponse:image error:error activityViewController:activityViewController];
-    }];
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+      UIImage *sourceImage = [image imageOfType:BLRImageTypeSource options:nil];
+      BLRImageGraphicsRenderer *renderer = [[BLRImageGraphicsRenderer alloc] init];
+      UIImage *outputImage = [renderer renderImage:sourceImage geometry:geometry options:options];
+      [photoService savePhotoToLibrary:outputImage queue:dispatch_get_main_queue() completion:^(NSError * _Nullable error) {
+        [weakSelf handlePhotoSaveResponse:outputImage error:error activityViewController:activityViewController];
+      }];
+    });
   }];
 }
 
 - (void)handlePhotoSaveResponse:(UIImage *)image error:(nullable NSError *)error activityViewController:(UIViewController *)activityViewController {
+  NSAssert([NSThread isMainThread], @"%@ must be run on the main thread.", NSStringFromSelector(_cmd));
   [activityViewController dismissViewControllerAnimated:YES completion:^{
     if (error) {
       [self blr_presentError:error];
