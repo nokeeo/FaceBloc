@@ -11,13 +11,14 @@
 #import <CoreGraphics/CoreGraphics.h>
 
 @implementation BLRPath {
-  CGMutablePathRef _path;
+  CGPathRef _path;
 }
 
-- (instancetype)init {
+- (instancetype)initWithPath:(CGPathRef)path {
   self = [super init];
   if (self) {
-    _path = CGPathCreateMutable();
+    CGPathRetain(path);
+    _path = path;
   }
   
   return self;
@@ -27,23 +28,62 @@
   CGPathRelease(_path);
 }
 
-- (void)addPoint:(CGPoint)point {
-  if (!CGPathIsEmpty(_path)) {
-     CGPathAddLineToPoint(_path, nil, point.x, point.y);
+- (CGPathRef)CGPath {
+  return _path;
+}
+
+- (CGFloat)strokeWidth {
+  return 1;
+}
+
+#pragma mark - NSMutableCopying
+
+- (id)mutableCopyWithZone:(NSZone *)zone {
+  return [[BLRMutablePath alloc] initWithPath:_path];
+}
+
+@end
+
+@implementation BLRMutablePath {
+  CGMutablePathRef _mutablePath;
+}
+
+- (instancetype)initWithPath:(CGPathRef)path {
+  CGMutablePathRef mutablePath = CGPathCreateMutableCopy(path);
+  self = [super initWithPath:mutablePath];
+  if (!self) {
+    CGPathRelease(mutablePath);
+    return nil;
   }
   
-   CGPathMoveToPoint(_path, nil, point.x, point.y);
+  _mutablePath = mutablePath;
+  
+  return self;
 }
 
-- (void)clear {
-  CGPathRelease(_path);
-  _path = CGPathCreateMutable();
+- (instancetype)init {
+  CGMutablePathRef mutablePath = CGPathCreateMutable();
+  self = [super initWithPath:mutablePath];
+  if (!self) {
+    CGPathRelease(mutablePath);
+    return nil;
+  }
+  
+  _mutablePath = mutablePath;
+  
+  return self;
 }
 
-#pragma mark - Getters
+- (void)dealloc {
+  CGPathRelease(_mutablePath);
+}
 
-- (CGPathRef)CGPath {
-  return CGPathCreateCopy(_path);
+- (void)addPoint:(CGPoint)point {
+  if (!CGPathIsEmpty(_mutablePath)) {
+     CGPathAddLineToPoint(_mutablePath, nil, point.x, point.y);
+  }
+  
+   CGPathMoveToPoint(_mutablePath, nil, point.x, point.y);
 }
 
 @end

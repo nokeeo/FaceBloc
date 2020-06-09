@@ -2,6 +2,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class BLRPath;
 @class UIBezierPath;
 @class VNDetectedObjectObservation;
 
@@ -9,9 +10,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, readonly, nullable) NSArray<VNDetectedObjectObservation *> *faceObservations;
 
-@property(nonatomic, readonly, nullable) NSArray<UIBezierPath *> *obfuscationPaths;
+@property(nonatomic, readonly, nullable) NSArray<BLRPath *> *obfuscationPaths;
 
-+ (instancetype)geometryWithFaceObservations:(nullable NSArray<VNDetectedObjectObservation *> *)faceObservations obfuscationPaths:(nullable NSArray<UIBezierPath *> *)obfuscationPaths;
++ (instancetype)geometryWithFaceObservations:(nullable NSArray<VNDetectedObjectObservation *> *)faceObservations obfuscationPaths:(nullable NSArray<BLRPath *> *)obfuscationPaths;
 
 - (instancetype)init NS_UNAVAILABLE;
 

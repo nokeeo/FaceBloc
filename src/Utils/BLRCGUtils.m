@@ -12,6 +12,7 @@
 #import <Vision/Vision.h>
 #import <UIKit/UIKit.h>
 
+#import "BLRPath.h"
 #import "BLRImageGeometryData.h"
 #import "BLRRenderingOptions.h"
 
@@ -28,14 +29,14 @@ static void DrawFaceObfuscationRects(CGContextRef context, NSArray<VNDetectedObj
   CGContextRestoreGState(context);
 }
 
-static void DrawObfuscationPaths(CGContextRef context, NSArray<UIBezierPath *> *paths) {
+static void DrawObfuscationPaths(CGContextRef context, NSArray<BLRPath *> *paths) {
   CGContextSaveGState(context);
   
   CGContextSetFillColorWithColor(context, UIColor.redColor.CGColor);
-  for (UIBezierPath *path in paths) {
-    CGContextAddPath(context, path.CGPath);
+  for (BLRPath *path in paths) {
+    CGContextAddPath(context, [path CGPath]);
     CGContextSetLineCap(context, kCGLineCapRound);
-    CGContextSetLineWidth(context, 0.01);
+    CGContextSetLineWidth(context, [path strokeWidth]);
     CGContextStrokePath(context);
   }
   

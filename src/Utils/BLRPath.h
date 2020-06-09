@@ -10,15 +10,29 @@
 
 #import <CoreGraphics/CoreGraphics.h>
 
+@class UIBezierPath;
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BLRPath : NSObject
+@interface BLRPath : NSObject <NSMutableCopying>
 
-@property(nonatomic, readonly) CGPathRef CGPath;
+- (instancetype)initWithPath:(CGPathRef)path NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)init NS_UNAVAILABLE;
+
+- (CGPathRef)CGPath;
+
+- (CGFloat)strokeWidth;
+
+@end
+
+@interface BLRMutablePath : BLRPath
+
+@property(nonatomic) CGFloat strokeWidth;
+
+- (instancetype)init;
 
 - (void)addPoint:(CGPoint)point;
-
-- (void)clear;
 
 @end
 
