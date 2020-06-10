@@ -16,12 +16,22 @@
 #import "BLRImageGeometryData.h"
 #import "BLRRenderingOptions.h"
 
+static CGColorRef GetRenderingColor() {
+  static UIColor *color;
+  static dispatch_once_t token;
+  dispatch_once(&token, ^{
+    color = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1];
+  });
+  
+  return color.CGColor;
+}
+
 static void DrawFaceObfuscationRects(CGContextRef context, NSArray<VNDetectedObjectObservation *> *observations) {
   CGContextSaveGState(context);
   
   CGContextScaleCTM(context, 1, -1);
   CGContextTranslateCTM(context, 0, -1);
-  CGContextSetFillColorWithColor(context, UIColor.redColor.CGColor);
+  CGContextSetFillColorWithColor(context, GetRenderingColor());
   for (VNDetectedObjectObservation *observation in observations) {
     CGContextFillRect(context, observation.boundingBox);
   }
@@ -32,7 +42,7 @@ static void DrawFaceObfuscationRects(CGContextRef context, NSArray<VNDetectedObj
 static void DrawObfuscationPaths(CGContextRef context, NSArray<BLRPath *> *paths) {
   CGContextSaveGState(context);
   
-  CGContextSetFillColorWithColor(context, UIColor.redColor.CGColor);
+  CGContextSetStrokeColorWithColor(context, GetRenderingColor());
   for (BLRPath *path in paths) {
     CGContextAddPath(context, [path CGPath]);
     CGContextSetLineCap(context, kCGLineCapRound);

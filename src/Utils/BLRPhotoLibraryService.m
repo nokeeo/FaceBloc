@@ -75,7 +75,7 @@ static void RequestPermissionsIfNeeded(BLRPhotoRequestPermissionCompletion compl
     }
     
     [library performChanges:^{
-      NSData *imageData = UIImageJPEGRepresentation(image, 1);
+      NSData *imageData = UIImageJPEGRepresentation(image, 0.1);
       if (!imageData) {
         return;
       }
