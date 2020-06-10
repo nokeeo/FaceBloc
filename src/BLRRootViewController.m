@@ -16,17 +16,6 @@
 @implementation BLRRootViewController {
   UIImagePickerController *_Nullable _mediaPickerController;
   BLREditorViewController *_Nullable _editorViewController;
-  
-  BLRPhotoLibraryService *_photoLibraryService;
-}
-
-- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-  self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-  if (self) {
-    _photoLibraryService = [[BLRPhotoLibraryService alloc] init];
-  }
-  
-  return self;
 }
 
 - (void)loadView {
