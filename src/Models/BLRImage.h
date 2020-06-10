@@ -33,8 +33,6 @@ extern
 
 - (instancetype)init NS_UNAVAILABLE;
 
-- (void)sourceImage:(BLRImageLoadCompletion)completion;
-
 - (void)imageOfType:(BLRImageType)type options:(nullable NSDictionary<BLRImageLoadOptionKey, id> *)options onQueue:(dispatch_queue_t)onQueue completion:(BLRImageLoadCompletion)completion;
 
 - (UIImage *)imageOfType:(BLRImageType)type options:(nullable NSDictionary<BLRImageLoadOptionKey, id> *)options;

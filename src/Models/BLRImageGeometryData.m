@@ -10,11 +10,11 @@
 
 @implementation BLRImageGeometryData
 
-+ (instancetype)geometryWithFaceObservations:(NSArray<VNDetectedObjectObservation *> *)faceObservations obfuscationPaths:(nullable NSArray<UIBezierPath *> *)obfuscationPaths {
++ (instancetype)geometryWithFaceObservations:(NSArray<VNDetectedObjectObservation *> *)faceObservations obfuscationPaths:(nullable NSArray<BLRPath *> *)obfuscationPaths {
   return [[self alloc] initWithFaceObservations:faceObservations obfuscationPaths:obfuscationPaths];
 }
 
-- (instancetype)initWithFaceObservations:(NSArray<VNDetectedObjectObservation *> *)faceObservations obfuscationPaths:(nullable NSArray<UIBezierPath *> *)obfuscationPaths {
+- (instancetype)initWithFaceObservations:(NSArray<VNDetectedObjectObservation *> *)faceObservations obfuscationPaths:(nullable NSArray<BLRPath *> *)obfuscationPaths {
   self = [super init];
   if (self) {
     _faceObservations = faceObservations;
