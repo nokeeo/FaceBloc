@@ -10,8 +10,6 @@
 
 #import <CoreGraphics/CoreGraphics.h>
 
-@class UIBezierPath;
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface BLRPath : NSObject <NSMutableCopying>

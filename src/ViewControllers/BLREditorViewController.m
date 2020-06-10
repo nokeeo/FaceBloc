@@ -15,6 +15,7 @@
 #import "BLRPath.h"
 #import "BLRPhotoLibraryService.h"
 #import "BLRRenderingOptions.h"
+#import "BLRStrokeWidthIndicatorLayer.h"
 #import "UIViewController+NSError.h"
 #import "UIView+AutoLayout.h"
 
@@ -22,12 +23,20 @@ static const CGFloat kDrawSliderWidth = 135;
 static const CGFloat kDrawSliderTopPadding = 30;
 static const CGFloat kDrawSliderHorizontalPadding = 8;
 
+static const CGFloat kDrawSliderMinimumValue = 0.05;
+static const CGFloat kDrawSliderMaximumValue = 0.9;
+static const CGFloat kDrawSliderInitialValue = 0.1;
+
+static const NSTimeInterval kStrokeWidthIndicatorAnimationDuration = 0.4;
+
+static NSString *const kOpacityAnimationKey = @"opacity";
+
 static UISlider *CreateDrawSlider() {
   UISlider *slider = [[UISlider alloc] init];
   slider.transform = CGAffineTransformRotate(CGAffineTransformIdentity, -M_PI / 2);
-  slider.minimumValue = 0.0;
-  slider.maximumValue = 0.5;
-  slider.value = 0.1;
+  slider.minimumValue = kDrawSliderMinimumValue;
+  slider.maximumValue = kDrawSliderMaximumValue;
+  slider.value = kDrawSliderInitialValue;
   
   return slider;
 }
@@ -38,6 +47,16 @@ static CGFloat DrawSliderValueToStrokeWidth(CGFloat value) {
   } else {
     return 2 * (value - 0.75) + (value / 2.f);
   }
+}
+
+static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden, CGFloat currentOpacity) {
+  CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:kOpacityAnimationKey];
+  animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
+  animation.fromValue = hidden ? @(1) : @(0);
+  animation.toValue = hidden ? @(0) : @(1);
+  animation.duration = kStrokeWidthIndicatorAnimationDuration;
+  
+  return animation;
 }
 
 @implementation BLREditorViewController {
@@ -60,6 +79,8 @@ static CGFloat DrawSliderValueToStrokeWidth(CGFloat value) {
   NSURL *_imageURL;
   
   UISlider *_drawWidthSlider;
+  
+  BLRStrokeWidthIndicatorLayer *_strokeIndicatorLayer;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -103,6 +124,10 @@ static CGFloat DrawSliderValueToStrokeWidth(CGFloat value) {
   [_imageViewController.imageView.contentView addSubview:_geometryOverlayView];
   [_imageViewController.imageView blr_addConstraints:[_geometryOverlayView blr_constraintsAttachedToSuperviewEdges]];
   
+  _strokeIndicatorLayer = [[BLRStrokeWidthIndicatorLayer alloc] initWithNormalStrokeWidth:0 zoomLevel:0];
+  _strokeIndicatorLayer.hidden = YES;
+  [view.layer addSublayer:_strokeIndicatorLayer];
+  
   _bottomNavigationView = [[BLREditorBottomNavigationView alloc] init];
   _bottomNavigationView.translatesAutoresizingMaskIntoConstraints = NO;
   _bottomNavigationView.delegate = self;
@@ -112,6 +137,7 @@ static CGFloat DrawSliderValueToStrokeWidth(CGFloat value) {
   
   _drawWidthSlider = CreateDrawSlider();
   [_drawWidthSlider addTarget:self action:@selector(drawSliderDidChange:) forControlEvents:UIControlEventValueChanged];
+  [_drawWidthSlider addTarget:self action:@selector(drawSliderDidTouchUp:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
   _touchPath.strokeWidth = DrawSliderValueToStrokeWidth(_drawWidthSlider.value);
   [view addSubview:_drawWidthSlider];
   
@@ -121,9 +147,10 @@ static CGFloat DrawSliderValueToStrokeWidth(CGFloat value) {
     bottomNavigationEdgeConstraints.bottom,
     bottomNavigationEdgeConstraints.trailing,
   ]];
+
   
   self.view.backgroundColor = UIColor.blackColor;
-  [self setIsDrawingEnabled:[_bottomNavigationView isDrawingEnabled]];
+  [self setIsDrawingEnabled:[_bottomNavigationView isDrawingEnabled] animated:NO];
 }
 
 - (void)viewDidLayoutSubviews {
@@ -145,6 +172,8 @@ static CGFloat DrawSliderValueToStrokeWidth(CGFloat value) {
   
   _drawWidthSlider.bounds = sliderBounds;
   _drawWidthSlider.center = CGPointMake(sliderCenterX, sliderCenterY);
+  
+  _strokeIndicatorLayer.frame = _imageViewController.view.frame;
 }
 
 #pragma mark - BLREditorBottomNavigationViewDelegate
@@ -154,7 +183,7 @@ static CGFloat DrawSliderValueToStrokeWidth(CGFloat value) {
 }
 
 - (void)editorBottomNavigationView:(BLREditorBottomNavigationView *)editorBottomNavigationView didEnableDrawing:(BOOL)enabled {
-  [self setIsDrawingEnabled:enabled];
+  [self setIsDrawingEnabled:enabled animated:YES];
 }
 
 - (void)editorBottomNavigationViewDidCancelEditing:(BLREditorBottomNavigationView *)bottomNavigationView {
@@ -237,7 +266,14 @@ static CGFloat DrawSliderValueToStrokeWidth(CGFloat value) {
 
 - (void)drawSliderDidChange:(UISlider *)sender {
   // TODO: Show some indication that the slider has changed value.
-  _touchPath.strokeWidth = DrawSliderValueToStrokeWidth(_drawWidthSlider.value);
+  CGFloat normalizedStrokeWidth = DrawSliderValueToStrokeWidth(_drawWidthSlider.value);
+  _touchPath.strokeWidth = normalizedStrokeWidth;
+  [_strokeIndicatorLayer setNormalStrokeWidth:normalizedStrokeWidth zoomLevel:_imageViewController.imageView.zoomScale imageSize:_imageViewController.imageView.image.size];
+  [self showStrokeWidthIndicator];
+}
+
+- (void)drawSliderDidTouchUp:(UISlider *)slider {
+  [self hideStrokeWidthIndicator];
 }
 
 #pragma mark - Private Methods
@@ -256,9 +292,14 @@ static CGFloat DrawSliderValueToStrokeWidth(CGFloat value) {
   return [BLRRenderingOptions optionsWithShouldObscureFaces:_bottomNavigationView.shouldObscureFaces];
 }
 
-- (void)setIsDrawingEnabled:(BOOL)isDrawingEnabled {
-  // Disable interaction on the image view controller to propegate the touch events up to this object.
+- (void)setIsDrawingEnabled:(BOOL)isDrawingEnabled animated:(BOOL)animated {
+  // Disable interaction on the image view controller to propagate the touch events up to this object.
   _imageViewController.view.userInteractionEnabled = !isDrawingEnabled;
+  
+  CGFloat drawSliderAlpha = [self->_bottomNavigationView isDrawingEnabled] ? 1 : 0;
+  [UIView animateWithDuration:kStrokeWidthIndicatorAnimationDuration animations:^{
+    self->_drawWidthSlider.alpha = drawSliderAlpha;
+  }];
 }
 
 - (void)saveCurrentImageToPhotosLibrary {
@@ -289,6 +330,32 @@ static CGFloat DrawSliderValueToStrokeWidth(CGFloat value) {
       [self->_delegate editorViewController:self didFinishEditingWithFinalImage:image];
     }
   }];
+}
+
+- (void)showStrokeWidthIndicator {
+  if (!_strokeIndicatorLayer.hidden) {
+    return;
+  }
+  
+  _strokeIndicatorLayer.hidden = NO;
+  CAAnimation *animation = StrokeWidthIndicatorAnimation(NO, _strokeIndicatorLayer.opacity);
+  [_strokeIndicatorLayer addAnimation:animation forKey:kOpacityAnimationKey];
+  _strokeIndicatorLayer.opacity = 1;
+}
+
+- (void)hideStrokeWidthIndicator {
+  if (_strokeIndicatorLayer.hidden) {
+    return;
+  }
+  
+  [CATransaction begin];
+  CAAnimation *animation = StrokeWidthIndicatorAnimation(YES, _strokeIndicatorLayer.opacity);
+  [CATransaction setCompletionBlock:^{
+    self->_strokeIndicatorLayer.hidden = YES;
+  }];
+  [_strokeIndicatorLayer addAnimation:animation forKey:kOpacityAnimationKey];
+  _strokeIndicatorLayer.opacity = 0;
+  [CATransaction commit];
 }
 
 @end

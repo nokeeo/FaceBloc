@@ -93,6 +93,10 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
   return _imageView;
 }
 
+- (CGFloat)zoomScale {
+  return _imageScrollView.zoomScale;
+}
+
 #pragma mark - Setters
 
 - (void)setImage:(UIImage *)image {
