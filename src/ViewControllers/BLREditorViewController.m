@@ -49,7 +49,7 @@ static CGFloat DrawSliderValueToStrokeWidth(CGFloat value) {
   }
 }
 
-static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden, CGFloat currentOpacity) {
+static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
   CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:kOpacityAnimationKey];
   animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
   animation.fromValue = hidden ? @(1) : @(0);
@@ -81,6 +81,7 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden, CGFloat currentOp
   UISlider *_drawWidthSlider;
   
   BLRStrokeWidthIndicatorLayer *_strokeIndicatorLayer;
+  CALayer *_imageDimmingLayer;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -123,6 +124,11 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden, CGFloat currentOp
   _geometryOverlayView.translatesAutoresizingMaskIntoConstraints = NO;
   [_imageViewController.imageView.contentView addSubview:_geometryOverlayView];
   [_imageViewController.imageView blr_addConstraints:[_geometryOverlayView blr_constraintsAttachedToSuperviewEdges]];
+  
+  _imageDimmingLayer = [[CALayer alloc] init];
+  _imageDimmingLayer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5].CGColor;
+  _imageDimmingLayer.hidden = YES;
+  [view.layer addSublayer:_imageDimmingLayer];
   
   _strokeIndicatorLayer = [[BLRStrokeWidthIndicatorLayer alloc] initWithNormalStrokeWidth:0 zoomLevel:0];
   _strokeIndicatorLayer.hidden = YES;
@@ -173,7 +179,9 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden, CGFloat currentOp
   _drawWidthSlider.bounds = sliderBounds;
   _drawWidthSlider.center = CGPointMake(sliderCenterX, sliderCenterY);
   
-  _strokeIndicatorLayer.frame = _imageViewController.view.frame;
+  // Center the layer in the image rect.
+  _strokeIndicatorLayer.frame = UIEdgeInsetsInsetRect(_imageViewController.view.bounds, _imageViewController.view.safeAreaInsets);
+  _imageDimmingLayer.frame = self.view.bounds;
 }
 
 #pragma mark - BLREditorBottomNavigationViewDelegate
@@ -338,9 +346,11 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden, CGFloat currentOp
   }
   
   _strokeIndicatorLayer.hidden = NO;
-  CAAnimation *animation = StrokeWidthIndicatorAnimation(NO, _strokeIndicatorLayer.opacity);
-  [_strokeIndicatorLayer addAnimation:animation forKey:kOpacityAnimationKey];
+  _imageDimmingLayer.hidden = NO;
+  [_strokeIndicatorLayer addAnimation:StrokeWidthIndicatorAnimation(/*hidden=*/NO) forKey:kOpacityAnimationKey];
+  [_imageDimmingLayer addAnimation:StrokeWidthIndicatorAnimation(/*hidden=*/NO) forKey:kOpacityAnimationKey];
   _strokeIndicatorLayer.opacity = 1;
+  _imageDimmingLayer.opacity = 1;
 }
 
 - (void)hideStrokeWidthIndicator {
@@ -349,12 +359,14 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden, CGFloat currentOp
   }
   
   [CATransaction begin];
-  CAAnimation *animation = StrokeWidthIndicatorAnimation(YES, _strokeIndicatorLayer.opacity);
   [CATransaction setCompletionBlock:^{
     self->_strokeIndicatorLayer.hidden = YES;
+    self->_imageDimmingLayer.hidden = YES;
   }];
-  [_strokeIndicatorLayer addAnimation:animation forKey:kOpacityAnimationKey];
+  [_strokeIndicatorLayer addAnimation:StrokeWidthIndicatorAnimation(/*hidden=*/YES) forKey:kOpacityAnimationKey];
+  [_imageDimmingLayer addAnimation:StrokeWidthIndicatorAnimation(/*hidden=*/YES) forKey:kOpacityAnimationKey];
   _strokeIndicatorLayer.opacity = 0;
+  _imageDimmingLayer.opacity = 0;
   [CATransaction commit];
 }
 

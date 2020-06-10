@@ -32,8 +32,6 @@ static CGPathRef CreatePathForStrokeWidth(CGSize imageSize, CGRect bounds, CGFlo
     self.strokeColor = UIColor.redColor.CGColor;
     self.lineDashPattern = @[@5, @5];
     self.lineWidth = 2.5;
-    self.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5].CGColor;
-    
   }
   
   return self;
@@ -47,7 +45,7 @@ static CGPathRef CreatePathForStrokeWidth(CGSize imageSize, CGRect bounds, CGFlo
   CGPathRelease(path);
 }
 
-- (void)setNormalStrokeWidth:(CGFloat)normalStrokeWidth zoomLevel:(CGFloat)zoomLevel imageSize:(CGSize)imageSize{
+- (void)setNormalStrokeWidth:(CGFloat)normalStrokeWidth zoomLevel:(CGFloat)zoomLevel imageSize:(CGSize)imageSize {
   _normalStrokeWidth = normalStrokeWidth;
   _zoomLevel = zoomLevel;
   
