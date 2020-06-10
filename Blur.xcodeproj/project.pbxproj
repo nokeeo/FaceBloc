@@ -37,6 +37,7 @@
 		BEAF7B69248E031F00902E58 /* BLRRenderingOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B68248E031F00902E58 /* BLRRenderingOptions.m */; };
 		BEAF7B6C248E09BD00902E58 /* BLRImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B6B248E09BD00902E58 /* BLRImage.m */; };
 		BEAF7B6F248E237200902E58 /* BLRImageGraphicsRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B6E248E237200902E58 /* BLRImageGraphicsRenderer.m */; };
+		BEAF7B72248F705000902E58 /* BLRStrokeWidthIndicatorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B71248F705000902E58 /* BLRStrokeWidthIndicatorLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,8 @@
 		BEAF7B6B248E09BD00902E58 /* BLRImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BLRImage.m; path = src/Models/BLRImage.m; sourceTree = SOURCE_ROOT; };
 		BEAF7B6D248E237200902E58 /* BLRImageGraphicsRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLRImageGraphicsRenderer.h; sourceTree = "<group>"; };
 		BEAF7B6E248E237200902E58 /* BLRImageGraphicsRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLRImageGraphicsRenderer.m; sourceTree = "<group>"; };
+		BEAF7B70248F705000902E58 /* BLRStrokeWidthIndicatorLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLRStrokeWidthIndicatorLayer.h; sourceTree = "<group>"; };
+		BEAF7B71248F705000902E58 /* BLRStrokeWidthIndicatorLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLRStrokeWidthIndicatorLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +200,8 @@
 		BE3EA5882489C7640053F89C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BEAF7B70248F705000902E58 /* BLRStrokeWidthIndicatorLayer.h */,
+				BEAF7B71248F705000902E58 /* BLRStrokeWidthIndicatorLayer.m */,
 				BEAF7B61248DBE2400902E58 /* BLRGeometryOverylayView.h */,
 				BEAF7B62248DBE2400902E58 /* BLRGeometryOverylayView.m */,
 				BEAF7B44248B894800902E58 /* BLREditorBottomNavigationButton.h */,
@@ -382,6 +387,7 @@
 				BEAC4F572489D90800BF4264 /* BLRImageView.m in Sources */,
 				BEAF7B3D248B7DBE00902E58 /* UIView+AutoLayout.m in Sources */,
 				BEAF7B34248A2E5800902E58 /* BLREditorViewController.m in Sources */,
+				BEAF7B72248F705000902E58 /* BLRStrokeWidthIndicatorLayer.m in Sources */,
 				BE3EA59A2489C7640053F89C /* LocalizationIDs.m in Sources */,
 				BEAF7B49248BBDDD00902E58 /* BLRPath.m in Sources */,
 				BEAF7B4F248C774600902E58 /* UINavigationController+Presenting.m in Sources */,
