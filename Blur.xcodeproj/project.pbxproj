@@ -51,7 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BE3344402489B1CC00E3F9ED /* Blur.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Blur.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE3344402489B1CC00E3F9ED /* FaceBlock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceBlock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE33445B2489B1CE00E3F9ED /* BlurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE33445F2489B1CE00E3F9ED /* BlurTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlurTests.m; sourceTree = "<group>"; };
 		BE3344612489B1CE00E3F9ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 		BE3344412489B1CC00E3F9ED /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BE3344402489B1CC00E3F9ED /* Blur.app */,
+				BE3344402489B1CC00E3F9ED /* FaceBlock.app */,
 				BE33445B2489B1CE00E3F9ED /* BlurTests.xctest */,
 			);
 			name = Products;
@@ -291,7 +291,7 @@
 			);
 			name = Blur;
 			productName = Blur;
-			productReference = BE3344402489B1CC00E3F9ED /* Blur.app */;
+			productReference = BE3344402489B1CC00E3F9ED /* FaceBlock.app */;
 			productType = "com.apple.product-type.application";
 		};
 		BE33445A2489B1CE00E3F9ED /* BlurTests */ = {
@@ -572,8 +572,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nokeeo.imageblur;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nokeeo.FaceBlock;
+				PRODUCT_NAME = FaceBlock;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -590,8 +591,9 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.nokeeo.imageblur;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nokeeo.FaceBlock;
+				PRODUCT_NAME = FaceBlock;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
