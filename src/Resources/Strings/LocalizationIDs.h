@@ -10,12 +10,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString *const BLRImportButtonStringID;
-extern NSString *const BLRSaveButtonStringID;
-extern NSString *const BLRCancelButtonStringID;
+extern NSString *const FBLCImportButtonStringID;
+extern NSString *const FBLCSaveButtonStringID;
+extern NSString *const FBLCCancelButtonStringID;
 
-extern NSString *const BLRPhotoPermissionsDeniedError;
+extern NSString *const FBLCPhotoPermissionsDeniedError;
 
-extern NSString *const BLRErrorDialogConfirmationTitle;
+extern NSString *const FBLCErrorDialogConfirmationTitle;
 
 NS_ASSUME_NONNULL_END

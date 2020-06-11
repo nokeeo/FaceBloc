@@ -10,13 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol BLRViewConstraining <NSObject>
+@protocol FBLCViewConstraining <NSObject>
 
 - (NSArray<NSLayoutConstraint *> *)constraints;
 
 @end
 
-@interface BLREdgeConstraints : NSObject <BLRViewConstraining>
+@interface FBLCEdgeConstraints : NSObject <FBLCViewConstraining>
 
 @property(nonatomic, readonly) NSLayoutConstraint *leading;
 
@@ -32,7 +32,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@interface BLRCenterConstraints : NSObject <BLRViewConstraining>
+@interface FBLCCenterConstraints : NSObject <FBLCViewConstraining>
 
 @property(nonatomic, readonly) NSLayoutConstraint *x;
 
@@ -46,15 +46,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIView (AutoLayout)
 
-- (BLREdgeConstraints *)blr_constraintsAttachedToSuperviewEdges;
+- (FBLCEdgeConstraints *)fblc_constraintsAttachedToSuperviewEdges;
 
-- (BLREdgeConstraints *)blr_constraintsAttachedToLayoutGuideEdges:(UILayoutGuide *)layoutGuide;
+- (FBLCEdgeConstraints *)fblc_constraintsAttachedToLayoutGuideEdges:(UILayoutGuide *)layoutGuide;
 
-- (BLREdgeConstraints *)blr_constraintsAttachedToView:(UIView *)view;
+- (FBLCEdgeConstraints *)fblc_constraintsAttachedToView:(UIView *)view;
 
-- (BLRCenterConstraints *)blr_constraintsCenteredInSuperview;
+- (FBLCCenterConstraints *)fblc_constraintsCenteredInSuperview;
 
-- (void)blr_addConstraints:(id<BLRViewConstraining>)constraints;
+- (void)fblc_addConstraints:(id<FBLCViewConstraining>)constraints;
 
 @end
 

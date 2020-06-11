@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import "BLRRootViewController.h"
+#import "FBLCRootViewController.h"
 
 @interface AppDelegate ()
 
@@ -22,7 +22,7 @@
         // No-op scene configuration
     } else {
         UIWindow *window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
-        BLRRootViewController *rootViewController = [[BLRRootViewController alloc] init];
+        FBLCRootViewController *rootViewController = [[FBLCRootViewController alloc] init];
         window.rootViewController = [[UINavigationController alloc] initWithRootViewController:rootViewController];
         self.window = window;
         [window makeKeyAndVisible];

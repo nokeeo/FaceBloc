@@ -12,7 +12,7 @@
 
 @implementation UIViewController (NSError)
 
-- (void)blr_presentError:(NSError *)error {
+- (void)fblc_presentError:(NSError *)error {
   NSString *localizedDescription = error.localizedDescription;
   if (localizedDescription.length == 0) {
     return;
@@ -20,7 +20,7 @@
   
   UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:localizedDescription preferredStyle:UIAlertControllerStyleAlert];
   
-  NSString *title = NSLocalizedString(BLRErrorDialogConfirmationTitle, nil);
+  NSString *title = NSLocalizedString(FBLCErrorDialogConfirmationTitle, nil);
   
   // Use weak to avoid potential retain cycle:
   //  Alert VC->Action->Action Block->Alert VC

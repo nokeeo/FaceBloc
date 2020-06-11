@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIViewController (Presenting)
 
-- (void)blr_dismissViewController:(id)sender;
+- (void)fblc_dismissViewController:(id)sender;
 
 @end
 

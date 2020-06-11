@@ -12,13 +12,13 @@
 
 @implementation UINavigationController (Presenting)
 
-- (void)blr_dismissViewController:(id)sender {
+- (void)fblc_dismissViewController:(id)sender {
   NSUInteger index = [self.viewControllers indexOfObject:sender];
   if (index != NSNotFound && index != 0 && index < self.viewControllers.count) {
     UIViewController *viewControllerToPopTo = self.viewControllers[index - 1];
     [self popToViewController:viewControllerToPopTo animated:YES];
   } else {
-    [self.parentViewController blr_dismissViewController:sender];
+    [self.parentViewController fblc_dismissViewController:sender];
   }
 }
 

@@ -11,33 +11,33 @@
 		BE3EA5912489C7640053F89C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE3EA57B2489C7630053F89C /* Assets.xcassets */; };
 		BE3EA5922489C7640053F89C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA57C2489C7640053F89C /* main.m */; };
 		BE3EA5932489C7640053F89C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE3EA57E2489C7640053F89C /* LaunchScreen.storyboard */; };
-		BE3EA5942489C7640053F89C /* BLRRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA5812489C7640053F89C /* BLRRootViewController.m */; };
+		BE3EA5942489C7640053F89C /* FBLCRootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA5812489C7640053F89C /* FBLCRootViewController.m */; };
 		BE3EA5962489C7640053F89C /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA5852489C7640053F89C /* SceneDelegate.m */; };
 		BE3EA5972489C7640053F89C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA5862489C7640053F89C /* AppDelegate.m */; };
-		BE3EA5982489C7640053F89C /* BLRRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA5892489C7640053F89C /* BLRRootView.m */; };
+		BE3EA5982489C7640053F89C /* FBLCRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA5892489C7640053F89C /* FBLCRootView.m */; };
 		BE3EA5992489C7640053F89C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BE3EA58D2489C7640053F89C /* Localizable.strings */; };
 		BE3EA59A2489C7640053F89C /* LocalizationIDs.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA58F2489C7640053F89C /* LocalizationIDs.m */; };
-		BEAC4F572489D90800BF4264 /* BLRImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC4F562489D90800BF4264 /* BLRImageView.m */; };
-		BEAC4F5E2489DF6B00BF4264 /* BLRImageGeometryData.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC4F5D2489DF6B00BF4264 /* BLRImageGeometryData.m */; };
-		BEAC4F612489E0FD00BF4264 /* BLRFeatureDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC4F602489E0FD00BF4264 /* BLRFeatureDetector.m */; };
-		BEAF7B34248A2E5800902E58 /* BLREditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B32248A2E5800902E58 /* BLREditorViewController.m */; };
-		BEAF7B37248B0A8700902E58 /* BLREditorBottomNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B36248B0A8700902E58 /* BLREditorBottomNavigationView.m */; };
-		BEAF7B3A248B7AED00902E58 /* BLRImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B39248B7AED00902E58 /* BLRImageViewController.m */; };
+		BEAC4F572489D90800BF4264 /* FBLCImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC4F562489D90800BF4264 /* FBLCImageView.m */; };
+		BEAC4F5E2489DF6B00BF4264 /* FBLCImageGeometryData.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC4F5D2489DF6B00BF4264 /* FBLCImageGeometryData.m */; };
+		BEAC4F612489E0FD00BF4264 /* FBLCFeatureDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAC4F602489E0FD00BF4264 /* FBLCFeatureDetector.m */; };
+		BEAF7B34248A2E5800902E58 /* FBLCEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B32248A2E5800902E58 /* FBLCEditorViewController.m */; };
+		BEAF7B37248B0A8700902E58 /* FBLCEditorBottomNavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B36248B0A8700902E58 /* FBLCEditorBottomNavigationView.m */; };
+		BEAF7B3A248B7AED00902E58 /* FBLCImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B39248B7AED00902E58 /* FBLCImageViewController.m */; };
 		BEAF7B3D248B7DBE00902E58 /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B3C248B7DBE00902E58 /* UIView+AutoLayout.m */; };
-		BEAF7B46248B894800902E58 /* BLREditorBottomNavigationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B45248B894800902E58 /* BLREditorBottomNavigationButton.m */; };
-		BEAF7B49248BBDDD00902E58 /* BLRPath.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B48248BBDDD00902E58 /* BLRPath.m */; };
+		BEAF7B46248B894800902E58 /* FBLCEditorBottomNavigationButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B45248B894800902E58 /* FBLCEditorBottomNavigationButton.m */; };
+		BEAF7B49248BBDDD00902E58 /* FBLCPath.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B48248BBDDD00902E58 /* FBLCPath.m */; };
 		BEAF7B4C248C766100902E58 /* UIViewController+Presenting.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B4B248C766100902E58 /* UIViewController+Presenting.m */; };
 		BEAF7B4F248C774600902E58 /* UINavigationController+Presenting.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B4E248C774600902E58 /* UINavigationController+Presenting.m */; };
-		BEAF7B52248CADB700902E58 /* BLRPhotoLibraryService.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B51248CADB700902E58 /* BLRPhotoLibraryService.m */; };
+		BEAF7B52248CADB700902E58 /* FBLCPhotoLibraryService.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B51248CADB700902E58 /* FBLCPhotoLibraryService.m */; };
 		BEAF7B55248CB02500902E58 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEAF7B57248CB02500902E58 /* InfoPlist.strings */; };
-		BEAF7B5A248CCB1900902E58 /* BLRActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B59248CCB1800902E58 /* BLRActivityViewController.m */; };
+		BEAF7B5A248CCB1900902E58 /* FBLCActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B59248CCB1800902E58 /* FBLCActivityViewController.m */; };
 		BEAF7B5D248CE86000902E58 /* UIViewController+NSError.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B5C248CE86000902E58 /* UIViewController+NSError.m */; };
-		BEAF7B63248DBE2400902E58 /* BLRGeometryOverylayView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B62248DBE2400902E58 /* BLRGeometryOverylayView.m */; };
-		BEAF7B66248DBF3000902E58 /* BLRCGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B65248DBF3000902E58 /* BLRCGUtils.m */; };
-		BEAF7B69248E031F00902E58 /* BLRRenderingOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B68248E031F00902E58 /* BLRRenderingOptions.m */; };
-		BEAF7B6C248E09BD00902E58 /* BLRImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B6B248E09BD00902E58 /* BLRImage.m */; };
-		BEAF7B6F248E237200902E58 /* BLRImageGraphicsRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B6E248E237200902E58 /* BLRImageGraphicsRenderer.m */; };
-		BEAF7B72248F705000902E58 /* BLRStrokeWidthIndicatorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B71248F705000902E58 /* BLRStrokeWidthIndicatorLayer.m */; };
+		BEAF7B63248DBE2400902E58 /* FBLCGeometryOverylayView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B62248DBE2400902E58 /* FBLCGeometryOverylayView.m */; };
+		BEAF7B66248DBF3000902E58 /* FBLCCGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B65248DBF3000902E58 /* FBLCCGUtils.m */; };
+		BEAF7B69248E031F00902E58 /* FBLCRenderingOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B68248E031F00902E58 /* FBLCRenderingOptions.m */; };
+		BEAF7B6C248E09BD00902E58 /* FBLCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B6B248E09BD00902E58 /* FBLCImage.m */; };
+		BEAF7B6F248E237200902E58 /* FBLCImageGraphicsRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B6E248E237200902E58 /* FBLCImageGraphicsRenderer.m */; };
+		BEAF7B72248F705000902E58 /* FBLCStrokeWidthIndicatorLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B71248F705000902E58 /* FBLCStrokeWidthIndicatorLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,59 +58,59 @@
 		BE3EA57B2489C7630053F89C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = src/Assets.xcassets; sourceTree = "<group>"; };
 		BE3EA57C2489C7640053F89C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = src/main.m; sourceTree = "<group>"; };
 		BE3EA57F2489C7640053F89C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		BE3EA5812489C7640053F89C /* BLRRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BLRRootViewController.m; path = src/BLRRootViewController.m; sourceTree = "<group>"; };
+		BE3EA5812489C7640053F89C /* FBLCRootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FBLCRootViewController.m; path = src/FBLCRootViewController.m; sourceTree = "<group>"; };
 		BE3EA5822489C7640053F89C /* SceneDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SceneDelegate.h; path = src/SceneDelegate.h; sourceTree = "<group>"; };
-		BE3EA5832489C7640053F89C /* BLRRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BLRRootViewController.h; path = src/BLRRootViewController.h; sourceTree = "<group>"; };
+		BE3EA5832489C7640053F89C /* FBLCRootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FBLCRootViewController.h; path = src/FBLCRootViewController.h; sourceTree = "<group>"; };
 		BE3EA5842489C7640053F89C /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = src/Info.plist; sourceTree = "<group>"; };
 		BE3EA5852489C7640053F89C /* SceneDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SceneDelegate.m; path = src/SceneDelegate.m; sourceTree = "<group>"; };
 		BE3EA5862489C7640053F89C /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = src/AppDelegate.m; sourceTree = "<group>"; };
 		BE3EA5872489C7640053F89C /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = src/AppDelegate.h; sourceTree = "<group>"; };
-		BE3EA5892489C7640053F89C /* BLRRootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLRRootView.m; sourceTree = "<group>"; };
-		BE3EA58A2489C7640053F89C /* BLRRootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLRRootView.h; sourceTree = "<group>"; };
+		BE3EA5892489C7640053F89C /* FBLCRootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLCRootView.m; sourceTree = "<group>"; };
+		BE3EA58A2489C7640053F89C /* FBLCRootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLCRootView.h; sourceTree = "<group>"; };
 		BE3EA58E2489C7640053F89C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BE3EA58F2489C7640053F89C /* LocalizationIDs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalizationIDs.m; sourceTree = "<group>"; };
 		BE3EA5902489C7640053F89C /* LocalizationIDs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalizationIDs.h; sourceTree = "<group>"; };
-		BEAC4F552489D90800BF4264 /* BLRImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLRImageView.h; sourceTree = "<group>"; };
-		BEAC4F562489D90800BF4264 /* BLRImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLRImageView.m; sourceTree = "<group>"; };
-		BEAC4F5C2489DF6B00BF4264 /* BLRImageGeometryData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BLRImageGeometryData.h; path = src/Models/BLRImageGeometryData.h; sourceTree = SOURCE_ROOT; };
-		BEAC4F5D2489DF6B00BF4264 /* BLRImageGeometryData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BLRImageGeometryData.m; path = src/Models/BLRImageGeometryData.m; sourceTree = SOURCE_ROOT; };
-		BEAC4F5F2489E0FD00BF4264 /* BLRFeatureDetector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BLRFeatureDetector.h; path = src/Models/BLRFeatureDetector.h; sourceTree = SOURCE_ROOT; };
-		BEAC4F602489E0FD00BF4264 /* BLRFeatureDetector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BLRFeatureDetector.m; path = src/Models/BLRFeatureDetector.m; sourceTree = SOURCE_ROOT; };
-		BEAF7B32248A2E5800902E58 /* BLREditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLREditorViewController.m; sourceTree = "<group>"; };
-		BEAF7B33248A2E5800902E58 /* BLREditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLREditorViewController.h; sourceTree = "<group>"; };
-		BEAF7B35248B0A8700902E58 /* BLREditorBottomNavigationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLREditorBottomNavigationView.h; sourceTree = "<group>"; };
-		BEAF7B36248B0A8700902E58 /* BLREditorBottomNavigationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLREditorBottomNavigationView.m; sourceTree = "<group>"; };
-		BEAF7B38248B7AED00902E58 /* BLRImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLRImageViewController.h; sourceTree = "<group>"; };
-		BEAF7B39248B7AED00902E58 /* BLRImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLRImageViewController.m; sourceTree = "<group>"; };
+		BEAC4F552489D90800BF4264 /* FBLCImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBLCImageView.h; sourceTree = "<group>"; };
+		BEAC4F562489D90800BF4264 /* FBLCImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBLCImageView.m; sourceTree = "<group>"; };
+		BEAC4F5C2489DF6B00BF4264 /* FBLCImageGeometryData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FBLCImageGeometryData.h; path = src/Models/FBLCImageGeometryData.h; sourceTree = SOURCE_ROOT; };
+		BEAC4F5D2489DF6B00BF4264 /* FBLCImageGeometryData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FBLCImageGeometryData.m; path = src/Models/FBLCImageGeometryData.m; sourceTree = SOURCE_ROOT; };
+		BEAC4F5F2489E0FD00BF4264 /* FBLCFeatureDetector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FBLCFeatureDetector.h; path = src/Models/FBLCFeatureDetector.h; sourceTree = SOURCE_ROOT; };
+		BEAC4F602489E0FD00BF4264 /* FBLCFeatureDetector.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FBLCFeatureDetector.m; path = src/Models/FBLCFeatureDetector.m; sourceTree = SOURCE_ROOT; };
+		BEAF7B32248A2E5800902E58 /* FBLCEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBLCEditorViewController.m; sourceTree = "<group>"; };
+		BEAF7B33248A2E5800902E58 /* FBLCEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBLCEditorViewController.h; sourceTree = "<group>"; };
+		BEAF7B35248B0A8700902E58 /* FBLCEditorBottomNavigationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBLCEditorBottomNavigationView.h; sourceTree = "<group>"; };
+		BEAF7B36248B0A8700902E58 /* FBLCEditorBottomNavigationView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBLCEditorBottomNavigationView.m; sourceTree = "<group>"; };
+		BEAF7B38248B7AED00902E58 /* FBLCImageViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBLCImageViewController.h; sourceTree = "<group>"; };
+		BEAF7B39248B7AED00902E58 /* FBLCImageViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBLCImageViewController.m; sourceTree = "<group>"; };
 		BEAF7B3B248B7DBE00902E58 /* UIView+AutoLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
 		BEAF7B3C248B7DBE00902E58 /* UIView+AutoLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
-		BEAF7B44248B894800902E58 /* BLREditorBottomNavigationButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLREditorBottomNavigationButton.h; sourceTree = "<group>"; };
-		BEAF7B45248B894800902E58 /* BLREditorBottomNavigationButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLREditorBottomNavigationButton.m; sourceTree = "<group>"; };
-		BEAF7B47248BBDDD00902E58 /* BLRPath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLRPath.h; sourceTree = "<group>"; };
-		BEAF7B48248BBDDD00902E58 /* BLRPath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLRPath.m; sourceTree = "<group>"; };
+		BEAF7B44248B894800902E58 /* FBLCEditorBottomNavigationButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBLCEditorBottomNavigationButton.h; sourceTree = "<group>"; };
+		BEAF7B45248B894800902E58 /* FBLCEditorBottomNavigationButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBLCEditorBottomNavigationButton.m; sourceTree = "<group>"; };
+		BEAF7B47248BBDDD00902E58 /* FBLCPath.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBLCPath.h; sourceTree = "<group>"; };
+		BEAF7B48248BBDDD00902E58 /* FBLCPath.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBLCPath.m; sourceTree = "<group>"; };
 		BEAF7B4A248C766100902E58 /* UIViewController+Presenting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Presenting.h"; sourceTree = "<group>"; };
 		BEAF7B4B248C766100902E58 /* UIViewController+Presenting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Presenting.m"; sourceTree = "<group>"; };
 		BEAF7B4D248C774600902E58 /* UINavigationController+Presenting.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+Presenting.h"; sourceTree = "<group>"; };
 		BEAF7B4E248C774600902E58 /* UINavigationController+Presenting.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+Presenting.m"; sourceTree = "<group>"; };
-		BEAF7B50248CADB700902E58 /* BLRPhotoLibraryService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLRPhotoLibraryService.h; sourceTree = "<group>"; };
-		BEAF7B51248CADB700902E58 /* BLRPhotoLibraryService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLRPhotoLibraryService.m; sourceTree = "<group>"; };
+		BEAF7B50248CADB700902E58 /* FBLCPhotoLibraryService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBLCPhotoLibraryService.h; sourceTree = "<group>"; };
+		BEAF7B51248CADB700902E58 /* FBLCPhotoLibraryService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBLCPhotoLibraryService.m; sourceTree = "<group>"; };
 		BEAF7B56248CB02500902E58 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		BEAF7B58248CCB1800902E58 /* BLRActivityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLRActivityViewController.h; sourceTree = "<group>"; };
-		BEAF7B59248CCB1800902E58 /* BLRActivityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLRActivityViewController.m; sourceTree = "<group>"; };
+		BEAF7B58248CCB1800902E58 /* FBLCActivityViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBLCActivityViewController.h; sourceTree = "<group>"; };
+		BEAF7B59248CCB1800902E58 /* FBLCActivityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBLCActivityViewController.m; sourceTree = "<group>"; };
 		BEAF7B5B248CE86000902E58 /* UIViewController+NSError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NSError.h"; sourceTree = "<group>"; };
 		BEAF7B5C248CE86000902E58 /* UIViewController+NSError.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NSError.m"; sourceTree = "<group>"; };
-		BEAF7B61248DBE2400902E58 /* BLRGeometryOverylayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLRGeometryOverylayView.h; sourceTree = "<group>"; };
-		BEAF7B62248DBE2400902E58 /* BLRGeometryOverylayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLRGeometryOverylayView.m; sourceTree = "<group>"; };
-		BEAF7B64248DBF3000902E58 /* BLRCGUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLRCGUtils.h; sourceTree = "<group>"; };
-		BEAF7B65248DBF3000902E58 /* BLRCGUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLRCGUtils.m; sourceTree = "<group>"; };
-		BEAF7B67248E031F00902E58 /* BLRRenderingOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BLRRenderingOptions.h; path = src/Models/BLRRenderingOptions.h; sourceTree = SOURCE_ROOT; };
-		BEAF7B68248E031F00902E58 /* BLRRenderingOptions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BLRRenderingOptions.m; path = src/Models/BLRRenderingOptions.m; sourceTree = SOURCE_ROOT; };
-		BEAF7B6A248E09BD00902E58 /* BLRImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BLRImage.h; path = src/Models/BLRImage.h; sourceTree = SOURCE_ROOT; };
-		BEAF7B6B248E09BD00902E58 /* BLRImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = BLRImage.m; path = src/Models/BLRImage.m; sourceTree = SOURCE_ROOT; };
-		BEAF7B6D248E237200902E58 /* BLRImageGraphicsRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLRImageGraphicsRenderer.h; sourceTree = "<group>"; };
-		BEAF7B6E248E237200902E58 /* BLRImageGraphicsRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLRImageGraphicsRenderer.m; sourceTree = "<group>"; };
-		BEAF7B70248F705000902E58 /* BLRStrokeWidthIndicatorLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BLRStrokeWidthIndicatorLayer.h; sourceTree = "<group>"; };
-		BEAF7B71248F705000902E58 /* BLRStrokeWidthIndicatorLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BLRStrokeWidthIndicatorLayer.m; sourceTree = "<group>"; };
+		BEAF7B61248DBE2400902E58 /* FBLCGeometryOverylayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBLCGeometryOverylayView.h; sourceTree = "<group>"; };
+		BEAF7B62248DBE2400902E58 /* FBLCGeometryOverylayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBLCGeometryOverylayView.m; sourceTree = "<group>"; };
+		BEAF7B64248DBF3000902E58 /* FBLCCGUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBLCCGUtils.h; sourceTree = "<group>"; };
+		BEAF7B65248DBF3000902E58 /* FBLCCGUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBLCCGUtils.m; sourceTree = "<group>"; };
+		BEAF7B67248E031F00902E58 /* FBLCRenderingOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FBLCRenderingOptions.h; path = src/Models/FBLCRenderingOptions.h; sourceTree = SOURCE_ROOT; };
+		BEAF7B68248E031F00902E58 /* FBLCRenderingOptions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FBLCRenderingOptions.m; path = src/Models/FBLCRenderingOptions.m; sourceTree = SOURCE_ROOT; };
+		BEAF7B6A248E09BD00902E58 /* FBLCImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FBLCImage.h; path = src/Models/FBLCImage.h; sourceTree = SOURCE_ROOT; };
+		BEAF7B6B248E09BD00902E58 /* FBLCImage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = FBLCImage.m; path = src/Models/FBLCImage.m; sourceTree = SOURCE_ROOT; };
+		BEAF7B6D248E237200902E58 /* FBLCImageGraphicsRenderer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBLCImageGraphicsRenderer.h; sourceTree = "<group>"; };
+		BEAF7B6E248E237200902E58 /* FBLCImageGraphicsRenderer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBLCImageGraphicsRenderer.m; sourceTree = "<group>"; };
+		BEAF7B70248F705000902E58 /* FBLCStrokeWidthIndicatorLayer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBLCStrokeWidthIndicatorLayer.h; sourceTree = "<group>"; };
+		BEAF7B71248F705000902E58 /* FBLCStrokeWidthIndicatorLayer.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBLCStrokeWidthIndicatorLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,8 +140,8 @@
 				BE3EA5862489C7640053F89C /* AppDelegate.m */,
 				BE3EA57B2489C7630053F89C /* Assets.xcassets */,
 				BE3EA57D2489C7640053F89C /* Base.lproj */,
-				BE3EA5832489C7640053F89C /* BLRRootViewController.h */,
-				BE3EA5812489C7640053F89C /* BLRRootViewController.m */,
+				BE3EA5832489C7640053F89C /* FBLCRootViewController.h */,
+				BE3EA5812489C7640053F89C /* FBLCRootViewController.m */,
 				BE33445E2489B1CE00E3F9ED /* BlurTests */,
 				BE3EA5842489C7640053F89C /* Info.plist */,
 				BE3EA57C2489C7640053F89C /* main.m */,
@@ -184,14 +184,14 @@
 		BE3EA5802489C7640053F89C /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				BEAF7B6D248E237200902E58 /* BLRImageGraphicsRenderer.h */,
-				BEAF7B6E248E237200902E58 /* BLRImageGraphicsRenderer.m */,
-				BEAF7B64248DBF3000902E58 /* BLRCGUtils.h */,
-				BEAF7B65248DBF3000902E58 /* BLRCGUtils.m */,
-				BEAF7B50248CADB700902E58 /* BLRPhotoLibraryService.h */,
-				BEAF7B51248CADB700902E58 /* BLRPhotoLibraryService.m */,
-				BEAF7B47248BBDDD00902E58 /* BLRPath.h */,
-				BEAF7B48248BBDDD00902E58 /* BLRPath.m */,
+				BEAF7B6D248E237200902E58 /* FBLCImageGraphicsRenderer.h */,
+				BEAF7B6E248E237200902E58 /* FBLCImageGraphicsRenderer.m */,
+				BEAF7B64248DBF3000902E58 /* FBLCCGUtils.h */,
+				BEAF7B65248DBF3000902E58 /* FBLCCGUtils.m */,
+				BEAF7B50248CADB700902E58 /* FBLCPhotoLibraryService.h */,
+				BEAF7B51248CADB700902E58 /* FBLCPhotoLibraryService.m */,
+				BEAF7B47248BBDDD00902E58 /* FBLCPath.h */,
+				BEAF7B48248BBDDD00902E58 /* FBLCPath.m */,
 			);
 			name = Utils;
 			path = src/Utils;
@@ -200,20 +200,20 @@
 		BE3EA5882489C7640053F89C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				BEAF7B70248F705000902E58 /* BLRStrokeWidthIndicatorLayer.h */,
-				BEAF7B71248F705000902E58 /* BLRStrokeWidthIndicatorLayer.m */,
-				BEAF7B61248DBE2400902E58 /* BLRGeometryOverylayView.h */,
-				BEAF7B62248DBE2400902E58 /* BLRGeometryOverylayView.m */,
-				BEAF7B44248B894800902E58 /* BLREditorBottomNavigationButton.h */,
-				BEAF7B45248B894800902E58 /* BLREditorBottomNavigationButton.m */,
+				BEAF7B70248F705000902E58 /* FBLCStrokeWidthIndicatorLayer.h */,
+				BEAF7B71248F705000902E58 /* FBLCStrokeWidthIndicatorLayer.m */,
+				BEAF7B61248DBE2400902E58 /* FBLCGeometryOverylayView.h */,
+				BEAF7B62248DBE2400902E58 /* FBLCGeometryOverylayView.m */,
+				BEAF7B44248B894800902E58 /* FBLCEditorBottomNavigationButton.h */,
+				BEAF7B45248B894800902E58 /* FBLCEditorBottomNavigationButton.m */,
 				BEAF7B3B248B7DBE00902E58 /* UIView+AutoLayout.h */,
 				BEAF7B3C248B7DBE00902E58 /* UIView+AutoLayout.m */,
-				BEAF7B35248B0A8700902E58 /* BLREditorBottomNavigationView.h */,
-				BEAF7B36248B0A8700902E58 /* BLREditorBottomNavigationView.m */,
-				BEAC4F552489D90800BF4264 /* BLRImageView.h */,
-				BEAC4F562489D90800BF4264 /* BLRImageView.m */,
-				BE3EA58A2489C7640053F89C /* BLRRootView.h */,
-				BE3EA5892489C7640053F89C /* BLRRootView.m */,
+				BEAF7B35248B0A8700902E58 /* FBLCEditorBottomNavigationView.h */,
+				BEAF7B36248B0A8700902E58 /* FBLCEditorBottomNavigationView.m */,
+				BEAC4F552489D90800BF4264 /* FBLCImageView.h */,
+				BEAC4F562489D90800BF4264 /* FBLCImageView.m */,
+				BE3EA58A2489C7640053F89C /* FBLCRootView.h */,
+				BE3EA5892489C7640053F89C /* FBLCRootView.m */,
 			);
 			name = Views;
 			path = src/Views;
@@ -242,14 +242,14 @@
 		BEAC4F582489DE2C00BF4264 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BEAF7B6A248E09BD00902E58 /* BLRImage.h */,
-				BEAF7B6B248E09BD00902E58 /* BLRImage.m */,
-				BEAF7B67248E031F00902E58 /* BLRRenderingOptions.h */,
-				BEAF7B68248E031F00902E58 /* BLRRenderingOptions.m */,
-				BEAC4F5C2489DF6B00BF4264 /* BLRImageGeometryData.h */,
-				BEAC4F5D2489DF6B00BF4264 /* BLRImageGeometryData.m */,
-				BEAC4F5F2489E0FD00BF4264 /* BLRFeatureDetector.h */,
-				BEAC4F602489E0FD00BF4264 /* BLRFeatureDetector.m */,
+				BEAF7B6A248E09BD00902E58 /* FBLCImage.h */,
+				BEAF7B6B248E09BD00902E58 /* FBLCImage.m */,
+				BEAF7B67248E031F00902E58 /* FBLCRenderingOptions.h */,
+				BEAF7B68248E031F00902E58 /* FBLCRenderingOptions.m */,
+				BEAC4F5C2489DF6B00BF4264 /* FBLCImageGeometryData.h */,
+				BEAC4F5D2489DF6B00BF4264 /* FBLCImageGeometryData.m */,
+				BEAC4F5F2489E0FD00BF4264 /* FBLCFeatureDetector.h */,
+				BEAC4F602489E0FD00BF4264 /* FBLCFeatureDetector.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -261,14 +261,14 @@
 				BEAF7B5C248CE86000902E58 /* UIViewController+NSError.m */,
 				BEAF7B4D248C774600902E58 /* UINavigationController+Presenting.h */,
 				BEAF7B4E248C774600902E58 /* UINavigationController+Presenting.m */,
-				BEAF7B58248CCB1800902E58 /* BLRActivityViewController.h */,
-				BEAF7B59248CCB1800902E58 /* BLRActivityViewController.m */,
+				BEAF7B58248CCB1800902E58 /* FBLCActivityViewController.h */,
+				BEAF7B59248CCB1800902E58 /* FBLCActivityViewController.m */,
 				BEAF7B4A248C766100902E58 /* UIViewController+Presenting.h */,
 				BEAF7B4B248C766100902E58 /* UIViewController+Presenting.m */,
-				BEAF7B33248A2E5800902E58 /* BLREditorViewController.h */,
-				BEAF7B32248A2E5800902E58 /* BLREditorViewController.m */,
-				BEAF7B38248B7AED00902E58 /* BLRImageViewController.h */,
-				BEAF7B39248B7AED00902E58 /* BLRImageViewController.m */,
+				BEAF7B33248A2E5800902E58 /* FBLCEditorViewController.h */,
+				BEAF7B32248A2E5800902E58 /* FBLCEditorViewController.m */,
+				BEAF7B38248B7AED00902E58 /* FBLCImageViewController.h */,
+				BEAF7B39248B7AED00902E58 /* FBLCImageViewController.m */,
 			);
 			name = ViewControllers;
 			path = src/ViewControllers;
@@ -375,32 +375,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEAF7B6C248E09BD00902E58 /* BLRImage.m in Sources */,
+				BEAF7B6C248E09BD00902E58 /* FBLCImage.m in Sources */,
 				BE3EA5972489C7640053F89C /* AppDelegate.m in Sources */,
-				BEAC4F612489E0FD00BF4264 /* BLRFeatureDetector.m in Sources */,
+				BEAC4F612489E0FD00BF4264 /* FBLCFeatureDetector.m in Sources */,
 				BE3EA5922489C7640053F89C /* main.m in Sources */,
 				BEAF7B4C248C766100902E58 /* UIViewController+Presenting.m in Sources */,
-				BEAF7B52248CADB700902E58 /* BLRPhotoLibraryService.m in Sources */,
-				BEAF7B66248DBF3000902E58 /* BLRCGUtils.m in Sources */,
+				BEAF7B52248CADB700902E58 /* FBLCPhotoLibraryService.m in Sources */,
+				BEAF7B66248DBF3000902E58 /* FBLCCGUtils.m in Sources */,
 				BE3EA5962489C7640053F89C /* SceneDelegate.m in Sources */,
 				BEAF7B5D248CE86000902E58 /* UIViewController+NSError.m in Sources */,
-				BEAC4F572489D90800BF4264 /* BLRImageView.m in Sources */,
+				BEAC4F572489D90800BF4264 /* FBLCImageView.m in Sources */,
 				BEAF7B3D248B7DBE00902E58 /* UIView+AutoLayout.m in Sources */,
-				BEAF7B34248A2E5800902E58 /* BLREditorViewController.m in Sources */,
-				BEAF7B72248F705000902E58 /* BLRStrokeWidthIndicatorLayer.m in Sources */,
+				BEAF7B34248A2E5800902E58 /* FBLCEditorViewController.m in Sources */,
+				BEAF7B72248F705000902E58 /* FBLCStrokeWidthIndicatorLayer.m in Sources */,
 				BE3EA59A2489C7640053F89C /* LocalizationIDs.m in Sources */,
-				BEAF7B49248BBDDD00902E58 /* BLRPath.m in Sources */,
+				BEAF7B49248BBDDD00902E58 /* FBLCPath.m in Sources */,
 				BEAF7B4F248C774600902E58 /* UINavigationController+Presenting.m in Sources */,
-				BEAF7B3A248B7AED00902E58 /* BLRImageViewController.m in Sources */,
-				BEAF7B63248DBE2400902E58 /* BLRGeometryOverylayView.m in Sources */,
-				BEAF7B37248B0A8700902E58 /* BLREditorBottomNavigationView.m in Sources */,
-				BEAF7B69248E031F00902E58 /* BLRRenderingOptions.m in Sources */,
-				BEAC4F5E2489DF6B00BF4264 /* BLRImageGeometryData.m in Sources */,
-				BEAF7B46248B894800902E58 /* BLREditorBottomNavigationButton.m in Sources */,
-				BE3EA5982489C7640053F89C /* BLRRootView.m in Sources */,
-				BEAF7B5A248CCB1900902E58 /* BLRActivityViewController.m in Sources */,
-				BE3EA5942489C7640053F89C /* BLRRootViewController.m in Sources */,
-				BEAF7B6F248E237200902E58 /* BLRImageGraphicsRenderer.m in Sources */,
+				BEAF7B3A248B7AED00902E58 /* FBLCImageViewController.m in Sources */,
+				BEAF7B63248DBE2400902E58 /* FBLCGeometryOverylayView.m in Sources */,
+				BEAF7B37248B0A8700902E58 /* FBLCEditorBottomNavigationView.m in Sources */,
+				BEAF7B69248E031F00902E58 /* FBLCRenderingOptions.m in Sources */,
+				BEAC4F5E2489DF6B00BF4264 /* FBLCImageGeometryData.m in Sources */,
+				BEAF7B46248B894800902E58 /* FBLCEditorBottomNavigationButton.m in Sources */,
+				BE3EA5982489C7640053F89C /* FBLCRootView.m in Sources */,
+				BEAF7B5A248CCB1900902E58 /* FBLCActivityViewController.m in Sources */,
+				BE3EA5942489C7640053F89C /* FBLCRootViewController.m in Sources */,
+				BEAF7B6F248E237200902E58 /* FBLCImageGraphicsRenderer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

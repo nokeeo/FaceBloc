@@ -10,10 +10,10 @@
 
 @implementation UIViewController (Presenting)
 
-- (void)blr_dismissViewController:(id)sender {
-  UIViewController *targetViewController = [self targetViewControllerForAction:@selector(blr_dismissViewController:) sender:self];
+- (void)fblc_dismissViewController:(id)sender {
+  UIViewController *targetViewController = [self targetViewControllerForAction:@selector(fblc_dismissViewController:) sender:self];
   if (targetViewController) {
-    [targetViewController blr_dismissViewController:self];
+    [targetViewController fblc_dismissViewController:self];
   } else {
     [self dismissViewControllerAnimated:YES completion:nil];
   }

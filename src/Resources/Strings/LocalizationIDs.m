@@ -8,11 +8,11 @@
 
 #import "LocalizationIDs.h"
 
-NSString *const BLRImportButtonStringID = @"import_button";
-NSString *const BLRSaveButtonStringID = @"save_button";
-NSString *const BLRCancelButtonStringID = @"cancel_button";
+NSString *const FBLCImportButtonStringID = @"import_button";
+NSString *const FBLCSaveButtonStringID = @"save_button";
+NSString *const FBLCCancelButtonStringID = @"cancel_button";
 
-NSString *const BLRPhotoPermissionsDeniedError = @"photo_permissions_denied";
+NSString *const FBLCPhotoPermissionsDeniedError = @"photo_permissions_denied";
 
-NSString *const BLRErrorDialogConfirmationTitle = @"error_dialog_confirmation_title";
+NSString *const FBLCErrorDialogConfirmationTitle = @"error_dialog_confirmation_title";
 

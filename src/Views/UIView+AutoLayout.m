@@ -8,13 +8,13 @@
 
 #import "UIView+AutoLayout.h"
 
-@interface BLREdgeConstraints ()
+@interface FBLCEdgeConstraints ()
 
 - (instancetype)initWithLeading:(NSLayoutConstraint *)leading trailing:(NSLayoutConstraint *)trailing top:(NSLayoutConstraint *)top bottom:(NSLayoutConstraint *)bottom;
 
 @end
 
-@implementation BLREdgeConstraints
+@implementation FBLCEdgeConstraints
 
 + (instancetype)edgeConstraintsWithLeading:(NSLayoutConstraint *)leading trailing:(NSLayoutConstraint *)trailing top:(NSLayoutConstraint *)top bottom:(NSLayoutConstraint *)bottom {
   return [[self alloc] initWithLeading:leading trailing:trailing top:top bottom:bottom];
@@ -45,7 +45,7 @@
 
 #pragma mark -
 
-@implementation BLRCenterConstraints
+@implementation FBLCCenterConstraints
 
 - (instancetype)initWithX:(NSLayoutConstraint *)x y:(NSLayoutConstraint *)y {
   self = [super init];
@@ -74,43 +74,43 @@
 
 @implementation UIView (AutoLayout)
 
-- (BLREdgeConstraints *)blr_constraintsAttachedToSuperviewEdges {
+- (FBLCEdgeConstraints *)fblc_constraintsAttachedToSuperviewEdges {
   UIView *superview = self.superview;
   NSLayoutConstraint *leading = [self.leadingAnchor constraintEqualToAnchor:superview.leadingAnchor];
   NSLayoutConstraint *trailing = [self.trailingAnchor constraintEqualToAnchor:superview.trailingAnchor];
   NSLayoutConstraint *top = [self.topAnchor constraintEqualToAnchor:superview.topAnchor];
   NSLayoutConstraint *bottom = [self.bottomAnchor constraintEqualToAnchor:superview.bottomAnchor];
   
-  return [BLREdgeConstraints edgeConstraintsWithLeading:leading trailing:trailing top:top bottom:bottom];
+  return [FBLCEdgeConstraints edgeConstraintsWithLeading:leading trailing:trailing top:top bottom:bottom];
 }
 
-- (BLREdgeConstraints *)blr_constraintsAttachedToLayoutGuideEdges:(UILayoutGuide *)layoutGuide {
+- (FBLCEdgeConstraints *)fblc_constraintsAttachedToLayoutGuideEdges:(UILayoutGuide *)layoutGuide {
   NSLayoutConstraint *leading = [self.leadingAnchor constraintEqualToAnchor:layoutGuide.leadingAnchor];
   NSLayoutConstraint *trailing = [self.trailingAnchor constraintEqualToAnchor:layoutGuide.trailingAnchor];
   NSLayoutConstraint *top = [self.topAnchor constraintEqualToAnchor:layoutGuide.topAnchor];
   NSLayoutConstraint *bottom = [self.bottomAnchor constraintEqualToAnchor:layoutGuide.bottomAnchor];
   
-  return [BLREdgeConstraints edgeConstraintsWithLeading:leading trailing:trailing top:top bottom:bottom];
+  return [FBLCEdgeConstraints edgeConstraintsWithLeading:leading trailing:trailing top:top bottom:bottom];
 }
 
-- (BLREdgeConstraints *)blr_constraintsAttachedToView:(UIView *)view {
+- (FBLCEdgeConstraints *)fblc_constraintsAttachedToView:(UIView *)view {
   NSLayoutConstraint *leading = [self.leadingAnchor constraintEqualToAnchor:view.leadingAnchor];
   NSLayoutConstraint *trailing = [self.trailingAnchor constraintEqualToAnchor:view.trailingAnchor];
   NSLayoutConstraint *top = [self.topAnchor constraintEqualToAnchor:view.topAnchor];
   NSLayoutConstraint *bottom = [self.bottomAnchor constraintEqualToAnchor:view.bottomAnchor];
   
-  return [BLREdgeConstraints edgeConstraintsWithLeading:leading trailing:trailing top:top bottom:bottom];
+  return [FBLCEdgeConstraints edgeConstraintsWithLeading:leading trailing:trailing top:top bottom:bottom];
 }
 
-- (BLRCenterConstraints *)blr_constraintsCenteredInSuperview {
+- (FBLCCenterConstraints *)fblc_constraintsCenteredInSuperview {
   UIView *superview = self.superview;
   NSLayoutConstraint *x = [self.centerXAnchor constraintEqualToAnchor:superview.centerXAnchor];
   NSLayoutConstraint *y = [self.centerYAnchor constraintEqualToAnchor:superview.centerYAnchor];
   
-  return [BLRCenterConstraints centerConstraintWithX:x y:y];
+  return [FBLCCenterConstraints centerConstraintWithX:x y:y];
 }
 
-- (void)blr_addConstraints:(id<BLRViewConstraining>)constraints {
+- (void)fblc_addConstraints:(id<FBLCViewConstraining>)constraints {
   [self addConstraints:[constraints constraints]];
 }
 

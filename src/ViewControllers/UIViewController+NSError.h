@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIViewController (NSError)
 
-- (void)blr_presentError:(NSError *)error;
+- (void)fblc_presentError:(NSError *)error;
 
 @end
 
