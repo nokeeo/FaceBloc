@@ -18,4 +18,8 @@ extern void BLRDrawImageGeometryInContext(CGContextRef context, BLRImageGeometry
 
 extern CGPoint BLRNormalizePoint(CGPoint point, CGSize bounds);
 
+extern CGPoint BLRPointForNormalPoint(CGPoint normalPoint, CGSize bounds);
+
+extern CGRect BLRRectForNormalRect(CGRect rect, CGSize bounds);
+
 NS_ASSUME_NONNULL_END

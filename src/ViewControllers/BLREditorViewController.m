@@ -187,7 +187,7 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
 #pragma mark - BLREditorBottomNavigationViewDelegate
 
 - (void)editorBottomNavigationView:(BLREditorBottomNavigationView *)editorBottomNavigationView didChangeFaceObfuscation:(BOOL)shouldFaceObfuscate {
-  _geometryOverlayView.renderingOptions = [self createRenderingOptions];
+  _geometryOverlayView.renderingOptions = [self createRenderingOptionsWithTargetSize:_geometryOverlayView.bounds.size];
 }
 
 - (void)editorBottomNavigationView:(BLREditorBottomNavigationView *)editorBottomNavigationView didEnableDrawing:(BOOL)enabled {
@@ -296,8 +296,8 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
   _geometryOverlayView.geometry = _imageMetadata;
 }
 
-- (BLRRenderingOptions *)createRenderingOptions {
-  return [BLRRenderingOptions optionsWithShouldObscureFaces:_bottomNavigationView.shouldObscureFaces];
+- (BLRRenderingOptions *)createRenderingOptionsWithTargetSize:(CGSize)targetSize {
+  return [BLRRenderingOptions optionsWithTargetSize:targetSize shouldObscureFaces:_bottomNavigationView.shouldObscureFaces];
 }
 
 - (void)setIsDrawingEnabled:(BOOL)isDrawingEnabled animated:(BOOL)animated {
@@ -316,11 +316,11 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
     BLRImage *image = self->_imageViewController.image;
     BLRPhotoLibraryService *photoService = self->_photoService;
     BLRImageGeometryData *geometry = self->_geometryOverlayView.geometry;
-    BLRRenderingOptions *options = [self createRenderingOptions];
     __weak __typeof__(self) weakSelf = self;
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
       UIImage *sourceImage = [image imageOfType:BLRImageTypeSource options:nil];
       BLRImageGraphicsRenderer *renderer = [[BLRImageGraphicsRenderer alloc] init];
+      BLRRenderingOptions *options = [weakSelf createRenderingOptionsWithTargetSize:sourceImage.size];
       UIImage *outputImage = [renderer renderImage:sourceImage geometry:geometry options:options];
       [photoService savePhotoToLibrary:outputImage queue:dispatch_get_main_queue() completion:^(NSError * _Nullable error) {
         [weakSelf handlePhotoSaveResponse:outputImage error:error activityViewController:activityViewController];

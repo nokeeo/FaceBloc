@@ -10,17 +10,18 @@
 
 @implementation BLRRenderingOptions
 
-- (instancetype)initWithShouldObscureFaces:(BOOL)shouldObscureFaces {
+- (instancetype)initWithTargetSize:(CGSize)targetSize shouldObscureFaces:(BOOL)shouldObscureFaces {
   self = [super init];
   if (self) {
+    _targetSize = targetSize;
     _shouldObscureFaces = shouldObscureFaces;
   }
   
   return self;
 }
 
-+ (instancetype)optionsWithShouldObscureFaces:(BOOL)shouldObscureFaces {
-  return [[self alloc] initWithShouldObscureFaces:shouldObscureFaces];
++ (instancetype)optionsWithTargetSize:(CGSize)targetSize shouldObscureFaces:(BOOL)shouldObscureFaces {
+  return [[self alloc] initWithTargetSize:targetSize shouldObscureFaces:shouldObscureFaces];
 }
 
 @end

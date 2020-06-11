@@ -18,11 +18,18 @@
   self = [super initWithFrame:frame];
   if (self) {
     _geometry = [BLRImageGeometryData geometryWithFaceObservations:nil obfuscationPaths:nil];
-    _renderingOptions = [BLRRenderingOptions optionsWithShouldObscureFaces:YES];
+    _renderingOptions = [BLRRenderingOptions optionsWithTargetSize:frame.size shouldObscureFaces:YES];
     self.opaque = NO;
   }
   
   return self;
+}
+
+- (void)layoutSubviews {
+  [super layoutSubviews];
+  
+  BLRRenderingOptions *options = [BLRRenderingOptions optionsWithTargetSize:self.bounds.size shouldObscureFaces:_renderingOptions.shouldObscureFaces];
+  self.renderingOptions = options;
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -32,13 +39,8 @@
   
   CGContextRef context = UIGraphicsGetCurrentContext();
   
-  CGSize viewSize = self.bounds.size;
   CGContextClearRect(context, rect);
   CGContextClipToRect(context, rect);
-  
-  // The geometry in the plain old data object is normalized. Scale the coordinate system to
-  // the size of the view.
-  CGContextScaleCTM(context, viewSize.width, viewSize.height);
   BLRDrawImageGeometryInContext(context, _geometry, _renderingOptions);
 }
 

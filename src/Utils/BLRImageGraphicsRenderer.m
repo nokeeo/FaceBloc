@@ -19,7 +19,6 @@ static UIImage *RenderGeometryImage(CGSize size, CGFloat scale, BLRImageGeometry
   UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:size format:format];
   UIImage *geometryImage = [renderer imageWithActions:^(UIGraphicsImageRendererContext * _Nonnull rendererContext) {
     CGContextRef context = rendererContext.CGContext;
-    CGContextScaleCTM(context, size.width, size.height);
     BLRDrawImageGeometryInContext(context, geometry, options);
   }];
   

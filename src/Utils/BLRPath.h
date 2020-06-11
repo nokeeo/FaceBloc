@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)init NS_UNAVAILABLE;
 
-- (CGPathRef)CGPath;
+- (CGPathRef)CGPathForSize:(CGSize)size;
 
 - (CGFloat)strokeWidth;
 
