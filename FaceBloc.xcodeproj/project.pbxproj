@@ -54,7 +54,7 @@
 /* Begin PBXFileReference section */
 		BE0248C4249305D500B602F9 /* Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
 		BE0248C5249305D500B602F9 /* Test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
-		BE3344402489B1CC00E3F9ED /* FaceBlock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceBlock.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE3344402489B1CC00E3F9ED /* FaceBloc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceBloc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE33445B2489B1CE00E3F9ED /* BlurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE33445F2489B1CE00E3F9ED /* BlurTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlurTests.m; sourceTree = "<group>"; };
 		BE3344612489B1CE00E3F9ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 		BE3344412489B1CC00E3F9ED /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BE3344402489B1CC00E3F9ED /* FaceBlock.app */,
+				BE3344402489B1CC00E3F9ED /* FaceBloc.app */,
 				BE33445B2489B1CE00E3F9ED /* BlurTests.xctest */,
 			);
 			name = Products;
@@ -296,7 +296,7 @@
 			);
 			name = Blur;
 			productName = Blur;
-			productReference = BE3344402489B1CC00E3F9ED /* FaceBlock.app */;
+			productReference = BE3344402489B1CC00E3F9ED /* FaceBloc.app */;
 			productType = "com.apple.product-type.application";
 		};
 		BE33445A2489B1CE00E3F9ED /* BlurTests */ = {
@@ -579,8 +579,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nokeeo.FaceBlock;
-				PRODUCT_NAME = FaceBlock;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nokeeo.FaceBloc;
+				PRODUCT_NAME = FaceBloc;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -598,8 +598,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = com.nokeeo.FaceBlock;
-				PRODUCT_NAME = FaceBlock;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nokeeo.FaceBloc;
+				PRODUCT_NAME = FaceBloc;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
