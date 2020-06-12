@@ -214,15 +214,25 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
 #pragma mark - FBLCImageViewControllerDelegate
 
 - (void)imageViewController:(FBLCImageViewController *)viewController didLoadImage:(UIImage *)image {
-  __weak __typeof__(self) weakSelf = self;
-  [_featureDetector detectFeaturesForImage:image
-                             dispatchQueue:dispatch_get_main_queue()
-                                completion:^(NSArray<VNDetectedObjectObservation *> *_Nullable observations,
-                                             NSError *_Nullable error) {
-                                  [weakSelf handleFacialFeatureDetectionForImage:image
-                                                                    observations:observations
-                                                                           error:error];
-                                }];
+  FBLCActivityViewController *activityIndicatorViewController = [[FBLCActivityViewController alloc] init];
+
+  __weak FBLCActivityViewController *weakActivityIndicatorViewController = activityIndicatorViewController;
+  [self presentViewController:activityIndicatorViewController
+                     animated:YES
+                   completion:^{
+                     __weak __typeof__(self) weakSelf = self;
+                     [self->_featureDetector
+                         detectFeaturesForImage:image
+                                  dispatchQueue:dispatch_get_main_queue()
+                                     completion:^(NSArray<VNDetectedObjectObservation *> *_Nullable observations,
+                                                  NSError *_Nullable error) {
+                                       [weakActivityIndicatorViewController dismissViewControllerAnimated:YES
+                                                                                               completion:nil];
+                                       [weakSelf handleFacialFeatureDetectionForImage:image
+                                                                         observations:observations
+                                                                                error:error];
+                                     }];
+                   }];
 }
 #pragma mark - UIResponder
 
