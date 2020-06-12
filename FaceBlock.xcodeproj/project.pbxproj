@@ -33,7 +33,7 @@
 		BEAF7B55248CB02500902E58 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BEAF7B57248CB02500902E58 /* InfoPlist.strings */; };
 		BEAF7B5A248CCB1900902E58 /* FBLCActivityViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B59248CCB1800902E58 /* FBLCActivityViewController.m */; };
 		BEAF7B5D248CE86000902E58 /* UIViewController+NSError.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B5C248CE86000902E58 /* UIViewController+NSError.m */; };
-		BEAF7B63248DBE2400902E58 /* FBLCGeometryOverylayView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B62248DBE2400902E58 /* FBLCGeometryOverylayView.m */; };
+		BEAF7B63248DBE2400902E58 /* FBLCGeometryOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B62248DBE2400902E58 /* FBLCGeometryOverlayView.m */; };
 		BEAF7B66248DBF3000902E58 /* FBLCCGUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B65248DBF3000902E58 /* FBLCCGUtils.m */; };
 		BEAF7B69248E031F00902E58 /* FBLCRenderingOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B68248E031F00902E58 /* FBLCRenderingOptions.m */; };
 		BEAF7B6C248E09BD00902E58 /* FBLCImage.m in Sources */ = {isa = PBXBuildFile; fileRef = BEAF7B6B248E09BD00902E58 /* FBLCImage.m */; };
@@ -102,8 +102,8 @@
 		BEAF7B59248CCB1800902E58 /* FBLCActivityViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBLCActivityViewController.m; sourceTree = "<group>"; };
 		BEAF7B5B248CE86000902E58 /* UIViewController+NSError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIViewController+NSError.h"; sourceTree = "<group>"; };
 		BEAF7B5C248CE86000902E58 /* UIViewController+NSError.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+NSError.m"; sourceTree = "<group>"; };
-		BEAF7B61248DBE2400902E58 /* FBLCGeometryOverylayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBLCGeometryOverylayView.h; sourceTree = "<group>"; };
-		BEAF7B62248DBE2400902E58 /* FBLCGeometryOverylayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBLCGeometryOverylayView.m; sourceTree = "<group>"; };
+		BEAF7B61248DBE2400902E58 /* FBLCGeometryOverlayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBLCGeometryOverlayView.h; sourceTree = "<group>"; };
+		BEAF7B62248DBE2400902E58 /* FBLCGeometryOverlayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBLCGeometryOverlayView.m; sourceTree = "<group>"; };
 		BEAF7B64248DBF3000902E58 /* FBLCCGUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FBLCCGUtils.h; sourceTree = "<group>"; };
 		BEAF7B65248DBF3000902E58 /* FBLCCGUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FBLCCGUtils.m; sourceTree = "<group>"; };
 		BEAF7B67248E031F00902E58 /* FBLCRenderingOptions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FBLCRenderingOptions.h; path = src/Models/FBLCRenderingOptions.h; sourceTree = SOURCE_ROOT; };
@@ -205,8 +205,8 @@
 			children = (
 				BEAF7B70248F705000902E58 /* FBLCStrokeWidthIndicatorLayer.h */,
 				BEAF7B71248F705000902E58 /* FBLCStrokeWidthIndicatorLayer.m */,
-				BEAF7B61248DBE2400902E58 /* FBLCGeometryOverylayView.h */,
-				BEAF7B62248DBE2400902E58 /* FBLCGeometryOverylayView.m */,
+				BEAF7B61248DBE2400902E58 /* FBLCGeometryOverlayView.h */,
+				BEAF7B62248DBE2400902E58 /* FBLCGeometryOverlayView.m */,
 				BEAF7B44248B894800902E58 /* FBLCEditorBottomNavigationButton.h */,
 				BEAF7B45248B894800902E58 /* FBLCEditorBottomNavigationButton.m */,
 				BEAF7B3B248B7DBE00902E58 /* UIView+AutoLayout.h */,
@@ -397,7 +397,7 @@
 				BEAF7B49248BBDDD00902E58 /* FBLCPath.m in Sources */,
 				BEAF7B4F248C774600902E58 /* UINavigationController+Presenting.m in Sources */,
 				BEAF7B3A248B7AED00902E58 /* FBLCImageViewController.m in Sources */,
-				BEAF7B63248DBE2400902E58 /* FBLCGeometryOverylayView.m in Sources */,
+				BEAF7B63248DBE2400902E58 /* FBLCGeometryOverlayView.m in Sources */,
 				BEAF7B37248B0A8700902E58 /* FBLCEditorBottomNavigationView.m in Sources */,
 				BEAF7B69248E031F00902E58 /* FBLCRenderingOptions.m in Sources */,
 				BEAC4F5E2489DF6B00BF4264 /* FBLCImageGeometryData.m in Sources */,

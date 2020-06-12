@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>FILEHEADER</key>
+    <string>
+// Copyright © 2020 Eric Lee All rights reserved.
+// This file is subject to the terms and conditions defined in the file, LICENSE.txt, included with
+// this project.
+    </string>
+</dict>
+</plist>

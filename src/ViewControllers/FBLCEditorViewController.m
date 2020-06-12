@@ -10,7 +10,7 @@
 #import "FBLCCGUtils.h"
 #import "FBLCEditorBottomNavigationView.h"
 #import "FBLCFeatureDetector.h"
-#import "FBLCGeometryOverylayView.h"
+#import "FBLCGeometryOverlayView.h"
 #import "FBLCImage.h"
 #import "FBLCImageGeometryData.h"
 #import "FBLCImageGraphicsRenderer.h"
@@ -75,7 +75,7 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
   
   FBLCPhotoLibraryService *_photoService;
   
-  FBLCGeometryOverylayView *_geometryOverlayView;
+  FBLCGeometryOverlayView *_geometryOverlayView;
   
   NSArray<FBLCPath *> *_previousTouchPaths;
   FBLCMutablePath *_touchPath;
@@ -124,7 +124,7 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
   [view addSubview:_imageViewController.view];
   [_imageViewController didMoveToParentViewController:self];
   
-  _geometryOverlayView = [[FBLCGeometryOverylayView alloc] init];
+  _geometryOverlayView = [[FBLCGeometryOverlayView alloc] init];
   _geometryOverlayView.translatesAutoresizingMaskIntoConstraints = NO;
   [_imageViewController.imageView.contentView addSubview:_geometryOverlayView];
   [_imageViewController.imageView fblc_addConstraints:[_geometryOverlayView fblc_constraintsAttachedToSuperviewEdges]];

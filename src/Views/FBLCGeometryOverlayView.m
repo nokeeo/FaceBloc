@@ -2,13 +2,13 @@
 // This file is subject to the terms and conditions defined in the file, LICENSE.txt, included with
 // this project.
 
-#import "FBLCGeometryOverylayView.h"
+#import "FBLCGeometryOverlayView.h"
 
 #import "FBLCCGUtils.h"
 #import "FBLCImageGeometryData.h"
 #import "FBLCRenderingOptions.h"
 
-@implementation FBLCGeometryOverylayView
+@implementation FBLCGeometryOverlayView
 
 - (instancetype)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
