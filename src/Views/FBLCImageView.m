@@ -76,6 +76,7 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
   [super layoutSubviews];
 
   [self updateZoomLevel];
+  [self updateScrollViewConstraintsForImageViewSize:_imageView.frame.size];
 }
 
 #pragma mark - Getters
@@ -100,6 +101,7 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
   // Force layout pass if needed to size the image view before updating the zoom level.
   [self layoutIfNeeded];
   [self updateZoomLevel];
+  [self updateScrollViewConstraintsForImageViewSize:_imageView.frame.size];
 }
 
 #pragma mark - UIScrollViewDelegate
