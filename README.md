@@ -15,7 +15,9 @@ Thank you!  There is quite a backlog of features and we are open to other ideas.
 ### Before Opening a PR
 1. Fork the repository and make a branch off the `dev` branch and request a merge back into dev.
 
-2. Ensure that you have run `clang-format` with the project style. This project adhears to the [Google style-guide](https://google.github.io/styleguide/objcguide.html) with minor alterations.
+2. Ensure that you have run `clang-format` with the project style. This project adheres to the [Google style-guide](https://google.github.io/styleguide/objcguide.html) with minor alterations.
 
 3. Squash all commit on the feature branch into a single commit.
 
+## Screenshots
+![Editor Screenshot](./images/docs/images/editorScreenshot.png)
