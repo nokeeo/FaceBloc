@@ -1,10 +1,6 @@
-//
-//  FBLCPhotoLibraryService.m
-//  Blur
-//
-//  Created by Eric Lee on 6/6/20.
-//  Copyright © 2020 Nokeeo. All rights reserved.
-//
+// Copyright © 2020 Eric Lee All rights reserved.
+// This file is subject to the terms and conditions defined in the file, LICENSE.txt, included with
+// this project.
 
 #import "FBLCPhotoLibraryService.h"
 
