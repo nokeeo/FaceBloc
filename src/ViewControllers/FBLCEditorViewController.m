@@ -130,7 +130,7 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
   [_imageViewController.imageView fblc_addConstraints:[_geometryOverlayView fblc_constraintsAttachedToSuperviewEdges]];
   
   _imageDimmingLayer = [[CALayer alloc] init];
-  _imageDimmingLayer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5].CGColor;
+  _imageDimmingLayer.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.65].CGColor;
   _imageDimmingLayer.hidden = YES;
   [view.layer addSublayer:_imageDimmingLayer];
   

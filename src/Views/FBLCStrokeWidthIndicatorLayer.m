@@ -25,7 +25,7 @@ static CGPathRef CreatePathForStrokeWidth(CGSize imageSize, CGRect bounds, CGFlo
     _zoomLevel = zoomLevel;
     
     self.fillColor = UIColor.clearColor.CGColor;
-    self.strokeColor = UIColor.redColor.CGColor;
+    self.strokeColor = [UIColor colorWithRed:45.f/255.f green:153.f/255.f blue:252.f/255.f alpha:1].CGColor;
     self.lineDashPattern = @[@5, @5];
     self.lineWidth = 2.5;
   }
