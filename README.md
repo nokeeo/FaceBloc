@@ -20,4 +20,4 @@ Thank you!  There is quite a backlog of features and we are open to other ideas.
 3. Squash all commit on the feature branch into a single commit.
 
 ## Screenshots
-![Editor Screenshot](https://github.com/nokeeo/movieMood/raw/master/docs/images/editorScreenshot.png)
+<img src="https://github.com/nokeeo/FaceBloc/raw/master/docs/images/editorScreenshot.png" width="300px"/>
