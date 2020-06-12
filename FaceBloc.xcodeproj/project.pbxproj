@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BE0248C6249305D500B602F9 /* Test.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0248C5249305D500B602F9 /* Test.m */; };
 		BE3344602489B1CE00E3F9ED /* BlurTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BE33445F2489B1CE00E3F9ED /* BlurTests.m */; };
 		BE3EA5912489C7640053F89C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE3EA57B2489C7630053F89C /* Assets.xcassets */; };
 		BE3EA5922489C7640053F89C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA57C2489C7640053F89C /* main.m */; };
@@ -52,8 +51,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BE0248C4249305D500B602F9 /* Test.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Test.h; sourceTree = "<group>"; };
-		BE0248C5249305D500B602F9 /* Test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Test.m; sourceTree = "<group>"; };
 		BE3344402489B1CC00E3F9ED /* FaceBloc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceBloc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE33445B2489B1CE00E3F9ED /* BlurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE33445F2489B1CE00E3F9ED /* BlurTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlurTests.m; sourceTree = "<group>"; };
@@ -260,8 +257,6 @@
 		BEAF7B31248A2E5800902E58 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				BE0248C4249305D500B602F9 /* Test.h */,
-				BE0248C5249305D500B602F9 /* Test.m */,
 				BEAF7B5B248CE86000902E58 /* UIViewController+NSError.h */,
 				BEAF7B5C248CE86000902E58 /* UIViewController+NSError.m */,
 				BEAF7B4D248C774600902E58 /* UINavigationController+Presenting.h */,
@@ -335,7 +330,7 @@
 					};
 				};
 			};
-			buildConfigurationList = BE33443B2489B1CC00E3F9ED /* Build configuration list for PBXProject "FaceBlock" */;
+			buildConfigurationList = BE33443B2489B1CC00E3F9ED /* Build configuration list for PBXProject "FaceBloc" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -401,7 +396,6 @@
 				BEAF7B37248B0A8700902E58 /* FBLCEditorBottomNavigationView.m in Sources */,
 				BEAF7B69248E031F00902E58 /* FBLCRenderingOptions.m in Sources */,
 				BEAC4F5E2489DF6B00BF4264 /* FBLCImageGeometryData.m in Sources */,
-				BE0248C6249305D500B602F9 /* Test.m in Sources */,
 				BEAF7B46248B894800902E58 /* FBLCEditorBottomNavigationButton.m in Sources */,
 				BE3EA5982489C7640053F89C /* FBLCRootView.m in Sources */,
 				BEAF7B5A248CCB1900902E58 /* FBLCActivityViewController.m in Sources */,
@@ -645,7 +639,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BE33443B2489B1CC00E3F9ED /* Build configuration list for PBXProject "FaceBlock" */ = {
+		BE33443B2489B1CC00E3F9ED /* Build configuration list for PBXProject "FaceBloc" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				BE3344622489B1CE00E3F9ED /* Debug */,

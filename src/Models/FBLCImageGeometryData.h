@@ -10,10 +10,13 @@ NS_ASSUME_NONNULL_BEGIN
 @class UIBezierPath;
 @class VNDetectedObjectObservation;
 
+/** A data object of renderable 2D geometry. */
 @interface FBLCImageGeometryData : NSObject
 
+/** An array of faces observed in the image. */
 @property(nonatomic, readonly, nullable) NSArray<VNDetectedObjectObservation *> *faceObservations;
 
+/** The paths that the user drew. */
 @property(nonatomic, readonly, nullable) NSArray<FBLCPath *> *obfuscationPaths;
 
 + (instancetype)geometryWithFaceObservations:(nullable NSArray<VNDetectedObjectObservation *> *)faceObservations

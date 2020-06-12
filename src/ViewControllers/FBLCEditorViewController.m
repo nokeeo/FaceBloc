@@ -23,18 +23,31 @@
 #import "UIView+AutoLayout.h"
 #import "UIViewController+NSError.h"
 
+/** The width of the stroke width slider. */
 static const CGFloat kDrawSliderWidth = 135;
+
+/** The distance from the top of the stroke width slider and the top edge of the screen. */
 static const CGFloat kDrawSliderTopPadding = 30;
+
+/** The padding between the stroke width slider and the trailing edge of the screen. */
 static const CGFloat kDrawSliderHorizontalPadding = 8;
 
+/** The minimum value of the stroke width slider. */
 static const CGFloat kDrawSliderMinimumValue = 0.05;
+
+/** The maximum value of the stroke width slider. */
 static const CGFloat kDrawSliderMaximumValue = 0.9;
+
+/** The value of the stroke width slider upon initialization. */
 static const CGFloat kDrawSliderInitialValue = 0.1;
 
+/** The time in seconds of the animation to display the stroke width slider and its indicator. */
 static const NSTimeInterval kStrokeWidthIndicatorAnimationDuration = 0.4;
 
+/** The core animation key for animating the opacity of a layer. */
 static NSString *const kOpacityAnimationKey = @"opacity";
 
+/** Creates the slider that represents the width of the draw brush. */
 static UISlider *CreateDrawSlider() {
   UISlider *slider = [[UISlider alloc] init];
   slider.transform = CGAffineTransformRotate(CGAffineTransformIdentity, -M_PI / 2);
@@ -45,6 +58,7 @@ static UISlider *CreateDrawSlider() {
   return slider;
 }
 
+/** Maps the given stroke width slider value to stroke width. */
 static CGFloat DrawSliderValueToStrokeWidth(CGFloat value) {
   if (value < 0.75) {
     return value / 2.f;
@@ -53,6 +67,7 @@ static CGFloat DrawSliderValueToStrokeWidth(CGFloat value) {
   }
 }
 
+/** Returns the core animation for hiding and showing the stroke width indicator. */
 static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
   CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:kOpacityAnimationKey];
   animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
@@ -64,27 +79,43 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
 }
 
 @implementation FBLCEditorViewController {
+  /** The view controller for displaying a FBLCImage */
   FBLCImageViewController *_imageViewController;
+  
+  /** The view that contains controls that sits at the bottom of the screen. */
   FBLCEditorBottomNavigationView *_bottomNavigationView;
 
+  /** The object that processes a given image and returns the @c CGRect of all detected faces. */
   FBLCFeatureDetector *_featureDetector;
 
-  UIImage *_originalImage;
-  FBLCImageGeometryData *_imageMetadata;
-  NSArray<UIBezierPath *> *_imagePaths;
-
+  /** The object that saves given photos to disk. */
   FBLCPhotoLibraryService *_photoService;
 
+  /** The view that renders geometry data over an image. */
   FBLCGeometryOverlayView *_geometryOverlayView;
 
+  /** An array of paths previously drawn by the user. */
   NSArray<FBLCPath *> *_previousTouchPaths;
+  
+  /** The current path being drawn by the user. */
   FBLCMutablePath *_touchPath;
 
+  /** The URL of the image on the device's disk. */
   NSURL *_imageURL;
 
+  /** The slider that indicates the stroke width of the draw tool. */
   UISlider *_drawWidthSlider;
 
+  /**
+   * The layer that is a visual representation of the stroke width. Is hidden by default and only displayed when the
+   * draw slider's value changes.
+   */
   FBLCStrokeWidthIndicatorLayer *_strokeIndicatorLayer;
+  
+  /**
+   * The layer that overlays most views and other layers and when displayed applies a dimming effect to all view beneath
+   * it. Is hidden by default.
+   */
   CALayer *_imageDimmingLayer;
 }
 
@@ -92,7 +123,6 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
     _featureDetector = [[FBLCFeatureDetector alloc] init];
-    _imagePaths = @[];
     _photoService = [[FBLCPhotoLibraryService alloc] init];
     _previousTouchPaths = [NSArray array];
     _touchPath = [[FBLCMutablePath alloc] init];
@@ -314,6 +344,7 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
 
 #pragma mark - Private Methods
 
+/** Is called when the feature detector has finished processing the given image. */
 - (void)handleFacialFeatureDetectionForImage:(UIImage *)image
                                 observations:(nullable NSArray<VNDetectedObjectObservation *> *)observations
                                        error:(nullable NSError *)error {
@@ -322,15 +353,17 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
     return;
   }
 
-  _imageMetadata = [FBLCImageGeometryData geometryWithFaceObservations:observations obfuscationPaths:nil];
-  _geometryOverlayView.geometry = _imageMetadata;
+  FBLCImageGeometryData *geometryData = [FBLCImageGeometryData geometryWithFaceObservations:observations obfuscationPaths:nil];
+  _geometryOverlayView.geometry = geometryData;
 }
 
+/** Creates the rending options with the given target render size. */
 - (FBLCRenderingOptions *)createRenderingOptionsWithTargetSize:(CGSize)targetSize {
   return [FBLCRenderingOptions optionsWithTargetSize:targetSize
                                   shouldObscureFaces:_bottomNavigationView.shouldObscureFaces];
 }
 
+/** Sets drawing UI to enabled or disabled. */
 - (void)setIsDrawingEnabled:(BOOL)isDrawingEnabled animated:(BOOL)animated {
   // Disable interaction on the image view controller to propagate the touch events up to this object.
   _imageViewController.view.userInteractionEnabled = !isDrawingEnabled;
@@ -342,6 +375,7 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
                    }];
 }
 
+/** Saves the current editing image to the user photo library. */
 - (void)saveCurrentImageToPhotosLibrary {
   FBLCActivityViewController *activityViewController = [[FBLCActivityViewController alloc] init];
   [self presentViewController:activityViewController
@@ -367,6 +401,7 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
                    }];
 }
 
+/** Is called when the photo service image has attempted to save an image to disk. */
 - (void)handlePhotoSaveResponse:(UIImage *)image
                           error:(nullable NSError *)error
          activityViewController:(UIViewController *)activityViewController {
@@ -382,6 +417,7 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
                                              }];
 }
 
+/** Displays the stroke width indicator with animations. */
 - (void)showStrokeWidthIndicator {
   if (!_strokeIndicatorLayer.hidden) {
     return;
@@ -395,6 +431,7 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
   _imageDimmingLayer.opacity = 1;
 }
 
+/** Hides the stroke width indicator with animations. */
 - (void)hideStrokeWidthIndicator {
   if (_strokeIndicatorLayer.hidden) {
     return;

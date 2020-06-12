@@ -6,8 +6,10 @@
 
 #import "UIView+AutoLayout.h"
 
+/** The size of the activity indicator container view. */
 static const CGFloat kActivityIndicatorSize = 95;
 
+/** Returns the UIActivityIndicator style. */
 static UIActivityIndicatorViewStyle GetIndicatorStyle() {
   if (@available(iOS 13.0, *)) {
     return UIActivityIndicatorViewStyleWhiteLarge;
@@ -16,6 +18,7 @@ static UIActivityIndicatorViewStyle GetIndicatorStyle() {
   return UIActivityIndicatorViewStyleWhite;
 }
 
+/** Returns the blur effect used for the activity indicator's visual effects view. */
 static UIBlurEffectStyle GetBlurEffectStyle() {
   if (@available(iOS 13.0, *)) {
     return UIBlurEffectStyleSystemChromeMaterialDark;
@@ -24,6 +27,10 @@ static UIBlurEffectStyle GetBlurEffectStyle() {
   return UIBlurEffectStyleDark;
 }
 
+/**
+ * Returns the initial transform of the activity view when animating the presentation. This is the transform that is
+ * applied when the activity indicator is dismissed.
+ */
 static CGAffineTransform GetInitialTransform() {
   CGAffineTransform scaleTransform = CGAffineTransformScale(CGAffineTransformIdentity, 0.75, 0.75);
   return CGAffineTransformTranslate(scaleTransform, 0, 6);
@@ -89,6 +96,7 @@ static CGAffineTransform GetInitialTransform() {
 
 #pragma mark Private Methods
 
+/** Performs the transition animation. */
 - (void)performTransitionForAppearing:(id<UIViewControllerContextTransitioning>)transitionContext {
   UIViewController *activityViewController =
       [transitionContext viewControllerForKey:UITransitionContextToViewControllerKey];
@@ -114,6 +122,7 @@ static CGAffineTransform GetInitialTransform() {
                    }];
 }
 
+/** Performs the dismissal animation. */
 - (void)performTransitionForDisappearing:(id<UIViewControllerContextTransitioning>)transitionContext {
   UIViewController *activityViewController =
       [transitionContext viewControllerForKey:UITransitionContextFromViewControllerKey];

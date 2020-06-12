@@ -4,9 +4,11 @@
 
 #import <UIKit/UIKit.h>
 
-#import "FBLCRootView.h"
 #import "FBLCEditorViewController.h"
+#import "FBLCRootView.h"
 
-@interface FBLCRootViewController : UIViewController <FBLCEditorViewControllerDelegate, FBLCRootViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface FBLCRootViewController : UIViewController <FBLCEditorViewControllerDelegate,
+                                                      FBLCRootViewDelegate,
+                                                      UIImagePickerControllerDelegate,
+                                                      UINavigationControllerDelegate>
 @end
-

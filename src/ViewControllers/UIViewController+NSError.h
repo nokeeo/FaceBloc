@@ -6,8 +6,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/** An extension of UIViewController used to display NSErrors. */
 @interface UIViewController (NSError)
 
+/**
+ * Displays the UI for the given error. If the given error does not have a localized description, this method results in
+ * a nil op.
+ */
 - (void)fblc_presentError:(NSError *)error;
 
 @end

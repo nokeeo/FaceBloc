@@ -6,6 +6,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/** An extension of the navigation controller to handle context independent presentation requests. */
 @interface UINavigationController (Presenting)
 
 - (void)fblc_dismissViewController:(id)sender;

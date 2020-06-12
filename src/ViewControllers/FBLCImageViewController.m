@@ -38,6 +38,10 @@
 
 #pragma mark - Private Methods
 
+/**
+ * Fetches the image from disk and sets the image view's image to the loaded image. If the image is already loaded, this
+ * method call is a no-op.
+ */
 - (void)loadImageIfNeeded {
   if (self.imageView.image || !_image) {
     return;
@@ -59,6 +63,7 @@
            }];
 }
 
+/** Is called when the images has finished loading from disk. */
 - (void)handleImageLoad:(UIImage *)image {
   _imageView.image = image;
   [_delegate imageViewController:self didLoadImage:image];

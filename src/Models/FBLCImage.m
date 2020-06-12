@@ -11,6 +11,7 @@
 
 FBLCImageLoadOptionKey FBLCImageLoadOptionTemplateMaxDimension = @"FBLCImageLoadOptionTemplateMaxDimension";
 
+/** Returns the object responsible for loading an image from disk. */
 static CGImageSourceRef CreateImageSource(NSURL *URL) {
   NSDictionary<NSString *, id> *imageSourceOptions = @{
     (__bridge NSString *)kCGImageSourceShouldCache : @(NO),
@@ -18,6 +19,7 @@ static CGImageSourceRef CreateImageSource(NSURL *URL) {
   return CGImageSourceCreateWithURL((__bridge CFURLRef)URL, (__bridge CFDictionaryRef)imageSourceOptions);
 }
 
+/** Creates the load options for a template image with the given size. */
 static NSDictionary<NSString *, id> *CreateTemplateImageOptions(NSNumber *maxDimension) {
   return @{
     (__bridge NSString *)kCGImageSourceCreateThumbnailFromImageAlways : @(YES),
@@ -26,6 +28,7 @@ static NSDictionary<NSString *, id> *CreateTemplateImageOptions(NSNumber *maxDim
   };
 }
 
+/** Creates the load options for a source image. */
 static NSDictionary<NSString *, id> *CreateSourceImageOptions() {
   return @{
     (__bridge NSString *)kCGImageSourceCreateThumbnailFromImageAlways : @(NO),
@@ -34,12 +37,14 @@ static NSDictionary<NSString *, id> *CreateSourceImageOptions() {
   };
 }
 
+/** Calls the given load completion block on the main thread. */
 static void CallImageLoadCompletionBlock(FBLCImageLoadCompletion completion, UIImage *image) {
   dispatch_async(dispatch_get_main_queue(), ^{
     completion(image);
   });
 }
 
+/** Retrieves the template image dimension from the given options dictionary. */
 static NSNumber *_Nullable GetTemplateImageDimensions(NSDictionary<FBLCImageLoadOptionKey, id> *_Nullable options) {
   id value = options[FBLCImageLoadOptionTemplateMaxDimension];
   if ([value isKindOfClass:[NSNumber class]]) {
@@ -50,14 +55,17 @@ static NSNumber *_Nullable GetTemplateImageDimensions(NSDictionary<FBLCImageLoad
 }
 
 @implementation FBLCImage {
+  /** The object used to load the image from disk. */
   CGImageSourceRef _imageSource;
 
+  /** The cached loaded template image. Nil if a template image has not been loaded yet. */
   UIImage *_Nullable _templateImage;
-  NSNumber *_templateImageDimension;
+  
+  /** The dimension of the last loaded @c _templateImage . */
+  NSNumber *_Nullable _templateImageDimension;
 
+  /** The cached loaded source image. */
   UIImage *_Nullable _sourceImage;
-
-  FBLCPhotoLibraryService *_photoLibraryService;
 }
 
 - (instancetype)initWithURL:(NSURL *)URL {
@@ -65,7 +73,6 @@ static NSNumber *_Nullable GetTemplateImageDimensions(NSDictionary<FBLCImageLoad
   if (self) {
     _URL = URL;
     _imageSource = CreateImageSource(URL);
-    _photoLibraryService = [[FBLCPhotoLibraryService alloc] init];
   }
 
   return self;
@@ -96,8 +103,6 @@ static NSNumber *_Nullable GetTemplateImageDimensions(NSDictionary<FBLCImageLoad
   }
 }
 
-#pragma mark - Private Methods
-
 - (UIImage *)loadTemplateImageWithOptions:(NSDictionary<FBLCImageLoadOptionKey, id> *)options {
   NSNumber *maxDimension = GetTemplateImageDimensions(options);
   if (_templateImage && [maxDimension isEqualToNumber:_templateImageDimension]) {
@@ -117,6 +122,9 @@ static NSNumber *_Nullable GetTemplateImageDimensions(NSDictionary<FBLCImageLoad
   return _templateImage;
 }
 
+#pragma mark - Private Methods
+
+/** Synchronously loads the source image. */
 - (UIImage *)loadSourceImage {
   if (_sourceImage) {
     return _sourceImage;

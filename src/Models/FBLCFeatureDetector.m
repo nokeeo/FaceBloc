@@ -31,7 +31,7 @@ static VNImageRequestHandler *RequestHandlerForImage(UIImage *image) {
 
 - (void)detectFeaturesForImage:(UIImage *)image
                  dispatchQueue:(dispatch_queue_t)dispatchQueue
-                    completion:(FBLCObjectDetectorCompleitionBlock)completion {
+                    completion:(FBLCObjectDetectorCompletionBlock)completion {
   VNImageRequestHandler *requestHandler = RequestHandlerForImage(image);
 
   __weak VNImageRequestHandler *weakHandler = requestHandler;
@@ -74,7 +74,7 @@ static VNImageRequestHandler *RequestHandlerForImage(UIImage *image) {
                 error:(NSError *)error
               handler:(VNImageRequestHandler *)handler
                 queue:(dispatch_queue_t)queue
-           completion:(FBLCObjectDetectorCompleitionBlock)completion {
+           completion:(FBLCObjectDetectorCompletionBlock)completion {
   @synchronized(self) {
     [_requestHandlers removeObject:handler];
   }

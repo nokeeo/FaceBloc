@@ -6,9 +6,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/** The object that coordinates the presentation of @c FBLCActivityViewController . */
 @interface FBLCActivityViewPresentationController : UIPresentationController
 @end
 
+/**
+ * The view controller that indicates that the application is busy. When presented modally, this view controller
+ * prevents interaction with content beneath it.
+ */
 @interface FBLCActivityViewController : UIViewController <UIViewControllerTransitioningDelegate>
 @end
 

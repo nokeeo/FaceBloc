@@ -6,7 +6,6 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (nonatomic, nullable) UIWindow *window;
+@property(nonatomic, nullable) UIWindow *window;
 
 @end
-

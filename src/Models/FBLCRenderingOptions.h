@@ -8,10 +8,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/** A data object that configures rendering of the image. */
 @interface FBLCRenderingOptions : NSObject
 
+/** True if face obfuscation rects should be drawn. */
 @property(nonatomic) BOOL shouldObscureFaces;
 
+/** The size in screen points of the render target. */
 @property(nonatomic) CGSize targetSize;
 
 + (instancetype)optionsWithTargetSize:(CGSize)targetSize shouldObscureFaces:(BOOL)shouldObscureFaces;
