@@ -8,7 +8,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FBLCEditorBottomNavigationButton : UIButton
 
-@property (nonatomic, getter=isOn) BOOL on;
+@property(nonatomic, getter=isOn) BOOL on;
 
 - (void)setOn:(BOOL)on animated:(BOOL)animated;
 

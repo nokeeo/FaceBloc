@@ -14,14 +14,14 @@ static UIScrollView *CreateImageScrollView() {
   view.minimumZoomScale = 1;
   view.showsVerticalScrollIndicator = NO;
   view.showsHorizontalScrollIndicator = NO;
-  
+
   return view;
 }
 
 static UIImageView *CreateImageView() {
   UIImageView *view = [[UIImageView alloc] init];
   view.contentMode = UIViewContentModeScaleAspectFit;
-  
+
   return view;
 }
 
@@ -38,7 +38,7 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
 @implementation FBLCImageView {
   UIScrollView *_imageScrollView;
   UIImageView *_imageView;
-  
+
   NSLayoutConstraint *_imageViewTopConstraint;
   NSLayoutConstraint *_imageViewLeadingConstraint;
   NSLayoutConstraint *_imageViewBottomConstraint;
@@ -48,12 +48,11 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
 - (instancetype)initWithFrame:(CGRect)frame {
   self = [super initWithFrame:frame];
   if (self) {
-    
     _imageScrollView = CreateImageScrollView();
     _imageScrollView.translatesAutoresizingMaskIntoConstraints = NO;
     [self addSubview:_imageScrollView];
     [self addConstraints:CreateImageScrollViewConstraints(_imageScrollView)];
-    
+
     _imageView = CreateImageView();
     _imageView.translatesAutoresizingMaskIntoConstraints = NO;
     _imageViewTopConstraint = [_imageView.topAnchor constraintEqualToAnchor:_imageScrollView.topAnchor];
@@ -69,13 +68,13 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
     ]];
     _imageScrollView.delegate = self;
   }
-  
+
   return self;
 }
 
 - (void)layoutSubviews {
   [super layoutSubviews];
-  
+
   [self updateZoomLevel];
 }
 
@@ -97,7 +96,7 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
 
 - (void)setImage:(UIImage *)image {
   _imageView.image = image;
-  
+
   // Force layout pass if needed to size the image view before updating the zoom level.
   [self layoutIfNeeded];
   [self updateZoomLevel];
@@ -118,27 +117,27 @@ static NSArray<NSLayoutConstraint *> *CreateImageScrollViewConstraints(UIView *s
   CGFloat imageViewYOffset = floorf(MAX(0, CGRectGetHeight(scrollViewSafeArea) - size.height) / 2.f);
   _imageViewTopConstraint.constant = imageViewYOffset;
   _imageViewBottomConstraint.constant = -imageViewYOffset;
-  
+
   CGFloat imageViewXOffset = floorf(MAX(0, CGRectGetWidth(scrollViewSafeArea) - size.width) / 2.f);
   _imageViewLeadingConstraint.constant = imageViewXOffset;
   _imageViewTrailingConstraint.constant = -imageViewXOffset;
-  
+
   [self layoutIfNeeded];
 }
 
 - (void)updateZoomLevel {
-  CGSize imageSize = _imageView.bounds.size;//_imageView.image.size;
+  CGSize imageSize = _imageView.bounds.size;  //_imageView.image.size;
   if (CGSizeEqualToSize(imageSize, CGSizeZero)) {
     return;
   }
-  
+
   CGRect scrollViewSafeArea = UIEdgeInsetsInsetRect(_imageScrollView.bounds, _imageScrollView.safeAreaInsets);
   CGFloat verticalZoomScale = CGRectGetHeight(scrollViewSafeArea) / imageSize.height;
   CGFloat horizontalZoomScale = CGRectGetWidth(scrollViewSafeArea) / imageSize.width;
   CGFloat minZoomScale = MIN(verticalZoomScale, horizontalZoomScale);
-  
+
   _imageScrollView.minimumZoomScale = minZoomScale;
-  
+
   _imageScrollView.zoomScale = minZoomScale;
 }
 

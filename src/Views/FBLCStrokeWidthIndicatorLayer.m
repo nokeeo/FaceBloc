@@ -10,7 +10,7 @@ static CGPathRef CreatePathForStrokeWidth(CGSize imageSize, CGRect bounds, CGFlo
 
   CGMutablePathRef path = CGPathCreateMutable();
   CGPathAddArc(path, nil, indicatorCenter.x, indicatorCenter.y, indicatorRadius, 0, M_PI * 2, 1);
-  
+
   return path;
 }
 
@@ -23,19 +23,19 @@ static CGPathRef CreatePathForStrokeWidth(CGSize imageSize, CGRect bounds, CGFlo
   if (self) {
     _normalStrokeWidth = normalStrokeWidth;
     _zoomLevel = zoomLevel;
-    
+
     self.fillColor = UIColor.clearColor.CGColor;
-    self.strokeColor = [UIColor colorWithRed:45.f/255.f green:153.f/255.f blue:252.f/255.f alpha:1].CGColor;
-    self.lineDashPattern = @[@5, @5];
+    self.strokeColor = [UIColor colorWithRed:45.f / 255.f green:153.f / 255.f blue:252.f / 255.f alpha:1].CGColor;
+    self.lineDashPattern = @[ @5, @5 ];
     self.lineWidth = 2.5;
   }
-  
+
   return self;
 }
 
 - (void)layoutSublayers {
   [super layoutSublayers];
-  
+
   CGPathRef path = CreatePathForStrokeWidth(CGSizeZero, self.bounds, _normalStrokeWidth, _zoomLevel);
   self.path = path;
   CGPathRelease(path);
@@ -44,7 +44,7 @@ static CGPathRef CreatePathForStrokeWidth(CGSize imageSize, CGRect bounds, CGFlo
 - (void)setNormalStrokeWidth:(CGFloat)normalStrokeWidth zoomLevel:(CGFloat)zoomLevel imageSize:(CGSize)imageSize {
   _normalStrokeWidth = normalStrokeWidth;
   _zoomLevel = zoomLevel;
-  
+
   CGPathRef path = CreatePathForStrokeWidth(imageSize, self.bounds, _normalStrokeWidth, _zoomLevel);
   self.path = path;
   CGPathRelease(path);

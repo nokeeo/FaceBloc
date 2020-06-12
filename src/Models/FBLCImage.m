@@ -45,18 +45,18 @@ static NSNumber *_Nullable GetTemplateImageDimensions(NSDictionary<FBLCImageLoad
   if ([value isKindOfClass:[NSNumber class]]) {
     return (NSNumber *)value;
   }
-  
+
   return nil;
 }
 
 @implementation FBLCImage {
   CGImageSourceRef _imageSource;
-  
+
   UIImage *_Nullable _templateImage;
   NSNumber *_templateImageDimension;
-  
+
   UIImage *_Nullable _sourceImage;
-  
+
   FBLCPhotoLibraryService *_photoLibraryService;
 }
 
@@ -67,7 +67,7 @@ static NSNumber *_Nullable GetTemplateImageDimensions(NSDictionary<FBLCImageLoad
     _imageSource = CreateImageSource(URL);
     _photoLibraryService = [[FBLCPhotoLibraryService alloc] init];
   }
-  
+
   return self;
 }
 
@@ -75,7 +75,10 @@ static NSNumber *_Nullable GetTemplateImageDimensions(NSDictionary<FBLCImageLoad
   CFRelease(_imageSource);
 }
 
-- (void)imageOfType:(FBLCImageType)type options:(NSDictionary<FBLCImageLoadOptionKey,id> *)options onQueue:(dispatch_queue_t)onQueue completion:(nonnull FBLCImageLoadCompletion)completion {
+- (void)imageOfType:(FBLCImageType)type
+            options:(NSDictionary<FBLCImageLoadOptionKey, id> *)options
+            onQueue:(dispatch_queue_t)onQueue
+         completion:(nonnull FBLCImageLoadCompletion)completion {
   dispatch_async(onQueue, ^{
     UIImage *image = [self imageOfType:type options:options];
     CallImageLoadCompletionBlock(completion, image);
@@ -95,22 +98,22 @@ static NSNumber *_Nullable GetTemplateImageDimensions(NSDictionary<FBLCImageLoad
 
 #pragma mark - Private Methods
 
-- (UIImage *)loadTemplateImageWithOptions:(NSDictionary<FBLCImageLoadOptionKey, id>*)options {
+- (UIImage *)loadTemplateImageWithOptions:(NSDictionary<FBLCImageLoadOptionKey, id> *)options {
   NSNumber *maxDimension = GetTemplateImageDimensions(options);
   if (_templateImage && [maxDimension isEqualToNumber:_templateImageDimension]) {
     return _templateImage;
   }
-  
+
   _templateImage = nil;
   _templateImageDimension = maxDimension;
-  
+
   CFDictionaryRef templateOptions = (__bridge CFDictionaryRef)CreateTemplateImageOptions(maxDimension);
   CGImageRef imageRef = CGImageSourceCreateThumbnailAtIndex(self->_imageSource, 0, templateOptions);
   UIImage *image = [UIImage imageWithCGImage:imageRef];
   CFRelease(imageRef);
-  
+
   _templateImage = image;
-  
+
   return _templateImage;
 }
 
@@ -118,14 +121,14 @@ static NSNumber *_Nullable GetTemplateImageDimensions(NSDictionary<FBLCImageLoad
   if (_sourceImage) {
     return _sourceImage;
   }
-  
+
   CFDictionaryRef options = (__bridge CFDictionaryRef)CreateSourceImageOptions();
   CGImageRef imageRef = CGImageSourceCreateImageAtIndex(self->_imageSource, 0, options);
   UIImage *image = [UIImage imageWithCGImage:imageRef];
   CGImageRelease(imageRef);
-  
+
   self->_sourceImage = image;
-  
+
   return _sourceImage;
 }
 

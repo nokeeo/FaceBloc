@@ -15,7 +15,7 @@ static UIButton *CreateImportButton() {
   button.clipsToBounds = YES;
   [button setTitleColor:UIColor.whiteColor forState:UIControlStateNormal];
   [button setTitle:NSLocalizedString(FBLCImportButtonStringID, @"Import photos button") forState:UIControlStateNormal];
-  
+
   return button;
 }
 
@@ -28,11 +28,13 @@ static UIButton *CreateImportButton() {
   if (self) {
     _importButton = CreateImportButton();
     _importButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [_importButton addTarget:self action:@selector(didTouchUpInsideImportButton:) forControlEvents:UIControlEventTouchUpInside];
-    
+    [_importButton addTarget:self
+                      action:@selector(didTouchUpInsideImportButton:)
+            forControlEvents:UIControlEventTouchUpInside];
+
     [self addSubview:_importButton];
     [self fblc_addConstraints:[_importButton fblc_constraintsCenteredInSuperview]];
-    
+
     UILayoutGuide *safeAreaLayoutGuide = self.safeAreaLayoutGuide;
     CGSize importButtonIntrinsicSize = _importButton.intrinsicContentSize;
     [self addConstraints:@[
@@ -41,10 +43,10 @@ static UIButton *CreateImportButton() {
       [_importButton.widthAnchor constraintGreaterThanOrEqualToAnchor:self.widthAnchor multiplier:0.65 constant:0],
       [_importButton.heightAnchor constraintGreaterThanOrEqualToConstant:importButtonIntrinsicSize.height + 18],
     ]];
-    
+
     self.backgroundColor = UIColor.blackColor;
   }
-  
+
   return self;
 }
 

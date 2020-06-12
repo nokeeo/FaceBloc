@@ -6,19 +6,20 @@
 
 @implementation FBLCImageGeometryData
 
-+ (instancetype)geometryWithFaceObservations:(NSArray<VNDetectedObjectObservation *> *)faceObservations obfuscationPaths:(nullable NSArray<FBLCPath *> *)obfuscationPaths {
++ (instancetype)geometryWithFaceObservations:(NSArray<VNDetectedObjectObservation *> *)faceObservations
+                            obfuscationPaths:(nullable NSArray<FBLCPath *> *)obfuscationPaths {
   return [[self alloc] initWithFaceObservations:faceObservations obfuscationPaths:obfuscationPaths];
 }
 
-- (instancetype)initWithFaceObservations:(NSArray<VNDetectedObjectObservation *> *)faceObservations obfuscationPaths:(nullable NSArray<FBLCPath *> *)obfuscationPaths {
+- (instancetype)initWithFaceObservations:(NSArray<VNDetectedObjectObservation *> *)faceObservations
+                        obfuscationPaths:(nullable NSArray<FBLCPath *> *)obfuscationPaths {
   self = [super init];
   if (self) {
     _faceObservations = faceObservations;
     _obfuscationPaths = obfuscationPaths;
   }
-  
+
   return self;
 }
 
 @end
-

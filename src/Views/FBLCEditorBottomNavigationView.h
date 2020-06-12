@@ -20,9 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol FBLCEditorBottomNavigationViewDelegate <NSObject>
 
-- (void)editorBottomNavigationView:(FBLCEditorBottomNavigationView *)editorBottomNavigationView didChangeFaceObfuscation:(BOOL)shouldFaceObfuscate;
+- (void)editorBottomNavigationView:(FBLCEditorBottomNavigationView *)editorBottomNavigationView
+          didChangeFaceObfuscation:(BOOL)shouldFaceObfuscate;
 
-- (void)editorBottomNavigationView:(FBLCEditorBottomNavigationView *)editorBottomNavigationView didEnableDrawing:(BOOL)enabled;
+- (void)editorBottomNavigationView:(FBLCEditorBottomNavigationView *)editorBottomNavigationView
+                  didEnableDrawing:(BOOL)enabled;
 
 - (void)editorBottomNavigationViewDidCancelEditing:(FBLCEditorBottomNavigationView *)bottomNavigationView;
 

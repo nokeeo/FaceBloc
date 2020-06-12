@@ -14,13 +14,13 @@ static const CGFloat insets = 3;
     [self setTintColor:UIColor.whiteColor];
     self.contentEdgeInsets = UIEdgeInsetsMake(insets, insets, insets, insets);
   }
-  
+
   return self;
 }
 
 - (void)layoutSubviews {
   [super layoutSubviews];
-  
+
   self.layer.cornerRadius = floor(CGRectGetHeight(self.bounds) / 4);
 }
 
@@ -30,7 +30,7 @@ static const CGFloat insets = 3;
   if ((controlEvents & UIControlEventTouchUpInside) != 0) {
     self.on = !self.on;
   }
-  
+
   [super sendActionsForControlEvents:controlEvents];
 }
 
@@ -38,7 +38,7 @@ static const CGFloat insets = 3;
 
 - (void)setOn:(BOOL)on {
   _on = on;
-  
+
   UIColor *foregroundColor = on ? UIColor.blackColor : UIColor.whiteColor;
   UIColor *backgroundColor = on ? UIColor.whiteColor : UIColor.blackColor;
   self.tintColor = foregroundColor;
@@ -49,7 +49,7 @@ static const CGFloat insets = 3;
   void (^animationBlock)(void) = ^{
     self.on = on;
   };
-  
+
   if (animated) {
     [UIView animateWithDuration:0.25 animations:animationBlock];
   } else {

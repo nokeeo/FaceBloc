@@ -9,11 +9,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void (^FBLCObjectDetectorCompleitionBlock)(NSArray<VNDetectedObjectObservation *> *_Nullable observations, NSError *_Nullable error);
+typedef void (^FBLCObjectDetectorCompleitionBlock)(NSArray<VNDetectedObjectObservation *> *_Nullable observations,
+                                                   NSError *_Nullable error);
 
 @interface FBLCFeatureDetector : NSObject
 
-- (void)detectFeaturesForImage:(UIImage *)image dispatchQueue:(dispatch_queue_t)dispatchQueue completion:(FBLCObjectDetectorCompleitionBlock)completionBlock;
+- (void)detectFeaturesForImage:(UIImage *)image
+                 dispatchQueue:(dispatch_queue_t)dispatchQueue
+                    completion:(FBLCObjectDetectorCompleitionBlock)completionBlock;
 
 @end
 

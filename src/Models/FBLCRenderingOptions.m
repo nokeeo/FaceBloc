@@ -12,7 +12,7 @@
     _targetSize = targetSize;
     _shouldObscureFaces = shouldObscureFaces;
   }
-  
+
   return self;
 }
 

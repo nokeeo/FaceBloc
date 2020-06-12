@@ -5,11 +5,11 @@
 #import "FBLCCGUtils.h"
 
 #import <CoreGraphics/CoreGraphics.h>
-#import <Vision/Vision.h>
 #import <UIKit/UIKit.h>
+#import <Vision/Vision.h>
 
-#import "FBLCPath.h"
 #import "FBLCImageGeometryData.h"
+#import "FBLCPath.h"
 #import "FBLCRenderingOptions.h"
 
 static CGColorRef GetRenderingColor() {
@@ -18,13 +18,14 @@ static CGColorRef GetRenderingColor() {
   dispatch_once(&token, ^{
     color = [UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1];
   });
-  
+
   return color.CGColor;
 }
 
-static void DrawFaceObfuscationRects(CGContextRef context, NSArray<VNDetectedObjectObservation *> *observations, CGSize targetSize) {
+static void DrawFaceObfuscationRects(CGContextRef context, NSArray<VNDetectedObjectObservation *> *observations,
+                                     CGSize targetSize) {
   CGContextSaveGState(context);
-  
+
   CGContextScaleCTM(context, 1, -1);
   CGContextTranslateCTM(context, 0, -targetSize.height);
   CGContextSetFillColorWithColor(context, GetRenderingColor());
@@ -32,13 +33,13 @@ static void DrawFaceObfuscationRects(CGContextRef context, NSArray<VNDetectedObj
     CGRect faceRect = FBLCRectForNormalRect(observation.boundingBox, targetSize);
     CGContextFillRect(context, faceRect);
   }
-  
+
   CGContextRestoreGState(context);
 }
 
 static void DrawObfuscationPaths(CGContextRef context, NSArray<FBLCPath *> *paths, CGSize targetSize) {
   CGContextSaveGState(context);
-  
+
   CGContextSetStrokeColorWithColor(context, GetRenderingColor());
   for (FBLCPath *path in paths) {
     CGContextAddPath(context, [path CGPathForSize:targetSize]);
@@ -46,16 +47,17 @@ static void DrawObfuscationPaths(CGContextRef context, NSArray<FBLCPath *> *path
     CGContextSetLineWidth(context, [path strokeWidth] * targetSize.width);
     CGContextStrokePath(context);
   }
-  
+
   CGContextRestoreGState(context);
 }
 
-void FBLCDrawImageGeometryInContext(CGContextRef context, FBLCImageGeometryData *geometry, FBLCRenderingOptions *options) {
+void FBLCDrawImageGeometryInContext(CGContextRef context, FBLCImageGeometryData *geometry,
+                                    FBLCRenderingOptions *options) {
   CGSize targetSize = options.targetSize;
   if (options.shouldObscureFaces) {
     DrawFaceObfuscationRects(context, geometry.faceObservations, targetSize);
   }
-  
+
   DrawObfuscationPaths(context, geometry.obfuscationPaths, targetSize);
 }
 
@@ -68,5 +70,6 @@ CGPoint FBLCPointForNormalPoint(CGPoint normalPoint, CGSize bounds) {
 }
 
 CGRect FBLCRectForNormalRect(CGRect rect, CGSize bounds) {
-  return CGRectMake(CGRectGetMinX(rect) * bounds.width, CGRectGetMinY(rect) * bounds.height, CGRectGetWidth(rect) * bounds.width, CGRectGetHeight(rect) * bounds.height);
+  return CGRectMake(CGRectGetMinX(rect) * bounds.width, CGRectGetMinY(rect) * bounds.height,
+                    CGRectGetWidth(rect) * bounds.width, CGRectGetHeight(rect) * bounds.height);
 }

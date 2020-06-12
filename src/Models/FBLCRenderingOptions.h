@@ -10,9 +10,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FBLCRenderingOptions : NSObject
 
-@property (nonatomic) BOOL shouldObscureFaces;
+@property(nonatomic) BOOL shouldObscureFaces;
 
-@property (nonatomic) CGSize targetSize;
+@property(nonatomic) CGSize targetSize;
 
 + (instancetype)optionsWithTargetSize:(CGSize)targetSize shouldObscureFaces:(BOOL)shouldObscureFaces;
 

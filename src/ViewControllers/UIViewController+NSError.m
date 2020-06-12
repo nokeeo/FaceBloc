@@ -13,19 +13,24 @@
   if (localizedDescription.length == 0) {
     return;
   }
-  
-  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil message:localizedDescription preferredStyle:UIAlertControllerStyleAlert];
-  
+
+  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                           message:localizedDescription
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+
   NSString *title = NSLocalizedString(FBLCErrorDialogConfirmationTitle, nil);
-  
+
   // Use weak to avoid potential retain cycle:
   //  Alert VC->Action->Action Block->Alert VC
   __weak UIAlertController *weakAlertController = alertController;
-  UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:title style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-    [weakAlertController dismissViewControllerAnimated:YES completion:nil];
-  }];
+  UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:title
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:^(UIAlertAction *_Nonnull action) {
+                                                          [weakAlertController dismissViewControllerAnimated:YES
+                                                                                                  completion:nil];
+                                                        }];
   [alertController addAction:confirmAction];
-  
+
   [self presentViewController:alertController animated:YES completion:nil];
 }
 

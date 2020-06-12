@@ -12,7 +12,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FBLCEditorViewController : UIViewController <FBLCEditorBottomNavigationViewDelegate, FBLCImageViewControllerDelegate>
+@interface FBLCEditorViewController
+    : UIViewController <FBLCEditorBottomNavigationViewDelegate, FBLCImageViewControllerDelegate>
 
 @property(nonatomic, nullable, weak) id<FBLCEditorViewControllerDelegate> delegate;
 
@@ -24,7 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)editorViewControllerDidCancelEditing:(FBLCEditorViewController *)editorViewController;
 
-- (void)editorViewController:(FBLCEditorViewController *)editorViewController didFinishEditingWithFinalImage:(UIImage *)finalImage;
+- (void)editorViewController:(FBLCEditorViewController *)editorViewController
+    didFinishEditingWithFinalImage:(UIImage *)finalImage;
 
 @end
 

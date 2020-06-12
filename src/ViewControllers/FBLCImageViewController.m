@@ -14,7 +14,7 @@
   if (self) {
     _image = image;
   }
-  
+
   return self;
 }
 
@@ -25,7 +25,7 @@
 
 - (void)viewDidLayoutSubviews {
   [super viewDidLayoutSubviews];
-  
+
   [self loadImageIfNeeded];
 }
 
@@ -42,18 +42,21 @@
   if (self.imageView.image || !_image) {
     return;
   }
-  
+
   CGSize safeAreaInsetSize = UIEdgeInsetsInsetRect(self.view.bounds, self.view.safeAreaInsets).size;
   CGFloat scale = UIScreen.mainScreen.scale;
   CGFloat imageMaxPixelSize = MAX(safeAreaInsetSize.width, safeAreaInsetSize.height) * scale;
   NSDictionary<FBLCImageLoadOptionKey, id> *options = @{
     FBLCImageLoadOptionTemplateMaxDimension : @(imageMaxPixelSize),
   };
-  
+
   __weak __typeof__(self) weakSelf = self;
-  [_image imageOfType:FBLCImageTypeTemplate options:options onQueue:dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0) completion:^(UIImage * _Nonnull image) {
-    [weakSelf handleImageLoad:image];
-  }];
+  [_image imageOfType:FBLCImageTypeTemplate
+              options:options
+              onQueue:dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0)
+           completion:^(UIImage *_Nonnull image) {
+             [weakSelf handleImageLoad:image];
+           }];
 }
 
 - (void)handleImageLoad:(UIImage *)image {

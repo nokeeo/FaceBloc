@@ -31,7 +31,8 @@ static void ProcessNormalizedPath(void *info, const CGPathElement *element) {
       CGPoint controlPoint1 = FBLCPointForNormalPoint(element->points[0], targetSize);
       CGPoint controlPoint2 = FBLCPointForNormalPoint(element->points[1], targetSize);
       CGPoint endPoint = FBLCPointForNormalPoint(element->points[2], targetSize);
-      CGPathAddCurveToPoint(normalizeInfo.outputPath, nil, controlPoint1.x, controlPoint1.y, controlPoint2.x, controlPoint2.y, endPoint.x, endPoint.y);
+      CGPathAddCurveToPoint(normalizeInfo.outputPath, nil, controlPoint1.x, controlPoint1.y, controlPoint2.x,
+                            controlPoint2.y, endPoint.x, endPoint.y);
       break;
     }
     case kCGPathElementAddQuadCurveToPoint: {
@@ -48,7 +49,7 @@ static void ProcessNormalizedPath(void *info, const CGPathElement *element) {
 
 @implementation FBLCPath {
   CGPathRef _path;
-  
+
   CGPathRef _denormalizedPath;
   CGSize _denormalizedTargetSize;
 }
@@ -59,13 +60,13 @@ static void ProcessNormalizedPath(void *info, const CGPathElement *element) {
     CGPathRetain(path);
     _path = path;
   }
-  
+
   return self;
 }
 
 - (void)dealloc {
   CGPathRelease(_path);
-  
+
   if (_denormalizedPath) {
     CGPathRelease(_denormalizedPath);
   }
@@ -75,21 +76,18 @@ static void ProcessNormalizedPath(void *info, const CGPathElement *element) {
   if (_denormalizedPath && CGSizeEqualToSize(size, _denormalizedTargetSize)) {
     return _denormalizedPath;
   }
-  
+
   if (_denormalizedPath) {
     CGPathRelease(_denormalizedPath);
     _denormalizedPath = NULL;
   }
-  
+
   CGMutablePathRef denormalizedPath = CGPathCreateMutable();
-  struct FBLCPathNormalizePathInfo info = {
-    .outputPath = denormalizedPath,
-    .targetSize = size
-  };
-  
+  struct FBLCPathNormalizePathInfo info = {.outputPath = denormalizedPath, .targetSize = size};
+
   CGPathApply(_path, &info, ProcessNormalizedPath);
   _denormalizedPath = denormalizedPath;
-  
+
   return denormalizedPath;
 }
 
@@ -116,9 +114,9 @@ static void ProcessNormalizedPath(void *info, const CGPathElement *element) {
     CGPathRelease(mutablePath);
     return nil;
   }
-  
+
   _mutablePath = mutablePath;
-  
+
   return self;
 }
 
@@ -129,9 +127,9 @@ static void ProcessNormalizedPath(void *info, const CGPathElement *element) {
     CGPathRelease(mutablePath);
     return nil;
   }
-  
+
   _mutablePath = mutablePath;
-  
+
   return self;
 }
 
@@ -141,10 +139,10 @@ static void ProcessNormalizedPath(void *info, const CGPathElement *element) {
 
 - (void)addPoint:(CGPoint)point {
   if (!CGPathIsEmpty(_mutablePath)) {
-     CGPathAddLineToPoint(_mutablePath, nil, point.x, point.y);
+    CGPathAddLineToPoint(_mutablePath, nil, point.x, point.y);
   }
-  
-   CGPathMoveToPoint(_mutablePath, nil, point.x, point.y);
+
+  CGPathMoveToPoint(_mutablePath, nil, point.x, point.y);
 }
 
 @end

@@ -16,7 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, readonly, nullable) NSArray<FBLCPath *> *obfuscationPaths;
 
-+ (instancetype)geometryWithFaceObservations:(nullable NSArray<VNDetectedObjectObservation *> *)faceObservations obfuscationPaths:(nullable NSArray<FBLCPath *> *)obfuscationPaths;
++ (instancetype)geometryWithFaceObservations:(nullable NSArray<VNDetectedObjectObservation *> *)faceObservations
+                            obfuscationPaths:(nullable NSArray<FBLCPath *> *)obfuscationPaths;
 
 - (instancetype)init NS_UNAVAILABLE;
 

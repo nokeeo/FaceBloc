@@ -19,7 +19,7 @@
   if (self) {
     _path = CGPathCreateMutable();
   }
-  
+
   return self;
 }
 
@@ -28,11 +28,9 @@
 }
 
 - (void)addTouch:(UITouch *)touch inView:(UIView *)view {
-  
 }
 
 - (void)clear {
-  
 }
 
 @end

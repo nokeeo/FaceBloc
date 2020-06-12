@@ -4,7 +4,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import<UIKit/UIKit.h>
+#import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -12,7 +12,9 @@ typedef void (^FBLCSavePhotoCompletionBlock)(NSError *_Nullable error);
 
 @interface FBLCPhotoLibraryService : NSObject
 
-- (void)savePhotoToLibrary:(UIImage *)image queue:(dispatch_queue_t)queue completion:(FBLCSavePhotoCompletionBlock)completion;
+- (void)savePhotoToLibrary:(UIImage *)image
+                     queue:(dispatch_queue_t)queue
+                completion:(FBLCSavePhotoCompletionBlock)completion;
 
 @end
 

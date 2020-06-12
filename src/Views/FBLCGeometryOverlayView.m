@@ -17,14 +17,15 @@
     _renderingOptions = [FBLCRenderingOptions optionsWithTargetSize:frame.size shouldObscureFaces:YES];
     self.opaque = NO;
   }
-  
+
   return self;
 }
 
 - (void)layoutSubviews {
   [super layoutSubviews];
-  
-  FBLCRenderingOptions *options = [FBLCRenderingOptions optionsWithTargetSize:self.bounds.size shouldObscureFaces:_renderingOptions.shouldObscureFaces];
+
+  FBLCRenderingOptions *options = [FBLCRenderingOptions optionsWithTargetSize:self.bounds.size
+                                                           shouldObscureFaces:_renderingOptions.shouldObscureFaces];
   self.renderingOptions = options;
 }
 
@@ -32,9 +33,9 @@
   if (!_geometry && !_renderingOptions) {
     return;
   }
-  
+
   CGContextRef context = UIGraphicsGetCurrentContext();
-  
+
   CGContextClearRect(context, rect);
   CGContextClipToRect(context, rect);
   FBLCDrawImageGeometryInContext(context, _geometry, _renderingOptions);

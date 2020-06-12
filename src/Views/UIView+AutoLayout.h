@@ -22,7 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, readonly) NSLayoutConstraint *bottom;
 
-+ (instancetype)edgeConstraintsWithLeading:(NSLayoutConstraint *)leading trailing:(NSLayoutConstraint *)trailing top:(NSLayoutConstraint *)top bottom:(NSLayoutConstraint *)bottom;
++ (instancetype)edgeConstraintsWithLeading:(NSLayoutConstraint *)leading
+                                  trailing:(NSLayoutConstraint *)trailing
+                                       top:(NSLayoutConstraint *)top
+                                    bottom:(NSLayoutConstraint *)bottom;
 
 - (instancetype)init NS_UNAVAILABLE;
 

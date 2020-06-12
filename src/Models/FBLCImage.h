@@ -10,10 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^FBLCImageLoadCompletion)(UIImage *image);
 
-typedef NS_ENUM(NSUInteger, FBLCImageType) {
-  FBLCImageTypeSource,
-  FBLCImageTypeTemplate
-};
+typedef NS_ENUM(NSUInteger, FBLCImageType) { FBLCImageTypeSource, FBLCImageTypeTemplate };
 
 typedef NSString *const FBLCImageLoadOptionKey NS_TYPED_ENUM;
 
@@ -21,7 +18,7 @@ extern FBLCImageLoadOptionKey FBLCImageLoadOptionTemplateMaxDimension;
 
 extern
 
-@interface FBLCImage : NSObject
+    @interface FBLCImage : NSObject
 
 @property(nonatomic, readonly) NSURL *URL;
 
@@ -29,7 +26,10 @@ extern
 
 - (instancetype)init NS_UNAVAILABLE;
 
-- (void)imageOfType:(FBLCImageType)type options:(nullable NSDictionary<FBLCImageLoadOptionKey, id> *)options onQueue:(dispatch_queue_t)onQueue completion:(FBLCImageLoadCompletion)completion;
+- (void)imageOfType:(FBLCImageType)type
+            options:(nullable NSDictionary<FBLCImageLoadOptionKey, id> *)options
+            onQueue:(dispatch_queue_t)onQueue
+         completion:(FBLCImageLoadCompletion)completion;
 
 - (UIImage *)imageOfType:(FBLCImageType)type options:(nullable NSDictionary<FBLCImageLoadOptionKey, id> *)options;
 

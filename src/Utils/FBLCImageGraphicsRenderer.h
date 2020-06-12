@@ -12,7 +12,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FBLCImageGraphicsRenderer : NSObject
 
-- (UIImage *)renderImage:(UIImage *)image geometry:(FBLCImageGeometryData *)geometry options:(FBLCRenderingOptions *)options;
+- (UIImage *)renderImage:(UIImage *)image
+                geometry:(FBLCImageGeometryData *)geometry
+                 options:(FBLCRenderingOptions *)options;
 
 @end
 

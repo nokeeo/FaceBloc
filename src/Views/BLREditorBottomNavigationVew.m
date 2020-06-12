@@ -14,13 +14,13 @@
 static UIStackView *CreateItemStackView() {
   UIStackView *view = [[UIStackView alloc] init];
   view.axis = UILayoutConstraintAxisHorizontal;
-  
+
   return view;
 }
 
 @implementation BLREditorBottomNavigationView {
   UIStackView *_itemStackView;
-  
+
   BLREditorBottomNavigationButton *_faceObfuscationButton;
 }
 
@@ -28,21 +28,25 @@ static UIStackView *CreateItemStackView() {
   self = [super initWithFrame:frame];
   if (self) {
     _itemStackView = CreateItemStackView();
-    
+
     BLREditorBottomNavigationButton *_faceObfuscationButton = [[BLREditorBottomNavigationButton alloc] init];
     _faceObfuscationButton.on = YES;
-    
+
     UIImage *image = [[UIImage imageNamed:@"person"] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [_faceObfuscationButton setImage:image forState:UIControlStateNormal];
-    [_faceObfuscationButton setContentHuggingPriority:UILayoutPriorityDefaultHigh forAxis:UILayoutConstraintAxisHorizontal];
-    [_faceObfuscationButton addTarget:self action:@selector(didTouchUpInsideFaceObfuscationButton) forControlEvents:UIControlEventTouchUpInside];
+    [_faceObfuscationButton setContentHuggingPriority:UILayoutPriorityDefaultHigh
+                                              forAxis:UILayoutConstraintAxisHorizontal];
+    [_faceObfuscationButton addTarget:self
+                               action:@selector(didTouchUpInsideFaceObfuscationButton)
+                     forControlEvents:UIControlEventTouchUpInside];
     [_itemStackView addArrangedSubview:_faceObfuscationButton];
-    
+
     [self addSubview:_itemStackView];
-    
+
     UILayoutGuide *safeAreaLayoutGuide = self.safeAreaLayoutGuide;
     _itemStackView.translatesAutoresizingMaskIntoConstraints = NO;
-    BLREdgeConstraints *itemConstraints = [_itemStackView blr_constraintsAttachedToLayoutGuideEdges:self.safeAreaLayoutGuide];
+    BLREdgeConstraints *itemConstraints =
+        [_itemStackView blr_constraintsAttachedToLayoutGuideEdges:self.safeAreaLayoutGuide];
     [self addConstraints:@[
       itemConstraints.top,
       itemConstraints.bottom,
@@ -51,7 +55,7 @@ static UIStackView *CreateItemStackView() {
       [_itemStackView.centerXAnchor constraintEqualToAnchor:safeAreaLayoutGuide.centerXAnchor],
     ]];
   }
-  
+
   return self;
 }
 

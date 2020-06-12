@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic, readonly) CGFloat zoomLevel;
 
-- (instancetype)initWithNormalStrokeWidth:(CGFloat)normalStrokeWidth zoomLevel:(CGFloat)zoomLevel NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithNormalStrokeWidth:(CGFloat)normalStrokeWidth
+                                zoomLevel:(CGFloat)zoomLevel NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)init NS_UNAVAILABLE;
 

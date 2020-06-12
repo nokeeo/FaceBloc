@@ -6,17 +6,26 @@
 
 @interface FBLCEdgeConstraints ()
 
-- (instancetype)initWithLeading:(NSLayoutConstraint *)leading trailing:(NSLayoutConstraint *)trailing top:(NSLayoutConstraint *)top bottom:(NSLayoutConstraint *)bottom;
+- (instancetype)initWithLeading:(NSLayoutConstraint *)leading
+                       trailing:(NSLayoutConstraint *)trailing
+                            top:(NSLayoutConstraint *)top
+                         bottom:(NSLayoutConstraint *)bottom;
 
 @end
 
 @implementation FBLCEdgeConstraints
 
-+ (instancetype)edgeConstraintsWithLeading:(NSLayoutConstraint *)leading trailing:(NSLayoutConstraint *)trailing top:(NSLayoutConstraint *)top bottom:(NSLayoutConstraint *)bottom {
++ (instancetype)edgeConstraintsWithLeading:(NSLayoutConstraint *)leading
+                                  trailing:(NSLayoutConstraint *)trailing
+                                       top:(NSLayoutConstraint *)top
+                                    bottom:(NSLayoutConstraint *)bottom {
   return [[self alloc] initWithLeading:leading trailing:trailing top:top bottom:bottom];
 }
 
-- (instancetype)initWithLeading:(NSLayoutConstraint *)leading trailing:(NSLayoutConstraint *)trailing top:(NSLayoutConstraint *)top bottom:(NSLayoutConstraint *)bottom {
+- (instancetype)initWithLeading:(NSLayoutConstraint *)leading
+                       trailing:(NSLayoutConstraint *)trailing
+                            top:(NSLayoutConstraint *)top
+                         bottom:(NSLayoutConstraint *)bottom {
   self = [super init];
   if (self) {
     _leading = leading;
@@ -24,7 +33,7 @@
     _top = top;
     _bottom = bottom;
   }
-  
+
   return self;
 }
 
@@ -49,7 +58,7 @@
     _x = x;
     _y = y;
   }
-  
+
   return self;
 }
 
@@ -76,7 +85,7 @@
   NSLayoutConstraint *trailing = [self.trailingAnchor constraintEqualToAnchor:superview.trailingAnchor];
   NSLayoutConstraint *top = [self.topAnchor constraintEqualToAnchor:superview.topAnchor];
   NSLayoutConstraint *bottom = [self.bottomAnchor constraintEqualToAnchor:superview.bottomAnchor];
-  
+
   return [FBLCEdgeConstraints edgeConstraintsWithLeading:leading trailing:trailing top:top bottom:bottom];
 }
 
@@ -85,7 +94,7 @@
   NSLayoutConstraint *trailing = [self.trailingAnchor constraintEqualToAnchor:layoutGuide.trailingAnchor];
   NSLayoutConstraint *top = [self.topAnchor constraintEqualToAnchor:layoutGuide.topAnchor];
   NSLayoutConstraint *bottom = [self.bottomAnchor constraintEqualToAnchor:layoutGuide.bottomAnchor];
-  
+
   return [FBLCEdgeConstraints edgeConstraintsWithLeading:leading trailing:trailing top:top bottom:bottom];
 }
 
@@ -94,7 +103,7 @@
   NSLayoutConstraint *trailing = [self.trailingAnchor constraintEqualToAnchor:view.trailingAnchor];
   NSLayoutConstraint *top = [self.topAnchor constraintEqualToAnchor:view.topAnchor];
   NSLayoutConstraint *bottom = [self.bottomAnchor constraintEqualToAnchor:view.bottomAnchor];
-  
+
   return [FBLCEdgeConstraints edgeConstraintsWithLeading:leading trailing:trailing top:top bottom:bottom];
 }
 
@@ -102,7 +111,7 @@
   UIView *superview = self.superview;
   NSLayoutConstraint *x = [self.centerXAnchor constraintEqualToAnchor:superview.centerXAnchor];
   NSLayoutConstraint *y = [self.centerYAnchor constraintEqualToAnchor:superview.centerYAnchor];
-  
+
   return [FBLCCenterConstraints centerConstraintWithX:x y:y];
 }
 

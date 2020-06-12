@@ -10,7 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern void FBLCDrawImageGeometryInContext(CGContextRef context, FBLCImageGeometryData *geometry, FBLCRenderingOptions *options);
+extern void FBLCDrawImageGeometryInContext(CGContextRef context, FBLCImageGeometryData *geometry,
+                                           FBLCRenderingOptions *options);
 
 extern CGPoint FBLCNormalizePoint(CGPoint point, CGSize bounds);
 

@@ -14,7 +14,8 @@ static NSString *const kPhotoServiceErrorDomain = @"com.nokeeo.photoService";
 
 static const NSInteger kPhotoServicePermissionDeniedErrorCode = 1;
 
-static void CallSaveCompletion(FBLCSavePhotoCompletionBlock completion, NSError *_Nullable error, dispatch_queue_t queue) {
+static void CallSaveCompletion(FBLCSavePhotoCompletionBlock completion, NSError *_Nullable error,
+                               dispatch_queue_t queue) {
   dispatch_async(queue, ^{
     completion(error);
   });
@@ -26,8 +27,10 @@ static NSError *CreateErrorForPermissionDenied() {
   if (localizedDescription) {
     userInfo[NSLocalizedDescriptionKey] = localizedDescription;
   }
-  
-  return [NSError errorWithDomain:kPhotoServiceErrorDomain code:kPhotoServicePermissionDeniedErrorCode userInfo:userInfo];
+
+  return [NSError errorWithDomain:kPhotoServiceErrorDomain
+                             code:kPhotoServicePermissionDeniedErrorCode
+                         userInfo:userInfo];
 }
 
 static void RequestPermissions(FBLCPhotoRequestPermissionCompletion completion) {
@@ -56,31 +59,35 @@ static void RequestPermissionsIfNeeded(FBLCPhotoRequestPermissionCompletion comp
       break;
     case PHAuthorizationStatusAuthorized:
     case PHAuthorizationStatusRestricted:
-      completion(/*error*/nil);
+      completion(/*error*/ nil);
   }
 }
 
 @implementation FBLCPhotoLibraryService
 
-- (void)savePhotoToLibrary:(UIImage *)image queue:(dispatch_queue_t)queue completion:(FBLCSavePhotoCompletionBlock)completion {
+- (void)savePhotoToLibrary:(UIImage *)image
+                     queue:(dispatch_queue_t)queue
+                completion:(FBLCSavePhotoCompletionBlock)completion {
   PHPhotoLibrary *library = PHPhotoLibrary.sharedPhotoLibrary;
   RequestPermissionsIfNeeded(^(NSError *authorizationError) {
     if (authorizationError) {
       CallSaveCompletion(completion, authorizationError, queue);
       return;
     }
-    
-    [library performChanges:^{
-      NSData *imageData = UIImageJPEGRepresentation(image, 0.1);
-      if (!imageData) {
-        return;
-      }
-      
-      PHAssetCreationRequest *creationRequest = [PHAssetCreationRequest creationRequestForAsset];
-      [creationRequest addResourceWithType:PHAssetResourceTypePhoto data:imageData options:nil];
-    } completionHandler:^(BOOL success, NSError * _Nullable error) {
-      CallSaveCompletion(completion, error, queue);
-    }];
+
+    [library
+        performChanges:^{
+          NSData *imageData = UIImageJPEGRepresentation(image, 0.1);
+          if (!imageData) {
+            return;
+          }
+
+          PHAssetCreationRequest *creationRequest = [PHAssetCreationRequest creationRequestForAsset];
+          [creationRequest addResourceWithType:PHAssetResourceTypePhoto data:imageData options:nil];
+        }
+        completionHandler:^(BOOL success, NSError *_Nullable error) {
+          CallSaveCompletion(completion, error, queue);
+        }];
   });
 }
 
