@@ -1,5 +1,5 @@
 // Copyright © 2020 Eric Lee All rights reserved.
-// This file is subject to the terms and conditions defined in the file, LICENSE.txt, included with
+// This file is subject to the terms and conditions defined in the file, LICENSE.md, included with
 // this project.
 
 #import "FBLCPhotoLibraryService.h"
@@ -8,12 +8,19 @@
 
 #import "LocalizationIDs.h"
 
-typedef void (^FBLCPhotoRequestPermissionCompletion)(NSError *_Nullable);
+/**
+ * The type of block executed when the request for permissions has completed.
+ * @param error describing request failure. Nil if the operation succeeded and permission was granted.
+ */
+typedef void (^FBLCPhotoRequestPermissionCompletion)(NSError *_Nullable error);
 
+/** The domain of errors produced by the photo service. */
 static NSString *const kPhotoServiceErrorDomain = @"com.nokeeo.photoService";
 
+/** The error code of a permission denied request. */
 static const NSInteger kPhotoServicePermissionDeniedErrorCode = 1;
 
+/** Executes the given save completion block on the main thread. */
 static void CallSaveCompletion(FBLCSavePhotoCompletionBlock completion, NSError *_Nullable error,
                                dispatch_queue_t queue) {
   dispatch_async(queue, ^{
@@ -21,6 +28,7 @@ static void CallSaveCompletion(FBLCSavePhotoCompletionBlock completion, NSError 
   });
 }
 
+/** Creates an error for a denied request for permissions. */
 static NSError *CreateErrorForPermissionDenied() {
   NSMutableDictionary<NSErrorUserInfoKey, id> *userInfo = [NSMutableDictionary dictionary];
   NSString *localizedDescription = NSLocalizedString(FBLCPhotoPermissionsDeniedError, nil);
@@ -33,6 +41,7 @@ static NSError *CreateErrorForPermissionDenied() {
                          userInfo:userInfo];
 }
 
+/** Requests permissions to access the photo library. */
 static void RequestPermissions(FBLCPhotoRequestPermissionCompletion completion) {
   [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
     switch (status) {
@@ -48,6 +57,10 @@ static void RequestPermissions(FBLCPhotoRequestPermissionCompletion completion) 
   }];
 }
 
+/**
+ * Requests permission if needed. If permissions have already been granted, this function immediately calls the given
+ * block
+ */
 static void RequestPermissionsIfNeeded(FBLCPhotoRequestPermissionCompletion completion) {
   PHAuthorizationStatus authorizationStatus = PHPhotoLibrary.authorizationStatus;
   switch (authorizationStatus) {

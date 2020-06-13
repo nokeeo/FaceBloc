@@ -1,9 +1,10 @@
 // Copyright © 2020 Eric Lee All rights reserved.
-// This file is subject to the terms and conditions defined in the file, LICENSE.txt, included with
+// This file is subject to the terms and conditions defined in the file, LICENSE.md, included with
 // this project.
 
 #import "FBLCStrokeWidthIndicatorLayer.h"
 
+/** Creates the indicators path. */
 static CGPathRef CreatePathForStrokeWidth(CGSize imageSize, CGRect bounds, CGFloat strokeWidth, CGFloat zoomLevel) {
   CGFloat indicatorRadius = floor((imageSize.width * strokeWidth) / 2.f * zoomLevel);
   CGPoint indicatorCenter = CGPointMake(CGRectGetMidX(bounds), CGRectGetMidY(bounds));

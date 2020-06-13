@@ -1,5 +1,5 @@
 // Copyright © 2020 Eric Lee All rights reserved.
-// This file is subject to the terms and conditions defined in the file, LICENSE.txt, included with
+// This file is subject to the terms and conditions defined in the file, LICENSE.md, included with
 // this project.
 
 #import "FBLCRootViewController.h"
@@ -10,7 +10,13 @@
 #import "UIViewController+Presenting.h"
 
 @implementation FBLCRootViewController {
+  /**
+   * The view controller that is displayed to select an image from the photos library. Nil if not currently selected a
+   * photo.
+   */
   UIImagePickerController *_Nullable _mediaPickerController;
+  
+  /** The view controller presented to edit a user photo. Nil if not currently editing a photo. */
   FBLCEditorViewController *_Nullable _editorViewController;
 }
 
@@ -56,6 +62,7 @@
 
 #pragma mark - Private Methods
 
+/** Presents the photo picker view controller. */
 - (void)presentMediaPicker {
   if (!_mediaPickerController) {
     _mediaPickerController = [[UIImagePickerController alloc] init];
@@ -74,6 +81,7 @@
   [self presentViewController:_mediaPickerController animated:YES completion:nil];
 }
 
+/** Presents the view controller used to edit an image. */
 - (void)showEditorViewControllerWithImageURL:(NSURL *)imageURL {
   _editorViewController = [[FBLCEditorViewController alloc] initWithImageURL:imageURL];
   _editorViewController.delegate = self;

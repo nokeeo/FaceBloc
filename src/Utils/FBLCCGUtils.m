@@ -1,5 +1,5 @@
 // Copyright © 2020 Eric Lee All rights reserved.
-// This file is subject to the terms and conditions defined in the file, LICENSE.txt, included with
+// This file is subject to the terms and conditions defined in the file, LICENSE.md, included with
 // this project.
 
 #import "FBLCCGUtils.h"
@@ -12,6 +12,7 @@
 #import "FBLCPath.h"
 #import "FBLCRenderingOptions.h"
 
+/** Returns the color to render geometry. */
 static CGColorRef GetRenderingColor() {
   static UIColor *color;
   static dispatch_once_t token;
@@ -22,6 +23,7 @@ static CGColorRef GetRenderingColor() {
   return color.CGColor;
 }
 
+/** Draws the rects that obscure the faces in a photo. */
 static void DrawFaceObfuscationRects(CGContextRef context, NSArray<VNDetectedObjectObservation *> *observations,
                                      CGSize targetSize) {
   CGContextSaveGState(context);
@@ -37,6 +39,7 @@ static void DrawFaceObfuscationRects(CGContextRef context, NSArray<VNDetectedObj
   CGContextRestoreGState(context);
 }
 
+/** Renders the path that the user has drawn. */
 static void DrawObfuscationPaths(CGContextRef context, NSArray<FBLCPath *> *paths, CGSize targetSize) {
   CGContextSaveGState(context);
 

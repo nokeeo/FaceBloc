@@ -1,5 +1,5 @@
 // Copyright © 2020 Eric Lee All rights reserved.
-// This file is subject to the terms and conditions defined in the file, LICENSE.txt, included with
+// This file is subject to the terms and conditions defined in the file, LICENSE.md, included with
 // this project.
 
 #import "FBLCPath.h"
@@ -8,11 +8,19 @@
 
 #import "FBLCCGUtils.h"
 
+/** The object passed to the callback function used to parse a normalized CGPath and output a denormalized path. */
 struct FBLCPathNormalizePathInfo {
+  /** The mutable denormalized path. */
   CGMutablePathRef outputPath;
+  
+  /** The target render size. */
   CGSize targetSize;
 };
 
+/**
+ * Parses the normalized path element and appends the denormalized point(s) to the output path stored in the info object
+ * @param info Expecting a pointer to the FBLCPathNormalizePathInfo struct.
+ */
 static void ProcessNormalizedPath(void *info, const CGPathElement *element) {
   struct FBLCPathNormalizePathInfo normalizeInfo = *(struct FBLCPathNormalizePathInfo *)info;
   switch (element->type) {
@@ -48,9 +56,13 @@ static void ProcessNormalizedPath(void *info, const CGPathElement *element) {
 }
 
 @implementation FBLCPath {
+  /** The path backing this object. The path's points are in normalized form. */
   CGPathRef _path;
 
+  /** A cached reference of the last denormalized path. NULL if not set. */
   CGPathRef _denormalizedPath;
+  
+  /** The target size of the last denormalized path. Check @c _denormalizedPath is not NULL before using. */
   CGSize _denormalizedTargetSize;
 }
 
@@ -92,6 +104,7 @@ static void ProcessNormalizedPath(void *info, const CGPathElement *element) {
 }
 
 - (CGFloat)strokeWidth {
+  // Subclasses may override this methods.
   return 1;
 }
 
@@ -104,6 +117,7 @@ static void ProcessNormalizedPath(void *info, const CGPathElement *element) {
 @end
 
 @implementation FBLCMutablePath {
+  /** A reference to the mutable path backing this object. The path's points are in normalized form. */
   CGMutablePathRef _mutablePath;
 }
 
@@ -138,6 +152,8 @@ static void ProcessNormalizedPath(void *info, const CGPathElement *element) {
 }
 
 - (void)addPoint:(CGPoint)point {
+  NSAssert(point.x >= 0 && point.x <= 1, @"Trying to add x coordinate (%f) not in normalized form.", point.x);
+  NSAssert(point.y >= 0 && point.y <= 1, @"Trying to add y coordinate (%f)not in normalized form.", point.y);
   if (!CGPathIsEmpty(_mutablePath)) {
     CGPathAddLineToPoint(_mutablePath, nil, point.x, point.y);
   }
