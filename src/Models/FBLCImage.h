@@ -39,7 +39,9 @@ extern FBLCImageLoadOptionKey FBLCImageLoadOptionTemplateMaxDimension;
 /** The URL of the image on the file system. */
 @property(nonatomic, readonly) NSURL *URL;
 
-- (instancetype)initWithURL:(NSURL *)URL NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithURL:(NSURL *)URL orientation:(UIImageOrientation)orientation NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)initWithURL:(NSURL *)URL;
 
 // Please use `initWithURL:`.
 - (instancetype)init NS_UNAVAILABLE;

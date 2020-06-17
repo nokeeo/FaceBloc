@@ -12,7 +12,7 @@
 struct FBLCPathNormalizePathInfo {
   /** The mutable denormalized path. */
   CGMutablePathRef outputPath;
-  
+
   /** The target render size. */
   CGSize targetSize;
 };
@@ -61,7 +61,7 @@ static void ProcessNormalizedPath(void *info, const CGPathElement *element) {
 
   /** A cached reference of the last denormalized path. NULL if not set. */
   CGPathRef _denormalizedPath;
-  
+
   /** The target size of the last denormalized path. Check @c _denormalizedPath is not NULL before using. */
   CGSize _denormalizedTargetSize;
 }

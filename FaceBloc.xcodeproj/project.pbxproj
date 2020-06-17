@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE0248CC2499E12C00B602F9 /* UIImage+Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0248CB2499E12A00B602F9 /* UIImage+Utils.m */; };
 		BE3344602489B1CE00E3F9ED /* BlurTests.m in Sources */ = {isa = PBXBuildFile; fileRef = BE33445F2489B1CE00E3F9ED /* BlurTests.m */; };
 		BE3EA5912489C7640053F89C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE3EA57B2489C7630053F89C /* Assets.xcassets */; };
 		BE3EA5922489C7640053F89C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3EA57C2489C7640053F89C /* main.m */; };
@@ -51,6 +52,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE0248CA2499E12A00B602F9 /* UIImage+Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "UIImage+Utils.h"; path = "src/Models/UIImage+Utils.h"; sourceTree = SOURCE_ROOT; };
+		BE0248CB2499E12A00B602F9 /* UIImage+Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "UIImage+Utils.m"; path = "src/Models/UIImage+Utils.m"; sourceTree = SOURCE_ROOT; };
 		BE3344402489B1CC00E3F9ED /* FaceBloc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FaceBloc.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE33445B2489B1CE00E3F9ED /* BlurTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BlurTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE33445F2489B1CE00E3F9ED /* BlurTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlurTests.m; sourceTree = "<group>"; };
@@ -242,6 +245,8 @@
 		BEAC4F582489DE2C00BF4264 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BE0248CA2499E12A00B602F9 /* UIImage+Utils.h */,
+				BE0248CB2499E12A00B602F9 /* UIImage+Utils.m */,
 				BEAF7B6A248E09BD00902E58 /* FBLCImage.h */,
 				BEAF7B6B248E09BD00902E58 /* FBLCImage.m */,
 				BEAF7B67248E031F00902E58 /* FBLCRenderingOptions.h */,
@@ -387,6 +392,7 @@
 				BEAC4F572489D90800BF4264 /* FBLCImageView.m in Sources */,
 				BEAF7B3D248B7DBE00902E58 /* UIView+AutoLayout.m in Sources */,
 				BEAF7B34248A2E5800902E58 /* FBLCEditorViewController.m in Sources */,
+				BE0248CC2499E12C00B602F9 /* UIImage+Utils.m in Sources */,
 				BEAF7B72248F705000902E58 /* FBLCStrokeWidthIndicatorLayer.m in Sources */,
 				BE3EA59A2489C7640053F89C /* LocalizationIDs.m in Sources */,
 				BEAF7B49248BBDDD00902E58 /* FBLCPath.m in Sources */,

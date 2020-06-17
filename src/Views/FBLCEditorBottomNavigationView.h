@@ -33,7 +33,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)editorBottomNavigationView:(FBLCEditorBottomNavigationView *)editorBottomNavigationView
                   didEnableDrawing:(BOOL)enabled;
 
-
 /** Indicates if the user has requested to end editing. */
 - (void)editorBottomNavigationViewDidCancelEditing:(FBLCEditorBottomNavigationView *)bottomNavigationView;
 

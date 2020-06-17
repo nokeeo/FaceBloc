@@ -100,9 +100,6 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
   /** The current path being drawn by the user. */
   FBLCMutablePath *_touchPath;
 
-  /** The URL of the image on the device's disk. */
-  NSURL *_imageURL;
-
   /** The slider that indicates the stroke width of the draw tool. */
   UISlider *_drawWidthSlider;
 
@@ -117,6 +114,9 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
    * it. Is hidden by default.
    */
   CALayer *_imageDimmingLayer;
+
+  /** The image this object was initialized with. */
+  FBLCImage *_image;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -131,10 +131,10 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
   return self;
 }
 
-- (instancetype)initWithImageURL:(NSURL *)imageURL {
+- (instancetype)initWithImage:(FBLCImage *)image {
   self = [self initWithNibName:nil bundle:nil];
   if (self) {
-    _imageURL = imageURL;
+    _image = image;
   }
 
   return self;
@@ -145,8 +145,7 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
 
   UIView *view = self.view;
 
-  FBLCImage *image = [[FBLCImage alloc] initWithURL:_imageURL];
-  _imageViewController = [[FBLCImageViewController alloc] initWithImage:image];
+  _imageViewController = [[FBLCImageViewController alloc] initWithImage:_image];
   _imageViewController.delegate = self;
   UIView *imageView = _imageViewController.view;
   imageView.translatesAutoresizingMaskIntoConstraints = NO;
