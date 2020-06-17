@@ -5,6 +5,7 @@
 #import "FBLCRootViewController.h"
 
 #import "FBLCEditorViewController.h"
+#import "FBLCImage.h"
 #import "FBLCPhotoLibraryService.h"
 #import "FBLCRootView.h"
 #import "UIViewController+Presenting.h"
@@ -15,7 +16,7 @@
    * photo.
    */
   UIImagePickerController *_Nullable _mediaPickerController;
-  
+
   /** The view controller presented to edit a user photo. Nil if not currently editing a photo. */
   FBLCEditorViewController *_Nullable _editorViewController;
 }
@@ -56,8 +57,15 @@
 - (void)imagePickerController:(UIImagePickerController *)picker
     didFinishPickingMediaWithInfo:(NSDictionary<UIImagePickerControllerInfoKey, id> *)info {
   NSURL *imageURL = info[UIImagePickerControllerImageURL];
+  UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
+  UIImageOrientation imageOrientation = UIImageOrientationUp;
+  if (originalImage) {
+    imageOrientation = originalImage.imageOrientation;
+  }
   [picker dismissViewControllerAnimated:YES completion:nil];
-  [self showEditorViewControllerWithImageURL:imageURL];
+
+  FBLCImage *image = [[FBLCImage alloc] initWithURL:imageURL orientation:imageOrientation];
+  [self showEditorViewControllerWithImage:image];
 }
 
 #pragma mark - Private Methods
@@ -82,8 +90,8 @@
 }
 
 /** Presents the view controller used to edit an image. */
-- (void)showEditorViewControllerWithImageURL:(NSURL *)imageURL {
-  _editorViewController = [[FBLCEditorViewController alloc] initWithImageURL:imageURL];
+- (void)showEditorViewControllerWithImage:(FBLCImage *)image {
+  _editorViewController = [[FBLCEditorViewController alloc] initWithImage:image];
   _editorViewController.delegate = self;
   [self showViewController:_editorViewController sender:self];
 }

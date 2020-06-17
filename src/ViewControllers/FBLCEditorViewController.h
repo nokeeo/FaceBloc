@@ -8,6 +8,7 @@
 
 #import "FBLCImageViewController.h"
 
+@class FBLCImage;
 @protocol FBLCEditorViewControllerDelegate;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -20,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, nullable, weak) id<FBLCEditorViewControllerDelegate> delegate;
 
 /** Initializes the editor with a URL to an image on the device's file system. */
-- (instancetype)initWithImageURL:(nullable NSURL *)imageURL;
+- (instancetype)initWithImage:(FBLCImage *)image;
 
 @end
 
