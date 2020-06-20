@@ -13,3 +13,12 @@
 "photo_permissions_denied" = "Permissions denied. Access required to save a photo.";
 
 "error_dialog_confirmation_title" = "Ok";
+
+/* Save quality titles: */
+"save_quality_title" = "File Size";
+"save_quality_subtitle" = "Select the size of the saved image. Smaller images may result in a lower quality image.";
+"save_quality_full" = "Original (Very Large)";
+"save_quality_high" = "Large";
+"save_quality_medium" = "Medium";
+"save_quality_low" = "Small";
+"save_quality_cancel" = "Cancel";

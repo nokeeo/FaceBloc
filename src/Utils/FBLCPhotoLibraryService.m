@@ -20,6 +20,31 @@ static NSString *const kPhotoServiceErrorDomain = @"com.nokeeo.photoService";
 /** The error code of a permission denied request. */
 static const NSInteger kPhotoServicePermissionDeniedErrorCode = 1;
 
+/** Returns the JPEG image compression constant. Value varies from 0.0 - 1.0. */
+static CGFloat ImageQualityToJPEGCompressionQuality(FBLCSavePhotoQuality quality) {
+  switch (quality) {
+    case FBLCSavePhotoQualityFull:
+      // Full quality images should export as PNGs.
+      return 1;
+    case FBLCSavePhotoQualityLarge:
+      return 0.8;
+    case FBLCSavePhotoQualityMedium:
+      return 0.4;
+    case FBLCSavePhotoQualitySmall:
+      return 0;
+  }
+}
+
+/** Returns the NSData representation of the given image with the given quality. */
+static NSData *ImageToDataForQuality(UIImage *image, FBLCSavePhotoQuality quality) {
+  if (quality == FBLCSavePhotoQualityFull) {
+    return UIImagePNGRepresentation(image);
+  }
+
+  CGFloat compressionQuality = ImageQualityToJPEGCompressionQuality(quality);
+  return UIImageJPEGRepresentation(image, compressionQuality);
+}
+
 /** Executes the given save completion block on the main thread. */
 static void CallSaveCompletion(FBLCSavePhotoCompletionBlock completion, NSError *_Nullable error,
                                dispatch_queue_t queue) {
@@ -79,6 +104,7 @@ static void RequestPermissionsIfNeeded(FBLCPhotoRequestPermissionCompletion comp
 @implementation FBLCPhotoLibraryService
 
 - (void)savePhotoToLibrary:(UIImage *)image
+                   quality:(FBLCSavePhotoQuality)quality
                      queue:(dispatch_queue_t)queue
                 completion:(FBLCSavePhotoCompletionBlock)completion {
   PHPhotoLibrary *library = PHPhotoLibrary.sharedPhotoLibrary;
@@ -90,7 +116,7 @@ static void RequestPermissionsIfNeeded(FBLCPhotoRequestPermissionCompletion comp
 
     [library
         performChanges:^{
-          NSData *imageData = UIImageJPEGRepresentation(image, 0.1);
+          NSData *imageData = ImageToDataForQuality(image, quality);
           if (!imageData) {
             return;
           }

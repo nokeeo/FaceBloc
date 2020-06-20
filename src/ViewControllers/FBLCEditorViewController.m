@@ -20,6 +20,7 @@
 #import "FBLCPhotoLibraryService.h"
 #import "FBLCRenderingOptions.h"
 #import "FBLCStrokeWidthIndicatorLayer.h"
+#import "LocalizationIDs.h"
 #import "UIView+AutoLayout.h"
 #import "UIViewController+NSError.h"
 
@@ -76,6 +77,20 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
   animation.duration = kStrokeWidthIndicatorAnimationDuration;
 
   return animation;
+}
+
+/** Returns the actions sheet item title for the given quality level. */
+static NSString *SaveActionTitleForQualityLevel(FBLCSavePhotoQuality quality) {
+  switch (quality) {
+    case FBLCSavePhotoQualityFull:
+      return NSLocalizedString(FBLCSaveQualityFullTitle, nil);
+    case FBLCSavePhotoQualityLarge:
+      return NSLocalizedString(FBLCSaveQualityHighTitle, nil);
+    case FBLCSavePhotoQualityMedium:
+      return NSLocalizedString(FBLCSaveQualityMediumTitle, nil);
+    case FBLCSavePhotoQualitySmall:
+      return NSLocalizedString(FBLCSaveQualityLowTitle, nil);
+  }
 }
 
 @implementation FBLCEditorViewController {
@@ -237,7 +252,7 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
 }
 
 - (void)editorBottomNavigationViewDidTapSaveButton:(FBLCEditorBottomNavigationView *)bottomNavigationView {
-  [self saveCurrentImageToPhotosLibrary];
+  [self showSaveQualityActionSheet];
 }
 
 #pragma mark - FBLCImageViewControllerDelegate
@@ -343,6 +358,19 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
 
 #pragma mark - Private Methods
 
+/**
+ * Returns an alert action associated with the given quality level. When the action is selected, the current image is
+ * saved to the photo library.
+ */
+- (UIAlertAction *)alertActionForQualityLevel:(FBLCSavePhotoQuality)quality {
+  __weak __typeof__(self) weakSelf = self;
+  return [UIAlertAction actionWithTitle:SaveActionTitleForQualityLevel(quality)
+                                  style:UIAlertActionStyleDefault
+                                handler:^(UIAlertAction *_Nonnull action) {
+                                  [weakSelf saveCurrentImageToPhotosLibraryForQuality:quality];
+                                }];
+}
+
 /** Is called when the feature detector has finished processing the given image. */
 - (void)handleFacialFeatureDetectionForImage:(UIImage *)image
                                 observations:(nullable NSArray<VNDetectedObjectObservation *> *)observations
@@ -374,8 +402,29 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
                    }];
 }
 
+/**
+ * Shows the action sheet that allows the user to select the quality of image to save. Upon selected an option, the
+ * image is save to the photo library.
+ */
+- (void)showSaveQualityActionSheet {
+  NSString *title = NSLocalizedString(FBLCSaveQualityActionSheetTitle, nil);
+  NSString *subtitle = NSLocalizedString(FBLCSaveQualityActionSheetSubtitle, nil);
+  UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:title
+                                                                       message:subtitle
+                                                                preferredStyle:UIAlertControllerStyleActionSheet];
+  [actionSheet addAction:[self alertActionForQualityLevel:FBLCSavePhotoQualityFull]];
+  [actionSheet addAction:[self alertActionForQualityLevel:FBLCSavePhotoQualityLarge]];
+  [actionSheet addAction:[self alertActionForQualityLevel:FBLCSavePhotoQualityMedium]];
+  [actionSheet addAction:[self alertActionForQualityLevel:FBLCSavePhotoQualitySmall]];
+  [actionSheet addAction:[UIAlertAction actionWithTitle:NSLocalizedString(FBLCSaveQualityCancelTitle, nil)
+                                                  style:UIAlertActionStyleCancel
+                                                handler:nil]];
+
+  [self presentViewController:actionSheet animated:YES completion:nil];
+}
+
 /** Saves the current editing image to the user photo library. */
-- (void)saveCurrentImageToPhotosLibrary {
+- (void)saveCurrentImageToPhotosLibraryForQuality:(FBLCSavePhotoQuality)quality {
   FBLCActivityViewController *activityViewController = [[FBLCActivityViewController alloc] init];
   [self presentViewController:activityViewController
                      animated:YES
@@ -390,6 +439,7 @@ static CAAnimation *StrokeWidthIndicatorAnimation(BOOL hidden) {
                        FBLCRenderingOptions *options = [weakSelf createRenderingOptionsWithTargetSize:sourceImage.size];
                        UIImage *outputImage = [renderer renderImage:sourceImage geometry:geometry options:options];
                        [photoService savePhotoToLibrary:outputImage
+                                                quality:quality
                                                   queue:dispatch_get_main_queue()
                                              completion:^(NSError *_Nullable error) {
                                                [weakSelf handlePhotoSaveResponse:outputImage
