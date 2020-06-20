@@ -25,4 +25,25 @@ extern NSString *const FBLCPhotoPermissionsDeniedError;
 /** The title of the action associated with confirming/dismissing an error alert. */
 extern NSString *const FBLCErrorDialogConfirmationTitle;
 
+/** The title of the action sheet for selecting image quality. */
+extern NSString *const FBLCSaveQualityActionSheetTitle;
+
+/** The subtitle of the action sheet for selecting image quality. */
+extern NSString *const FBLCSaveQualityActionSheetSubtitle;
+
+/** The title of the save action for a lossless image. */
+extern NSString *const FBLCSaveQualityFullTitle;
+
+/** The title of the save action for a large image. */
+extern NSString *const FBLCSaveQualityHighTitle;
+
+/** The title of a save action for a medium image. */
+extern NSString *const FBLCSaveQualityMediumTitle;
+
+/** The title of a save action for a small image. */
+extern NSString *const FBLCSaveQualityLowTitle;
+
+/** The title of the action that cancels saving an image. */
+extern NSString *const FBLCSaveQualityCancelTitle;
+
 NS_ASSUME_NONNULL_END
