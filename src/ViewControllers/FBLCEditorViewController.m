@@ -93,6 +93,13 @@ static NSString *SaveActionTitleForQualityLevel(FBLCSavePhotoQuality quality) {
   }
 }
 
+static UIGestureRecognizer *GetDrawGestureRecognizer(id target, SEL action) {
+  UIPanGestureRecognizer *recognizer = [[UIPanGestureRecognizer alloc] initWithTarget:target action:action];
+  recognizer.maximumNumberOfTouches = 1;
+
+  return recognizer;
+}
+
 @implementation FBLCEditorViewController {
   /** The view controller for displaying a FBLCImage */
   FBLCImageViewController *_imageViewController;
@@ -132,6 +139,12 @@ static NSString *SaveActionTitleForQualityLevel(FBLCSavePhotoQuality quality) {
 
   /** The image this object was initialized with. */
   FBLCImage *_image;
+
+  /**
+   * The recognizer that fires when the draw gesture is performed. The gesture is only added to he hierarchy when in
+   * draw mode.
+   */
+  UIGestureRecognizer *_drawRecognizer;
 }
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -164,9 +177,13 @@ static NSString *SaveActionTitleForQualityLevel(FBLCSavePhotoQuality quality) {
   _imageViewController.delegate = self;
   UIView *imageView = _imageViewController.view;
   imageView.translatesAutoresizingMaskIntoConstraints = NO;
+  _imageViewController.imageView.contentView.userInteractionEnabled = YES;
   [self addChildViewController:_imageViewController];
   [view addSubview:_imageViewController.view];
   [_imageViewController didMoveToParentViewController:self];
+
+  _drawRecognizer = GetDrawGestureRecognizer(/*target=*/self, @selector(handlePanGestureRecognizer:));
+  _drawRecognizer.delegate = self;
 
   _geometryOverlayView = [[FBLCGeometryOverlayView alloc] init];
   _geometryOverlayView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -280,15 +297,8 @@ static NSString *SaveActionTitleForQualityLevel(FBLCSavePhotoQuality quality) {
 }
 #pragma mark - UIResponder
 
-- (BOOL)canHandleTouches {
-  return _bottomNavigationView.drawingEnabled;
-}
-
-- (void)handleTouchesUpdate:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-  UITouch *touch = touches.allObjects.firstObject;
-  CGPoint touchPoint = [touch locationInView:_geometryOverlayView];
-
-  CGPoint normalizedPoint = FBLCNormalizePoint(touchPoint, _geometryOverlayView.bounds.size);
+- (void)handleTouchesUpdate:(CGPoint)point {
+  CGPoint normalizedPoint = FBLCNormalizePoint(point, _geometryOverlayView.bounds.size);
   [_touchPath addPoint:normalizedPoint];
 
   FBLCImageGeometryData *currentGeometry = _geometryOverlayView.geometry;
@@ -301,43 +311,39 @@ static NSString *SaveActionTitleForQualityLevel(FBLCSavePhotoQuality quality) {
   _geometryOverlayView.geometry = newGeometry;
 }
 
-- (void)handleTouchesEnd:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-  [self handleTouchesUpdate:touches withEvent:event];
+- (void)handleTouchesEnd:(CGPoint)point {
+  [self handleTouchesUpdate:point];
   _previousTouchPaths = _geometryOverlayView.geometry.obfuscationPaths;
   _touchPath = [[FBLCMutablePath alloc] init];
   _touchPath.strokeWidth = DrawSliderValueToStrokeWidth(_drawWidthSlider.value);
 }
 
-- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-  if (![self canHandleTouches]) {
-    [super touchesBegan:touches withEvent:event];
+- (void)handlePanGestureRecognizer:(UIGestureRecognizer *)gestureRecognizer {
+  if (!_bottomNavigationView.drawingEnabled) {
     return;
   }
-  [self handleTouchesUpdate:touches withEvent:event];
+
+  CGPoint touchPoint = [gestureRecognizer locationInView:_geometryOverlayView];
+  switch (gestureRecognizer.state) {
+    case UIGestureRecognizerStateBegan:
+    case UIGestureRecognizerStateChanged:
+      [self handleTouchesUpdate:touchPoint];
+      break;
+    case UIGestureRecognizerStateEnded:
+    case UIGestureRecognizerStateCancelled:
+    case UIGestureRecognizerStateFailed:
+      [self handleTouchesEnd:touchPoint];
+      break;
+    case UIGestureRecognizerStatePossible:
+      break;
+  }
 }
 
-- (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-  if (![self canHandleTouches]) {
-    [super touchesMoved:touches withEvent:event];
-    return;
-  }
-  [self handleTouchesUpdate:touches withEvent:event];
-}
+#pragma mark - UIGestureRecognizerDelegate
 
-- (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-  if (![self canHandleTouches]) {
-    [super touchesEnded:touches withEvent:event];
-    return;
-  }
-  [self handleTouchesEnd:touches withEvent:event];
-}
-
-- (void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-  if (![self canHandleTouches]) {
-    [super touchesCancelled:touches withEvent:event];
-    return;
-  }
-  [self handleTouchesEnd:touches withEvent:event];
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+    shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+  return NO;
 }
 
 #pragma mark - Target Actions
@@ -393,7 +399,12 @@ static NSString *SaveActionTitleForQualityLevel(FBLCSavePhotoQuality quality) {
 /** Sets drawing UI to enabled or disabled. */
 - (void)setIsDrawingEnabled:(BOOL)isDrawingEnabled animated:(BOOL)animated {
   // Disable interaction on the image view controller to propagate the touch events up to this object.
-  _imageViewController.view.userInteractionEnabled = !isDrawingEnabled;
+
+  if (isDrawingEnabled) {
+    [_imageViewController.imageView.contentView addGestureRecognizer:_drawRecognizer];
+  } else {
+    [_imageViewController.imageView.contentView removeGestureRecognizer:_drawRecognizer];
+  }
 
   CGFloat drawSliderAlpha = [self->_bottomNavigationView isDrawingEnabled] ? 1 : 0;
   [UIView animateWithDuration:kStrokeWidthIndicatorAnimationDuration

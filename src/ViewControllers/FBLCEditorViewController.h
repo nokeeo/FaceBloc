@@ -14,8 +14,9 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /** The view controller that presents the user interface for editing an imported photo. */
-@interface FBLCEditorViewController
-    : UIViewController <FBLCEditorBottomNavigationViewDelegate, FBLCImageViewControllerDelegate>
+@interface FBLCEditorViewController : UIViewController <FBLCEditorBottomNavigationViewDelegate,
+                                                        FBLCImageViewControllerDelegate,
+                                                        UIGestureRecognizerDelegate>
 
 /** The object that receives callback events on the status of editing. */
 @property(nonatomic, nullable, weak) id<FBLCEditorViewControllerDelegate> delegate;
